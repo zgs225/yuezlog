@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://yuez.me
-title: 乐正的博客
-subtitle: 简洁
-author: Yuez
+title: 乐正
+subtitle: 记录日常生活，技术心得等。
+author: 乐正
 simple_search: https://www.google.com/search
 description: 乐正的博客，记录日常生活，技术心得等
 
@@ -27,7 +27,8 @@ email: zgs225@gmail.com
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
-permalink: /blog/:year/:month/:day/:title/
+# permalink: /blog/:year/:month/:day/:title/
+permalink: /:title/
 source: source
 destination: public
 plugins: plugins
