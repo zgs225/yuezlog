@@ -3,7 +3,7 @@ layout: post
 title: "HTTP Cache"
 date: 2015-03-17 21:01:48 +0800
 comments: true
-categories: HTTP
+categories: [HTTP, tech]
 ---
 
 使用缓存的优点：

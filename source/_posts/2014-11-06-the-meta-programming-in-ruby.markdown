@@ -3,7 +3,7 @@ layout: post
 title: "The meta programming in Ruby"
 date: 2014-11-06 10:05:34 +0800
 comments: true
-categories: 
+categories: [Tech, Ruby]
 ---
 The machine could be used to create new programming that
 it could then execute. And that would be meta programming

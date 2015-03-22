@@ -3,7 +3,7 @@ layout: post
 title: "成都金夫人从零部署记录"
 date: 2014-12-02 09:48:59 +0800
 comments: true
-categories: Linux
+categories: [Linux, tech]
 ---
 成都金夫人香港服务器需要部署网站，记录整个服务器搭建的全部流程，涉及安全、用户、
 系统等综合性管理。
