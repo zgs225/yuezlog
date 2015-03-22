@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://yuez.me
-title: 乐正
-subtitle: 记录日常生活，技术心得等。
+title: Yuezlog
+subtitle: Actions speak louder than words.
 author: 乐正
 simple_search: https://www.google.com/search
 description: 乐正的博客，记录日常生活，技术心得等
@@ -72,7 +72,7 @@ github_skip_forks: true
 
 # Twitter
 twitter_user:
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google +1
 google_plus_one: false
