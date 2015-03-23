@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "搜索引擎优化要点"
-date: 2015-03-23 08:50:09 +0800
+date: 2014-07-27 08:50:09 +0800
 comments: true
 categories: [Tech, SEO]
 ---
