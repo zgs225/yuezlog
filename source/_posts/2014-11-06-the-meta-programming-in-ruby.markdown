@@ -40,7 +40,7 @@ object of the class being defined.
 Ruby lets you define methods that are specific to a
 particular object. These are called `singleton methods`.
 
-```
+``` ruby
 animal = 'cat'
 def animal.speak
   puts "The #{ self } says miaow."
