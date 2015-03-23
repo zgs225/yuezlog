@@ -355,20 +355,16 @@ public class Receipt {
 
 符号               | 参数类型        | 描述
 -------------------|-----------------|-----------------------------------------------------------
-'b', 'B'           | General         |
-如果参数是null或者`String.valueOf(arg)`返回值为false的值，得到的结果则是false。否则，结果为true。
-'h', 'H'           | General         |
-如果参数是null则返回“null”。否则返回这个参数的`Integer.toHexString()`的返回值。
+'b', 'B'           | General         | 如果参数是null或者`String.valueOf(arg)`返回值为false的值，得到的结果则是false。否则，结果为true。
+'h', 'H'           | General         | 如果参数是null则返回“null”。否则返回这个参数的`Integer.toHexString()`的返回值。
 'c', 'C'           | Character       | 返回值为Character。
-'s', 'S'           | General         |
-如果参数是null则返回"null"；如果参数是`Formattable`的实现类，则调用参数的`arg.formatTo()`方法，并且将方法的返回值作为结果；最后返回的结果为'arg.toString()`。
+'s', 'S'           | General         | 如果参数是null则返回"null"；如果参数是`Formattable`的实现类，则调用参数的`arg.formatTo()`方法，并且将方法的返回值作为结果；最后返回的结果为`arg.toString()`。
 'd'                | Integer         | 返回值为格式化后的十进制数字。
 'o'                | Integer         | 返回值为格式化后的八进制数字。
 'x', 'X'           | Integer         | 返回值为格式化后的十六进制数字。
 'e', 'E'           | floating point  | 将浮点数用科学计数法表示出来。
 'f'                | floating point  | 返回值为格式化的浮点数。
-'g', 'G'           | floating point  |
-返回用科学计数法表示的，固定精度的经过四舍五入的浮点数。
+'g', 'G'           | floating point  | 返回用科学计数法表示的，固定精度的经过四舍五入的浮点数。
 'a', 'A'           | floating point  | 返回指数形式有效位的十六进制浮点数。
 't', 'T'           | Data/Time       | 将日期和时间转化成字符串。
 '%'                | percert         | 返回一个百分比。
