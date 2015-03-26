@@ -29,6 +29,7 @@ body > header h2 {
 body {
   line-height: 1.5em;
   color: $text-color;
+  letter-spacing: 1px;
   @extend .serif;
 }
 h1 {
