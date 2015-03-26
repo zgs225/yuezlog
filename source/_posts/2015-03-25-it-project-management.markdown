@@ -3,7 +3,7 @@ layout: post
 title: "IT Project Management"
 date: 2015-03-25 09:17:56 +0800
 comments: true
-categories: Tech
+categories: 技术
 published: false
 ---
 ## 什么是IT项目管理

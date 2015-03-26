@@ -3,7 +3,7 @@ layout: post
 title: "CAS 集成小战"
 date: 2013-12-06 11:32:25 +0800
 comments: true
-categories: [Tech, Java]
+categories: 技术
 ---
 > 近来，项目中需要整合单点登录系统。按照项目要求，工程中原先的单点登录无法完成任务，需要重新加工。于
 > 是选用[JA-SIG](http://www.jasig.org/)的`CAS`系统整合项目中。

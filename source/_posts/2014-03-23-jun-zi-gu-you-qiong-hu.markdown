@@ -3,7 +3,7 @@ layout: post
 title: "君子固有穷乎?"
 date: 2014-07-27 08:56:43 +0800
 comments: true
-categories: Life
+categories: 生活
 ---
 > 匪兕匪虎 率彼旷野
 

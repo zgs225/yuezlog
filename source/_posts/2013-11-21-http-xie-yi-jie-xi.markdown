@@ -3,7 +3,7 @@ layout: post
 title: "HTTP 协议解析"
 date: 2013-11-21 11:15:21 +0800
 comments: true
-categories: [Tech, HTTP]
+categories: 技术
 ---
 从进入软件开发至今，也做了几个关于Web的应用。对于HTTP协议的理解不足让我吃到了不少的苦头，也曾在看到某一项解释之后一拍脑门：
 原来是这样的，原来还能那么做。就从经典的3W理论（What, How,

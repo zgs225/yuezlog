@@ -3,7 +3,7 @@ layout: post
 title: "搜索引擎优化要点"
 date: 2014-07-27 08:50:09 +0800
 comments: true
-categories: [Tech, SEO]
+categories: 技术
 ---
 > 本文翻译自[SEO CHECKLIST](http://www.clickminded.com/seo-checklist/)。
 > 欢迎各位在[Github](https://github.com/zgs225/SEO-CHECKLIST.git)上或者留言中指正错误。

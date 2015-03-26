@@ -3,7 +3,7 @@ layout: post
 title: "重新认识Java，发现你的细节"
 date: 2014-01-25 09:08:34 +0800
 comments: true
-categories: [Tech, Java]
+categories: 技术
 ---
 ## 序言
 
