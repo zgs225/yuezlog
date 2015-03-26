@@ -111,7 +111,7 @@ Apache Web服务器提供了几种设置HTTP缓存控制首部的机制。其中
 
 + mod\_headers
 
-``` perl
+``` apache
 <Files *.html>
   Header set Cache-control no-cache
 </Files>
