@@ -5,5 +5,5 @@ date: 2015-03-26 22:46:13 +0800
 comments: true
 categories: 生活
 ---
-<img class="lazy" data-original="/photos/520-she.jpg" alt="Yuez blog - she" width="640" height="200">
-<img class="lazy" data-original="/photos/520-me.jpg"  alt="Yuez blog - me" width="640" height="200">
+{% lazy_img lazy /photos/520-she.jpg 'yuez blog - she' %}
+{% lazy_img lazy /photos/520-me.jpg 'yuez blog - me' %}
