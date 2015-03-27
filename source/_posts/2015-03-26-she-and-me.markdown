@@ -1,0 +1,9 @@
+---
+layout: post
+title: "She And Me"
+date: 2015-03-26 22:46:13 +0800
+comments: true
+categories: 生活
+---
+{% img left /photos/520-she.jpg  'She' "Yuez blog - she" %}
+{% img left /photos/520-me.jpg  'Me' "Yuez blog - me" %}

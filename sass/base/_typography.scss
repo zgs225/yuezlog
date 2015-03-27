@@ -1,8 +1,8 @@
 $blockquote: $type-border !default;
-$sans: "PT Sans", "Helvetica Neue", Arial, sans-serif !default;
-$serif: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif !default;
+$sans: Tahoma, "Georgia", "Times New Roman", "Songti SC", "SimSun", serif !default;
+$serif: Tahoma, "Georgia", "Times New Roman", "Songti SC", "SimSun", serif !default;
 $mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
-$heading-font-family: "PT Serif", "Georgia", "Helvetica Neue", Arial, sans-serif !default;
+$heading-font-family: "Lucida Grande", "Helvetica Neue", "Arial", "Hiragino Sans GB", "Noto Sans CJK SC", "Heiti SC", "Microsoft YaHei", "WenQuanYi Microhei", sans-serif !default;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $heading-font-family !default;
 
@@ -29,7 +29,6 @@ body > header h2 {
 body {
   line-height: 1.5em;
   color: $text-color;
-  letter-spacing: 1px;
   @extend .serif;
 }
 h1 {
