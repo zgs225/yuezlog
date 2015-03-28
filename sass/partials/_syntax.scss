@@ -99,7 +99,6 @@ p, li {
     font-size: .8em;
     line-height: 1.5em;
     color: darken(#0099ff, 10);
-    border: 1px solid lighten(#0099ff, 30);
     @include border-radius(.4em);
     padding: 0 .3em;
     margin: -1px 0;
