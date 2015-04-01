@@ -34,14 +34,14 @@ a {
 article {
   > footer {
     font-family: $heading-font-family;
-    color: lighten($text-color, 30);
+    color: rgba(0, 39, 59, 0.5);
 
     .category {
-      color: lighten($text-color, 30);
+      color: rgba(0, 39, 59, 0.5);
     }
 
     a.category {
-      color: lighten($text-color, 30);
+      color: rgba(0, 39, 59, 0.5);
       &:hover {
         color: lighten($text-color, 44);
       }
