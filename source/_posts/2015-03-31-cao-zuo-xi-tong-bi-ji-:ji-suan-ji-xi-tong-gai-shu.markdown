@@ -86,7 +86,7 @@ Memory Address Register)和存储器缓冲寄存器(Memory Buffer Register)。�
   很简单，缺点是没有考虑相对优先级和时间限制的要求。
 + 定义中断优先级，允许高优先级的中断打断低优先级的中断。
 
-{% lazy_img lazy /photos/cpu-period.jpg 640 200 "CPU指令周期" %}
+{% lazy_img lazy no-shadow /photos/cpu-period.jpg 640 200 "CPU指令周期" %}
 
 ## 存储器的层次结构
 
@@ -99,7 +99,7 @@ Memory Address Register)和存储器缓冲寄存器(Memory Buffer Register)。�
 为了既满足大容量存储需求，又能够兼顾性能需求，不能依赖于单一的存储组件，使用**存
 储器的层次结构**。
 
-{% lazy_img lazy /photos/memory-hierarchy.jpg 640 200 "存储器层次结构" %}
+{% lazy_img lazy no-shadow /photos/memory-hierarchy.jpg 640 200 "存储器层次结构" %}
 
 这个层次结构从上往下看，会出现下列情况：
 
