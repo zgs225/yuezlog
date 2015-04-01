@@ -23,8 +23,8 @@ categories: 技术
 + **输入/输出模块（I/O modules）**
 + **系统总线（System bus）**
 
-CPU的一种功能是和内存交换数据，为此，它通常使用两种寄存器：存储器地址寄存器（
-Memory Address Register）和存储器缓冲寄存器（Memory Buffer Register）。同理，输
+CPU的一种功能是和内存交换数据，为此，它通常使用两种寄存器：存储器地址寄存器(
+Memory Address Register)和存储器缓冲寄存器(Memory Buffer Register)。同理，输
 入/输出地址寄存器(I/O Address Register)和输入/输出缓冲寄存器（I/O Buffer Register）
 用于确定一个特定的输入/输出设备与处理器之间交换数据。
 
@@ -36,7 +36,7 @@ Memory Address Register）和存储器缓冲寄存器（Memory Buffer Register�
 释指令并执行对应的操作。大体上，这些动作可以分为四类：
 
 + **处理器-存储器**：数据在处理器和存储器之间交换。
-+ **处理器-I/O：CPU可以从外部设备中输入或者输出数据。
++ **处理器-I/O**：CPU可以从外部设备中输入或者输出数据。
 + **数据处理**：处理器可以执行很多与数据有关的算数操作或者逻辑操作。
 + **控制**：某些指令可以改变执行顺序。
 
