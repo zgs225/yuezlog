@@ -10,7 +10,7 @@ $noise-bg: image-url('geometry2.png') top left !default;
 $img-border: inline-image('dotted-border.png') !default;
 
 // Main Link Colors
-$link-color: lighten(#0099ff, 3) !default;
+$link-color: #FF6600 !default;
 $link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !default;
 $link-color-visited: $link-color;
 $link-color-active: $link-color;
