@@ -35,5 +35,16 @@ article {
   > footer {
     font-family: $heading-font-family;
     color: lighten($text-color, 30);
+
+    .category {
+      color: lighten($text-color, 30);
+    }
+
+    a.category {
+      color: lighten($text-color, 30);
+      &:hover {
+        color: lighten($text-color, 44);
+      }
+    }
   }
 }
