@@ -2,6 +2,7 @@
 layout: page
 title: README
 comments: true
+sharing: false
 footer: true
 ---
 
