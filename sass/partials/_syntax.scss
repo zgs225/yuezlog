@@ -228,7 +228,7 @@ figure.code {
   text-align: center;
   font-size: 13px;
   line-height: 2em;
-  color: darken(#0099ff, 10);
+  color: darken($link-color, 10);
   font-weight: normal;
   margin-bottom: 0;
   @include border-top-radius(5px);
