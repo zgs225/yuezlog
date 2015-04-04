@@ -50,9 +50,6 @@ brew install ${formula}   # 按名称安装
 brew uninstall ${formula} # 按名称卸载
 brew pin/unpin ${formula} # 锁定或者解锁软件包版本，防止误升级
 ```
-+ [官方网站](http://brew.sh)
-+ [FAQ](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md#faq)
-
 #### zsh，好用的shell
 
 Shell程序就是Linux/UNIX系统中的一层外壳，几乎所有的应用程序都可以运行在Shell环境
@@ -101,3 +98,107 @@ chsh -s /usr/local/bin/zsh
 下面贴上我的zsh配置以供参考
 
 {% include_code 我的zsh配置 lang:bash zshrc %}
+
+#### 好用的编辑器 Vim
+
+对于Vim，无需溢美之词，作为与emac并列的两大编辑器，早已经被无数人奉为经典。而它却
+又以超长的学习曲线，使得很多人望而却步。长久以来，虽然拥有大量的插件，却缺少一个
+确之有效的插件管理器。所幸，`Vundle`的出现解决了这个问题。
+
+`Vundle`可以让你在配置文件中管理插件，并且非常方便的查找、安装、更新或者删除插件。
+还可以帮你自动配置插件的执行路径和生成帮助文件。相对于另外一个管理工具`pathogen`，
+可以说有着巨大的优势。
+
+``` bash
+# vundle 安装和配置
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+``` vim
+" 将下面配置文件加入到.vimrc文件中
+set nocompatible " 必须
+filetype off     " 必须
+
+" 将Vundle加入运行时路径中(Runtime path)
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" 使用Vundle管理插件，必须
+Plugin 'gmarik/Vundle.vim'
+
+"
+" 其他插件
+"
+
+call vundle#end() " 必须
+filetype plugin indent on " 必须
+```
+
+最后，你只需要执行安装命令，即可以安装好所需的插件。
+
+``` bash
+# 在vim中
+:PluginInstall
+
+# 在终端
+vim +PluginInstall +qall
+```
+
+下面列出我的Vim插件和配置
+
+{% include_code Vim插件 lang:vim vimrc.bundles %}
+{% include_code Vim配置 lang:vim vimrc %}
+
+#### 新世代的版本管理工具 git
+
+Git是一个分散式版本控制软件。最初的目的是为了更好的管理Linux内核开发而设计。与CVS、
+Subversion等集中式版本控制软件不同，Git不需要服务器端软件就可以发挥版本控制的作用。
+使得代码的维护和发布变得非常方便。
+
+Git库目录结构
+
++ hooks   : 存储钩子文件夹
++ logs    : 存储日志文件夹
++ refs    : 存储指向各个分支指针的(SHA-1)的文件夹
++ objects : 存储git对象
++ config  : 存储配置文件
++ HEAD    : 指向当前分支的指针文件路径
+
+``` bash
+# 安装git
+brew install git
+```
+
+Git安装完毕后，只需要使用`git config`简单配置下用户名和邮箱就可以使用了。
+
++ [Git中文简易指南](http://www.bootcss.com/p/git-guide/)
++ [Git官网帮助](https://help.github.com)
+
+为了使Git更好用，对Git做一些配置，`.gitconfig`文件中可以设置自定义命令等，`.gitignore`
+文件是默认被忽略版本管理的文件。
+
+{% include_code gitconfig %}
+{% include_code gitignore %}
+
+#### 自动集成 ternimal 环境
+
+感谢`thoughtbot`组织发布的[开源项目](https://github.com/thoughtbot/dotfiles)，可
+以轻松的完成上述配置。这是我fork项目的地址(https://github.com/zgs225/dotfiles)，
+欢迎fork并完善成属于你自己的配置。
+
+安装步骤：
+
+``` bash
+# 更改为zsh, 详细参考上面zsh部分
+chsh -s $(which zsh)
+
+# clone 源码
+git clone https://github.com/zgs225/dotfiles.git
+
+# 安装rcm
+brew tap thoughtbot/formulae
+brew install rcm
+
+# 安装上述环境并且完成配置
+rcup -d dotfiles -x README.md -x LICENSE -x Brewfile
+```
