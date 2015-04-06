@@ -8,7 +8,7 @@ keywords: Mac开发环境搭建,OSX开发环境搭建,Ruby开发环境搭建,开
 ---
 对于每一名开发者来说，更换系统或者更换电脑的时候，都免不了花上不短的时间去折腾开
 发环境的问题。我本人也是三番两次，深知这个过程的繁琐。所有，根据我自己以往的经验，
-以及参考一下他们的意见，整理一下关于在Mac下做各种开发的配置，包含Java, Ruby, Vim,
+以及参考一下他人的意见，整理一下关于在Mac下做各种开发的配置，包含Java, Ruby, Vim,
 git, 数据库等等。欢迎补充与修正。
 
 ## {% icon fa fa-anchor %} Terminal篇
@@ -18,15 +18,15 @@ git, 数据库等等。欢迎补充与修正。
 #### Homebrew, 你不能错过的包管理工具
 
 包管理工具已经成为现在操作系统中不可缺少的一个重要工具了，它能大大减轻软件安装的
-负担，节约我们的时间。`Linux`中常用的有`yum`和`apt-get`工具，甚至`Windows`平台也
+负担，节约我们的时间。Linux中常用的有`yum`和`apt-get`工具，甚至Windows平台也
 有`Chocolatey`这样优秀的工具，OSX平台自然有它独有的工具。
 
 在OSX中，有两款大家常用的管理工具：`Homebrew`或者`MacPorts`。这两款工具都是为了解决同
-样的问题——为OSX安装常用库和工具。`Homebrew`与`MacPorts`的主要区别是`Homebrew`不会破坏OSX
-原生的环境，这也是我推荐`Homebrew`的主要原因。同时它安装的所有文件都是在用户独立空间内
+样的问题——为OSX安装常用库和工具。Homebrew与MacPorts的主要区别是Homebrew不会破坏OSX
+原生的环境，这也是我推荐Homebrew的主要原因。同时它安装的所有文件都是在用户独立空间内
 的，这让你安装的所有软件对于该用户来说都是可以访问的，不需要使用`sudo`命令。
 
-> 在安装`Homebrew`前，你需要前往AppStore下载并安装Xcode.
+> 在安装Homebrew前，你需要前往AppStore下载并安装Xcode.
 
 安装方式：
 
@@ -101,7 +101,7 @@ chsh -s /usr/local/bin/zsh
 
 #### 好用的编辑器 Vim
 
-对于Vim，无需溢美之词，作为与emac并列的两大编辑器，早已经被无数人奉为经典。而它却
+对于Vim，无需溢美之词，作为与emacs并列的两大编辑器，早已经被无数人奉为经典。而它却
 又以超长的学习曲线，使得很多人望而却步。长久以来，虽然拥有大量的插件，却缺少一个
 确之有效的插件管理器。所幸，`Vundle`的出现解决了这个问题。
 
@@ -202,3 +202,58 @@ brew install rcm
 # 安装上述环境并且完成配置
 rcup -d dotfiles -x README.md -x LICENSE -x Brewfile
 ```
+
+## {% icon fa fa-language %} 语言篇
+
+编程语言五花八门，它们各自的版本也是万别千差。各种语言之间或多或少都存在着向前，
+或者向后的不兼容。因为版本不兼容导致的bug也是格外的招人烦。所以，在语言篇这篇，也
+是侧重与到编程语言版本管理已经环境控制。
+
+#### 简洁优美的类Lisp语言 Ruby
+
+以Ruby作为语言篇的开篇，足以看得出来我对Ruby的喜爱。虽然它有着这样或者那样令人诟
+病的缺点，不过作为让我体会到Web世界美妙的第一门语言，我对Ruby一直有着别样的感情。
+
+目前，Ruby的常用版本是1.9，2.1和最新的2.2。最新版本并不是完全向后兼容，所以如果你
+的电脑中存在着老版本的Ruby项目，这时候又想切换到新版本中来，那可就头疼了。好在，
+有像`rvm`和`rbenv`这样的Ruby版本管理软件。它们各有优劣，而我喜欢更为自动化的rvm。
+
+一个完整的Ruby环境包括Ruby解释器、安装的RubyGems以及它们的文档。rvm用`gemsets`的
+概念，为每一个版本的Ruby提供一个独立的RubyGems环境。可以很方便的在不同的Ruby环境
+中切换而不相互影响。
+
+``` bash
+# 安装rvm
+# 设置mpapis公钥
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+# 安装稳定版rvm
+\curl -sSL https://get.rvm.io | bash -s stable
+```
+
+由于网络原因，可以将rvm的Ruby安装源修改为国内淘宝的[Ruby镜像服务器](http://ruby.taobao.org)。
+该镜像服务器15分钟以此更新，尽量保证与官方同步。这样能提高安装速度。
+
+``` bash
+# 出自 http://ruby.taobao.org
+sed -i .bak 's!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/config/db
+```
+推荐一篇关于rvm的文章: https://ruby-china.org/wiki/rvm-guide
+
+同样，由于网络原因，需要将RubyGems的安装源修改到镜像服务器上。
+
+``` bash
+# 切换源
+gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+
+# 查看源列表
+gem sources -l
+
+*** CURRENT SOURCES ***
+
+https://rubygems.org/
+```
+
+以上，你就拥有了一个相对舒适的Ruby开发环境，不用为版本和网络问题发愁。啊！天空都
+清净了。

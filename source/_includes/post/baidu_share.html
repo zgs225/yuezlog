@@ -8,9 +8,12 @@
     common : {
       bdText : document.title,
       bdDesc : (function () {
-        var meta = document.querySelector("meta[name=\'description\']");
+        var meta = document.querySelector("meta[name=\'description\']"),
+            description;
+
         if (meta) meta = meta.getAttribute("content");
-        var description = meta || "";
+        description = meta || "";
+
         return description;
       })(),
       bdUrl  : document.location.href,
@@ -23,6 +26,7 @@
           // 因为使用了延迟加载，图片没有src属性
           img_srcs.push(window.location.host + img.getAttribute('data-original'));
         }
+
         return img_srcs.join("||");
       })()
     },
