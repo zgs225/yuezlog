@@ -61,7 +61,7 @@ if( !Tablesaw.config ) {
   },
     defaultMode = "stack",
     // initSelector = "table[data-tablesaw-mode],table[data-tablesaw-sortable]";
-    initSelector = "table";
+    initSelector = "table:not(.code table)";
 
   var Table = function( element ) {
     if( !element ) {
