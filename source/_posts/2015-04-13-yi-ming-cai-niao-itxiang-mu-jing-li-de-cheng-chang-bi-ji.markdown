@@ -4,7 +4,7 @@ title: "一名菜鸟IT项目经理的成长笔记"
 date: 2015-04-13 17:22:25 +0800
 comments: true
 categories: 技术
-keywords:IT项目经理,IT项目管理,Bug追踪,产品需求分析
+keywords: IT项目经理,IT项目管理,Bug追踪,产品需求分析
 ---
 ## 是什么？
 
