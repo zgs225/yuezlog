@@ -35,4 +35,10 @@ gulp.task('images', function () {
              .pipe(gulp.dest('source/photos'));
 });
 
+// Rerun the task when a file changes
+gulp.task('watch', function () {
+  gulp.watch(paths.scripts, ['minify-js']);
+  gulp.watch(paths.images, ['images']);
+});
+
 gulp.task('default', ['minify-js', 'images']);
