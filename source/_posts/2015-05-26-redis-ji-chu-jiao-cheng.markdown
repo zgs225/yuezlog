@@ -19,7 +19,7 @@ Redis 将会把我们的数据永久存储。于是，我们可以假设这样�
 对应的值是什么？ 然后，Redis 会返回『fido』。
 
 ```
-GET server:name => "fido"
+GET server:name # => "fido"
 ```
 
 下面列出了一些其他常用的命令：
@@ -30,10 +30,10 @@ GET server:name => "fido"
 
 ```
 SET  connection 10
-INCR connection => 11
-INCR connection => 12
+INCR connection # => 11
+INCR connection # => 12
 DEL  connection
-INCR connection => 1
+INCR connection # => 1
 ```
 
 ## 递增
@@ -72,10 +72,10 @@ EXPIRE resource:lock 120
 在多少时间：
 
 ```
-TTL resource:lock => 120
+TTL resource:lock # => 120
 
-// after 122s later
-TTL resource:lock => -2
+# after 122s later
+TTL resource:lock # => -2
 ```
 
 这里的 -2 是指 resource:lock 已经不存在了，如果返回值是 -1 说明这个键永远不会过
@@ -84,9 +84,9 @@ TTL resource:lock => -2
 ```
 SET resource:lock "Redis demo 1"
 EXPIRE resource:lock 120
-TTL resource:lock => 119
+TTL resource:lock # => 119
 SET resoource.lock "Redis demo 2"
-TTL resource:lock => -1
+TTL resource:lock # => -1
 ```
 
 ## 列表
@@ -112,34 +112,34 @@ LPUSH friends "Sam"
   最后一个元素的下标作为参数。将 -1 作为参数意味着取值到列表的最后。
 
 ```
-LRANGE friends 0 -1 => 1) "Sam", 2) "Alice", 3) "Joe"
-LRANGE friends 0  1 => 1) "Sam", 2) "Alice"
-LRANGE friends 1  2 => 1) "Alice", 2) "Joe"
+LRANGE friends 0 -1 # => 1) "Sam", 2) "Alice", 3) "Joe"
+LRANGE friends 0  1 # => 1) "Sam", 2) "Alice"
+LRANGE friends 1  2 # => 1) "Alice", 2) "Joe"
 ```
 
 + `LLEN` 返回指定列表的长度
 
 ```
-LLEN friends => 3
+LLEN friends # => 3
 ```
 
 + `LPOP` 从列表中删除第一个元素，并将它作为返回值
 
 ```
-LPOP friends => "Sam"
+LPOP friends # => "Sam"
 ```
 
 + `RPOP` 从列表中删除最后一个元素，并将它作为返回值
 
 ```
-RPOP friends => "Joe"
+RPOP friends # => "Joe"
 ```
 
 注意看现在的列表：
 
 ```
-LLEN friends => 1
-LRANGE friends 0 -1 => 1) "Alice"
+LLEN friends # => 1
+LRANGE friends 0 -1 # => 1) "Alice"
 ```
 
 ## 集合
@@ -164,14 +164,14 @@ SREM superpowers "reflexes"
 + `SISMEMBER` 检查一个值是否在集合中，返回0不在，返回1在。
 
 ```
-SISMEMBER superpowers "flight" => 1
-SISMEMBER superpowers "reflexes" => 0
+SISMEMBER superpowers "flight" # => 1
+SISMEMBER superpowers "reflexes" # => 0
 ```
 
 + `SMEMBERS` 返回集合中所有的元素
 
 ```
-SMEMBERS superpowers => 1) "flight", 2) "x-ray vision"
+SMEMBERS superpowers # => 1) "flight", 2) "x-ray vision"
 ```
 
 + `SUNION` 合并两个或者更多个集合，并且将所有的元素返回。
@@ -179,7 +179,7 @@ SMEMBERS superpowers => 1) "flight", 2) "x-ray vision"
 ```
 SADD birdpowers "pecking"
 SADD birdpowers "flight"
-SUNION superpowers birdpowers => 1) "pecking", 2) "flight", 3) "x-ray vision"
+SUNION superpowers birdpowers # => 1) "pecking", 2) "flight", 3) "x-ray vision"
 ```
 
 ## 可排序集合
@@ -194,7 +194,7 @@ ZADD hackers 1906 "Grace Hopper"
 ZADD hackers 1954 "Wang Zhi He"
 ZADD hackers 1988 "Li Feng"
 
-ZRANGE hackers 1, 3 => 1) "Alan Kay", 2) "Grace Hopper", 3) "Wang Zhi He"
+ZRANGE hackers 1, 3 # => 1) "Alan Kay", 2) "Grace Hopper", 3) "Wang Zhi He"
 ```
 
 ## 哈希表
@@ -223,17 +223,17 @@ HMSET user:1001 name "Zack Lee" email "zack.lee@facebook.com" password "public"
 我们也可以只获取特定域的值：
 
 ```
-HGET user:1001 name => "Zack Lee"
+HGET user:1001 name # => "Zack Lee"
 ```
 
 数字类型的值在哈希表里面有一些方便的原子性的递增方法：
 
 ```
 HSET user:1000 visits 10
-HINCRBY user:1000 visits 1  => 11
-HINCRBY user:1000 visits 10 => 21
+HINCRBY user:1000 visits 1  # => 11
+HINCRBY user:1000 visits 10 # => 21
 HDEL    user:1000 visits
-HINCRBY user:1000 visits 1  => 1
+HINCRBY user:1000 visits 1  # => 1
 ```
 
 关于哈希表的完整命令列表，请查看[官方文档](http://redis.io/commands#hash)
