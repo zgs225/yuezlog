@@ -41,4 +41,4 @@ gulp.task('watch', function () {
   gulp.watch(paths.images, ['images']);
 });
 
-gulp.task('default', ['minify-js', 'images']);
+gulp.task('default', ['minify-js']);
