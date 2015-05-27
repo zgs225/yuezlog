@@ -232,7 +232,7 @@ task :deploy do
     File.delete(".preview-mode")
     Rake::Task[:generate].execute
   end
-
+  system "gulp images"
   Rake::Task[:copydot].invoke(source_dir, public_dir)
   Rake::Task["#{deploy_default}"].execute
 end
