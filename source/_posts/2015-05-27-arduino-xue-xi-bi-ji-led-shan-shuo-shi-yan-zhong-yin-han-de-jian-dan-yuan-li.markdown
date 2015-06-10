@@ -3,7 +3,7 @@ layout: post
 title: "Arduino 学习笔记——LED 闪烁实验中隐含的简单原理"
 date: 2015-05-27 08:52:24 +0800
 comments: true
-categories: 技术
+categories: Arduino
 ---
 我是软件出身，但是许久以前便对硬件充满了兴趣，终于在最近买了一套 Arduino 基础开
 发套件，希望能在硬件上学习一些知识。

@@ -3,7 +3,7 @@ layout: post
 title: "第一次与 Arduino 交互"
 date: 2015-05-31 21:01:21 +0800
 comments: true
-categories: 技术
+categories: Arduino
 ---
 这是一个比较简单的实验，不过好歹也是让 Arduino 接受外界电子元件的输入值了。这是
 套互动交通灯的实验，Arduino 等待行人按下按钮，这样行车灯会变红，行人灯会变绿。
