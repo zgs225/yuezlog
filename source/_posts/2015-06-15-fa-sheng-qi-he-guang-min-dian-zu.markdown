@@ -69,7 +69,7 @@ void loop() {
 项目中，接触到了一个新的概念——分压器（也叫电位分配器）。分压器是由电阻构成的。使
 用两个电阻串联，从其中一个取出电压，这样可以减小进入电路的电压。
 
-{% lazy_img lazy /photos/fen-ya-qi.jpg 640 200 '分压器' %}
+{% lazy_img lazy no-shadow /photos/fen-ya-qi.jpg 640 200 '分压器' %}
 
 输入电压(V<sub>in</sub>)连接在两个电阻上。当测量通过一个电阻的电压(V<sub>out</sub>)
 时，电压将小俞输入电压（分压）。计算 R<sub>2</sub> 两端的输出电压公式如下：
