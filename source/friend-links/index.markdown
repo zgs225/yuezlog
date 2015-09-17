@@ -7,3 +7,4 @@ footer: true
 ---
 
 + [李健华](http://ljh.name)
++ [Generate Favicon](http://www.generate-favicon.com)
