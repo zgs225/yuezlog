@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "《计算机程序的构造和解释》习题解答"
+title: "计算机程序的构造和解释-习题解答"
 date: 2015-11-18 00:18:12 +0800
 comments: true
 categories: 技术

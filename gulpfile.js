@@ -38,7 +38,7 @@ gulp.task('images', function () {
 // Rerun the task when a file changes
 gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['minify-js']);
-  gulp.watch(paths.images, ['images']);
+  // gulp.watch(paths.images, ['images']);
 });
 
 gulp.task('default', ['minify-js']);
