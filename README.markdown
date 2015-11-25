@@ -13,3 +13,4 @@ A blog powered by `Octopress`. Thank you.
 + 集成了表格响应式设计，方便在小屏幕下阅读表格
 + 集成了font-awesome图标
 + 集成了Gulp工作流
++ 集成了Mathjax，和通用模板区分开来，模板名为mathjax

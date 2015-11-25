@@ -1,0 +1,31 @@
+---
+layout: mathjax
+title: "sicp-ex1-3"
+date: 2015-11-25 13:14:54 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一个过程，它以三个数为参数，返回其中较大的两个数之和。
+
+### 解答
+
+``` scheme
+(define (sum-of-nums x y z)
+  (if (and (<= x y) (<= x z))
+      (+ y z)
+      (sum-of-nums y z x)))
+```
+
+### 测试
+
+``` scheme
+(sum-of-nums 1 2 3)
+;Value: 5
+
+(sum-of-nums 3 2 2)
+;Value: 5
+```
