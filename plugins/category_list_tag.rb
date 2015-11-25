@@ -5,7 +5,7 @@ module Jekyll
     def render(context)
       html = ""
       categories = context.registers[:site].categories.keys
-      categories.reject { |category| category == 'draft' }.sort.each do |category|
+      categories.sort.each do |category|
         posts_in_category = context.registers[:site].categories[category].size
         category_dir = context.registers[:site].config['category_dir']
         category_url = "/#{ category_dir }/#{ category.to_url }/"

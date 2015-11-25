@@ -3,7 +3,8 @@ layout: mathjax
 title: "sicp-ex1-19"
 date: 2015-11-24 02:04:44 +0800
 comments: true
-categories: draft
+hidden: true
+categories: sicp
 ---
 ### 问题
 

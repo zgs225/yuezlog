@@ -3,6 +3,7 @@ layout: mathjax
 title: "sicp-ex1-2"
 date: 2015-11-25 12:20:09 +0800
 comments: true
+hidden: true
 categories: draft
 ---
 

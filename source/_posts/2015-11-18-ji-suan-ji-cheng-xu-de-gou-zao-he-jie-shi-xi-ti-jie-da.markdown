@@ -3,7 +3,9 @@ layout: post
 title: "计算机程序的构造和解释-习题解答"
 date: 2015-11-18 00:18:12 +0800
 comments: true
-categories: 技术
+categories:
+  - 技术
+  - sicp
 ---
 目标是完成《计算机程序的构造和解释》一书所有的习题。会不断更新，希望在年底之前能
 完成。
