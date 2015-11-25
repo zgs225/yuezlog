@@ -49,17 +49,17 @@ $$
 
 ``` scheme
 (fib 0)
-;value: 0
+;Value: 0
 
 (fib 1)
-;value: 1
+;Value: 1
 
 (fib 3)
-;value: 2
+;Value: 2
 
 (fib 4)
-;value: 3
+;Value: 3
 
 (fib 5)
-;value: 5
+;Value: 5
 ```
