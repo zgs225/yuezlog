@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: mathjax
 title: "sicp-ex1-1"
 date: 2015-11-25 10:48:49 +0800
 comments: true
