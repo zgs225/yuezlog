@@ -46,7 +46,7 @@ $$
 
 ``` scheme
 (define (good-enough? guess new-guess)
-  (< (abs (- guess new-guess)) 0.001))
+  (< (/ (abs (- guess new-guess)) guess) 0.001))
 
 (define (sqrt-iter guess x)
   (if (good-enough? guess (imporve guess x))

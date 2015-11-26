@@ -1,0 +1,34 @@
+---
+layout: mathjax
+title: "sicp-ex1-8"
+date: 2015-11-27 01:04:18 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+求立方根的牛顿法基于如下事实，如果$y$是$x$的立方根的一个近似值，那么下式将给出一
+个更好的近似值：
+$$
+{\cfrac {x} {y\^2} + 2y} \over 3
+$$
+请利用这一公式实现一个类似平方根过程的求立方根过程。
+
+### 解答
+
+{% include_code 练习1.8 lang:scheme sicp/ex1-8.scm %}
+
+### 测试
+
+``` scheme
+(cbrt 27)
+;Value: 3.0000000000000977
+
+(cbrt 1)
+;Value: 1.
+
+(cbrt 8)
+;Value: 2.000000000012062
+```
