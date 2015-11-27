@@ -1,0 +1,48 @@
+---
+layout: mathjax
+title: "sicp-ex1-11"
+date: 2015-11-27 10:35:36 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+函数$f$由如下的规则定义：如果$n<3$，那么$f(n) = n$；如果$n\ge 3$，那么$f(n) =
+f(n-1) + 2f(n-2) + 3f(n-3)$。请写一个采用递归计算过程计算$f$的过程。再写一个采用
+迭代计算过程计算$f$的过程。
+
+### 解答
+
+函数为：
+$$
+f(n) =
+\begin{cases}
+n, & \text{if $n<3$} \\\\\\\\
+f(n-1) + 2f(n-2) + 3f(n-3), & \text{if $n\ge 3$}
+\end{cases}
+$$
+
+{% include_code 练习1.11 lang:scheme sicp/ex1-11.scm %}
+
+### 测试
+``` scheme
+(f 1)
+;Value: 1
+
+(f 3)
+;Value: 4
+
+(f 5)
+;Value: 25
+
+(f2 1)
+;Value: 1
+
+(f2 3)
+;Value: 4
+
+(f2 5)
+;Value: 25
+```
