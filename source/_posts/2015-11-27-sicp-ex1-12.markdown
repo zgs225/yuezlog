@@ -1,0 +1,107 @@
+---
+layout: mathjax
+title: "sicp-ex1-12"
+date: 2015-11-27 11:59:22 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面数值模式称为帕斯卡三角形：
+$$
+\begin{array}{ccccccccccc}
+  &    &    &    &    &  1 &    &    &    &    &   \cr
+  &    &    &    &  1 &    &  1 &    &    &    &   \cr
+  &    &    &  1 &    &  2 &    &  1 &    &    &   \cr
+  &    &  1 &    &  3 &    &  3 &    &  1 &    &   \cr
+  &  1 &    &  4 &    &  6 &    &  4 &    &  1 &   \cr
+1 &    &  5 &    & 10 &    & 10 &    &  5 &    & 1 \cr
+\end{array}
+$$
+三角形边界上的数都是1，内部的每个数是位于它上面的两个数之和。请写一个过程，它采
+用递归计算过程计算出帕斯卡三角形。
+
+### 解答
+
+``` scheme
+(define (pascal row col)
+  (if (or (= col 1) (= row col))
+      1
+      (+ (pascal (- row 1) (- col 1))
+         (pascal (- row 1) col))))
+```
+
+### 测试
+
+``` scheme
+(pascal 3 2)
+;Value: 2
+
+(pascal 4 2)
+;Value: 3
+
+(pascal 5 3)
+;Value: 6
+```
+
+### 拓展
+
+有一个常用的计算帕斯卡三角的公式为（[参考维基](https://en.wikipedia.org/wiki/Pascal%27s_triangle#Combinations)）：
+
+$$
+C(n,k) = C{\^n\_k} = \_nC\_k =
+\begin{pmatrix}
+n \\\\\\\\
+k \\\\\\\\
+\end{pmatrix}
+= \frac {n!} {k!(n-k)!}
+$$
+
+由此，可以得到计算帕斯卡三角的过程。
+
+``` scheme
+; 计算阶乘
+(define (factorial n)
+  (define (fact-iter product counter max-count)
+    (if (> counter max-count)
+        product
+        (fact-iter (* product counter)
+                   (+ counter 1)
+                   max-count)))
+  (fact-iter 1 1 n))
+
+; Pascal triangle
+(define (pascal row col)
+  (/ (factorial (- row 1))
+     (* (factorial (- col 1))
+        (factorial (- row col)))))
+```
+
+测试一下新版过程：
+
+``` scheme
+(pascal 4 2)
+;Value: 3
+
+(pascal 4 3)
+;Value: 3
+
+(pascal 4 4)
+;Value: 1
+
+(pascal 5 2)
+;Value: 4
+
+(pascal 5 3)
+;Value: 6
+```
+
+新版迭代型计算过程是线性复杂度的算法，其速度比递归算法的过程快上许多，而且没有了
+递归深度的限制。计算一个很大的Pascal三角数：
+
+``` scheme
+(pascal 1024 36)
+;Value: 119105169448695658119331865425553953128013711784936317985421906015
+```
