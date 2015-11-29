@@ -1,0 +1,54 @@
+---
+layout: mathjax
+title: "sicp-ex1-13"
+date: 2015-11-28 11:03:57 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+证明$Fib(n)$是最接近$\frac {\phi \^n} {\sqrt {5}}$的整数，其中$\phi = \frac {1+\sqrt {5}} {2}$。
+提示：采用归纳法和斐波那契数定义，证明$Fib(n) = \frac {(\phi \^n - \gamma \^n)} {\sqrt {5}}$。
+
+### 解答
+
+假设，
+$$
+Fib(n) = \frac {(\phi \^n - \gamma \^n)} {\sqrt {5}},
+\text {其中$\gamma = \frac {1-\sqrt {5}} {2}$}
+$$
+
+则
+$$
+\begin{align}
+Fib(n+1) & = \frac {(\phi \^{n+1} - \gamma \^{n+1})} {\sqrt {5}} \\\\\\\\
+         & = \frac {\phi \^n \cdot \cfrac {1+\sqrt {5}} {2} - \gamma \^n \cdot \cfrac {1-\sqrt {5}} {2}} {\sqrt {5}} \\\\\\\\
+         & = \frac {1} {2} \cdot \cfrac {\phi \^n - \gamma \^n} {\sqrt {5}} + \cfrac {\phi \^n + \gamma \^n} {2} \\\\\\\\
+         & = \frac {1} {2} Fib(n) + \frac {\phi \^n + \gamma \^n} {2}
+\end{align}
+$$
+
+$$
+\begin{align}
+Fib(n+2) & = \frac {(\phi \^{n+2} - \gamma \^{n+2})} {\sqrt {5}} \\\\\\\\
+         & = \frac {\phi \^n \cdot (\cfrac {1+\sqrt {5}} {2})\^2 - \gamma \^n \cdot (\cfrac {1-\sqrt {5}} {2})\^2} {\sqrt {5}} \\\\\\\\
+         & = \frac {3} {2} \cdot \cfrac {\phi \^n - \gamma \^n} {\sqrt {5}} + \cfrac {\phi \^n + \gamma \^n} {2} \\\\\\\\
+         & = \frac {3} {2} Fib(n) + \frac {\phi \^n + \gamma \^n} {2}
+\end{align}
+$$
+
+$\therefore Fib(n+2) = Fib(n+1) + Fib(n)$
+
+又$\because Fib(0) = 0, Fib(1) = 1$，可以得出$Fib(n) = \frac {(\phi \^n - \gamma \^n)} {\sqrt {5}}$成立。
+
+于是，$Fib(n) = \frac {\phi \^n} {\sqrt {5}} - \frac {\gamma \^n} {\sqrt {5}}$。
+
+$\because \frac {1} {\sqrt {5}} < \frac {1} {2}$
+
+$|\gamma | = |\frac {1 - \sqrt {5}} {2}| < 1$
+
+$\therefore |Fib(n) - \frac {\phi \^n} {\sqrt {5}}| < \frac {1} {2}$
+
+从而命题得证：$Fib(n)$是最接近$\frac {\phi \^n} {\sqrt {5}}$的整数。
