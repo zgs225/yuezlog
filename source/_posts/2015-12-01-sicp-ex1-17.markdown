@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex1-17"
+date: 2015-12-01 23:15:18 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+本节李的求幂算法的基础就是通过反复做乘法去求乘幂。与此类似，也可以通过反复做加法
+来求出乘积。下面的乘积的过程与expt过程类似（其中假定我们的语言只有加法而没有乘法）：
+
+``` scheme
+(define (* a b)
+  (if (= b 0)
+      0
+      (+ a (* a (- b 1)))))
+```
+
+这一算法具有相对于$b$的线性步数。现在假定除了加法之外还有运算double，它能求出一
+个整数的两倍；还有halve，它将一个（偶数）除以2.请用这些运算设计一个类似fast-expt
+的求乘积的过程，使之只用对数的计算步数。
+
+### 解答
+
+{% include_code 练习1.17 lang:scheme sicp/ex1-17.scm %}
+
+### 测试
+
+``` scheme
+(new-* 3 4)
+;Value: 12
+
+(new-* 3 100)
+;Value: 300
+
+(new-* 1 1)
+;Value: 1
+```
