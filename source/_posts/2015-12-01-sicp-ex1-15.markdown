@@ -1,0 +1,60 @@
+---
+layout: mathjax
+title: "sicp-ex1-15"
+date: 2015-12-01 22:31:39 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在角（用弧度描述）$x$足够小时，其正弦值可以用$\sin x \approx x$计算，而三角恒等
+式：
+$$
+\sin x = 3 \cdot \sin {\frac {x} {3}} - 4 \cdot \sin \^3 {\frac {x} {3}}
+$$
+可以减少$\sin$的参数的大小（为完成这一练习，我们认为一个角是“足够小”，如果其数值
+不大于0.1弧度）。这些想法都体现在下述过程中：
+
+``` scheme
+(define (cube x) (* x x x))
+
+(define (p x) (- (* 3 x) (* 4 (cube x))))
+
+(define (sine angle)
+  (if (not (> (abs angle) 0.1))
+    angle
+    (p (sine (/ angle 3.0)))))
+```
+
+a) 在求值`(sine 12.15)`时，`p`将被使用多少次？
+b) 在求值`(sine a)`时，由过程`sine`所产生的计算过程使用的空间和步数（作为a的函数
+   ）增长的阶是什么？
+
+### 解答
+
+第一问中`p`的调用过程如下：
+
+``` scheme
+(trace-entry p)
+;Unspecified return value
+
+(sine 12.15)
+[Entering #[compound-procedure 13 p]
+    Args: 4.9999999999999996e-2]
+[Entering #[compound-procedure 13 p]
+    Args: .1495]
+[Entering #[compound-procedure 13 p]
+    Args: .4351345505]
+[Entering #[compound-procedure 13 p]
+    Args: .9758465331678772]
+[Entering #[compound-procedure 13 p]
+    Args: -.7895631144708228]
+;Value: -.39980345741334
+```
+
+可以看到，过程`p`被调用了5次。
+
+第二问：$a$的值每增大3倍，过程`p`的调用次数增加1，所以其空间和步数增长的阶为
+$\Theta (\log a)$。
