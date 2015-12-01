@@ -1,0 +1,27 @@
+---
+layout: mathjax
+title: "sicp-ex1-21"
+date: 2015-12-02 07:17:05 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+使用smallest-divisor过程找出下面各数的最小因子：199，1999，19999.
+
+### 解答
+
+{% include_code smallest-divisor lang:scheme sicp/ex1-21.scm %}
+
+``` scheme
+(smallest-divisor 199)
+;Value: 199
+
+(smallest-divisor 1999)
+;Value: 1999
+
+(smallest-divisor 19999)
+;Value: 7
+```
