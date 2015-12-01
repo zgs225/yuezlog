@@ -1,0 +1,63 @@
+---
+layout: mathjax
+title: "sicp-ex1-20"
+date: 2015-12-01 23:31:29 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+一个过程所产生的计算过程当然依赖于解释器使用的规则。作为一个例子，考虑上面给出的
+迭代式gcd过程，假定解释器用第1.1.5节讨论的正则序去解释这一过程（对if的正则序求值
+规则在练习1.5的描述中）。请采用（正则序的）代换方法，展示在求值表达式`(gcd 206 40)`
+中产生的计算过程，并指明实际执行的remainder运算。在采用正则序求值`(gcd 206 40)`
+中实际执行了多少次remainder运算？如果采用应用序求值呢？
+
+### 解答
+
+gcd过程如下：
+
+``` scheme
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+```
+
+`(gcd 206 40)`在正则序求值下展开：
+
+``` scheme
+(gcd 206 40)
+
+(gcd 40 (remainder 206 40))
+
+(gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
+
+(gcd (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
+
+(gcd (remainder (remainder 206 40) (remainder 40 (remainder 206 40))) (remainder (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))))
+
+;;; ...
+```
+
+最后，总共执行了18次remainder。
+
+如果使用应用序求值，则：
+
+``` scheme
+(gcd 206 40)
+
+(gcd 40 6)
+
+(gcd 6 4)
+
+(gcd 4 2)
+
+(gcd 2 0)
+
+;Value: 2
+```
+
+所以总共执行了4次remainder。
