@@ -1,0 +1,25 @@
+---
+layout: mathjax
+title: "sicp-ex1-14"
+date: 2015-11-29 11:10:43 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请画出有关的树，展示1.2.2节的过程count-change在将11美分换成硬币时所产生的计算过
+程。相对于被换成现金量的增加，这一计算过程的空间和步数增长的阶各是什么？
+
+### 解答
+
+回顾一下count-change：
+
+{% include_code count-change lang:scheme sicp/count-coins.scm %}
+
+`(count-change 11)`产生的树形递归过程如下：
+
+{% lazy_img lazy no-shadow /photos/sicp/ex1-14.png  640 200 练习1.14 %}
+
+其空间和步数增长的阶正比于需要兑换的金额$n$，为$\Theta(n)$。
