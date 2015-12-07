@@ -1,0 +1,105 @@
+---
+layout: mathjax
+title: "sicp-ex1-22"
+date: 2015-12-07 20:33:13 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+大部分Lisp的实现都包含一个`runtime`基本过程，调用它将返回一个整数，表示系统已运行
+的时间（例如，以微秒计）。在对整数$n$调用下面的`timed-prime-test`过程时，将打印
+出$n$并检查$n$是否为素数。如果是素数，过程将打印出三个星号，随后是执行这一检查所
+用的时间量。
+
+``` scheme
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (runtime)))
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (runtime) start-time))))
+
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+```
+
+请利用这一过程写一个`search-for-primes`的过程，它检查给范围内连续的各个奇数的素
+性。请用你的过程找出大于1000， 大于10000，大于100000和大于1000000的三个最小素数。
+请注意其中检查每个素数所需要的时间。因为这一检查算法具有$\Theta (\sqrt {n})$的增
+长阶，你可以期望在10000附近的素数检查的耗时大约是在1000附近的素数检查的$\sqrt {10}$
+倍。你得到的数据确实如此吗？对于100000和1000000得到的数据，对这一$\sqrt {n}$预测
+的支持情况如何？有人说程序在你的机器上运行的时间正比于计算所需的步数，你得到的结
+果符合这种说法吗？
+
+### 解答
+
+> 由于在新版本的scheme中，`runtime`的返回值已经不在使用毫秒为单位了，所以需要使
+   用`real-time-clock`作为计时使用的过程。
+
+{% include_code 练习1.22 lang:scheme sicp/ex1-22.scm %}
+
+目前，`search-for-primes`可以查找从某个数起连续指定个数的素数。
+
+### 测试
+
+``` scheme
+(search-for-primes 1000 4)
+1009
+1013
+1019
+1021
+are primes
+;Unspecified return value
+
+(search-for-primes 10000 3)
+10007
+10009
+10037
+are primes
+;Unspecified return value
+
+(search-for-primes 100000 1)
+100003
+are primes
+;Unspecified return value
+```
+
+再接下来，测量下各自运算所花费的时间：
+
+``` scheme
+(timed-search-for-primes 1000 1)
+1009
+are primes
+ *** 
+Time costed: 0
+;Unspecified return value
+
+(timed-search-for-primes 10000 1)
+10007
+are primes
+ *** 
+Time costed: 0
+;Unspecified return value
+
+(timed-search-for-primes 100000 1)
+100003
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 1000000 1)
+1000003
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+```
+
+可以看到，在这里，查找素数的过程所需要的时间并没有严格遵循$\sqrt {10}$倍增。
