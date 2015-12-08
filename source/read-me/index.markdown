@@ -32,7 +32,7 @@ class Yuez
 
   def contact
     {
-        email: 'zgs225@gmail.com',
+        email: 'i@yuez.me',
        github: 'https://github.com/zgs225',
            ps: 'Talk is cheap, show me the code.'
     }
