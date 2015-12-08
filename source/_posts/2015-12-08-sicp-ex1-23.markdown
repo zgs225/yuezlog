@@ -1,0 +1,145 @@
+---
+layout: mathjax
+title: "sicp-ex1-23"
+date: 2015-12-08 20:24:19 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在本节开始时给出的那个`smallest-divisor`过程做了许多无用检查：在它检查了一个数是
+否能被2整除之后，实际上已经完全没必要再检查它是否能被任何偶数整除了，这说明`test-divisor`
+所用的值不应该是2，3，4，5，6，……，而应该是2，3，5，7，9，……，请实现这种修改。其
+中应定义一个过程`next`，用2调用时它返回3，否则就返回其输入值加2。修改`smallest-divisor`
+过程，使它去使用`(next test-divisor)`而不是`(+ test-divisor 1)`。让`timed-prime-test`
+结合这个`smallest-divisor`版本，运行练习1.22里面的12个找素数的测试。因为这一修改
+使检查的步数减少一半，你可能期望它的运行速度快一倍。实际情况符合这一预期吗？如果
+不符合，你所观察到的两个算法速度的比值是什么？你如何解释这一比值不是2的事实？
+
+### 解答
+
+{% include_code 练习1.23 lang:scheme sicp/ex1-23.scm %}
+
+使用新的过程运行练习1.22中的12个素数检查
+
+``` scheme 使用next过程
+;;; (load "ex1-22.scm")
+
+(timed-search-for-primes 1000 3)
+1009
+1013
+1019
+are primes
+ ***
+Time costed: 0
+;Unspecified return value
+
+(timed-search-for-primes 10000 3)
+10007
+10009
+10037
+are primes
+ ***
+Time costed: 0
+;Unspecified return value
+
+(timed-search-for-primes 100000 3)
+100003
+100019
+100043
+are primes
+ ***
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 1000000 3)
+1000003
+1000033
+1000037
+are primes
+ ***
+Time costed: 2
+;Unspecified return value
+```
+
+对比一下没有使用`next`过程之前的查找素数的结果：
+
+``` scheme 未使用next过程
+;;; (load "ex1-21.scm")
+
+(timed-search-for-primes 1000 3)
+1009
+1013
+1019
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 10000 3)
+10007
+10009
+10037
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 100000 3)
+100003
+100019
+100043
+are primes
+ *** 
+Time costed: 2
+;Unspecified return value
+
+(timed-search-for-primes 1000000 3)
+1000003
+1000033
+1000037
+are primes
+ *** 
+Time costed: 3
+;Unspecified return value
+```
+
+可以看到，实际情况并不符合我们预期的2倍运行速度。当查找一百万后的三个素数的过程
+中，使用`next`和不使用`next`过程的速度比值是$\frac {2} {3}$，其速度是快了1.5倍。
+由于上例中查询的数量级小，换成查询一百万后的连续10000个素数对比下运行结果：
+
+``` scheme 查询一百万后的连续一万个素数
+;;; 使用next过程
+(timed-search-for-primes 1000000 10000)
+1000003
+1000033
+1000037
+;;; ...
+are primes
+ *** 
+Time costed: 8230
+;Unspecified return value
+
+;;; 不使用next过程
+(timed-search-for-primes 1000000 10000)
+1000003
+1000033
+1000037
+;;; ...
+are primes
+ *** 
+Time costed: 12752
+;Unspecified return value
+```
+
+这次不使用`next`过程和使用`next`过程所花费时间的比值依然是1.55，接近1.5。当数
+量级别大很多的时候，其运行速度增加也不是成倍的。
+
+为什么程序运行的速度不是按照预期增长呢？我的理解是这样的。
+
+程序运行的速度并不仅限于运行步数一个条件，它还受到计算机的硬件条件、系统资源的占
+用情况、或者运行这个程序本身的编译器/解释器的效率等条件约束。就算是同样的程序，在
+同样的计算机上，不同时刻运行，其运行速度也不相同。所以，就算能准确的知道程序需要
+的运行步数，也无法准确的计算出它的运行速度快了多少。
