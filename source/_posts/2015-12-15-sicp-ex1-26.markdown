@@ -1,0 +1,34 @@
+---
+layout: mathjax
+title: "sicp-ex1-26"
+date: 2015-12-15 07:29:38 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Louis Reasoner在做练习1.24的时候遇到了很大的困难，他的`fast-prime?`检查看起来运
+行的比`prime?`还慢。Louis请他的朋友Eva Lu Ator过来帮忙。在检查Louis的代码时，两
+个人发现了他重写了`expmod`过程，其中用了一个显示的乘法，而没有调用`square`：
+
+``` scheme
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+          (remainder (* (expmod base (/ exp 2) m)
+                        (expmod base (/ exp 2) m))
+                     m))
+        (else (remainder (* base (expmod base (- exp 1) m))
+                         m))))
+```
+
+“我看不出来有什么不同” Louis说。“我能看出来”，Eva说，“采用这种方式写出该过程时，
+你就把一个$\Theta (\log n)$的计算过程变成$\Theta (n)$的了。” 请解释这一问题。
+
+### 解答
+
+原本的`expmod`在当exp是偶数的时候可以减少一倍的计算量，所以它的计算过程是$\Theta
+(\log n)$的。而改写后的`expmod`因为需要计算两遍`(expmod base (/ exp 2) m)`，计算
+量并没有减少。所以其计算过程是$\Theta (n)$的。
