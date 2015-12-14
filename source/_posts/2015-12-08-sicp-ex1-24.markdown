@@ -1,0 +1,68 @@
+---
+layout: mathjax
+title: "sicp-ex1-24"
+date: 2015-12-08 22:28:08 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+修改练习1.22中的`timed-prime-test`过程，让它使用`fast-prime?`(费马方法)，并检查
+你在该练习中找出的12个素数。因为费马检查具有$\Theta (\log n)$的增长速度，对接近
+1000000的素数检查与接近1000的素数检查作对期望时间之间的比较有怎么样的预期？你的
+数据确实表明了这一预期吗？你能解释所发现的任何不符合预期的地方吗？
+
+### 解答
+
+首先将`fast-prime?`过程加载到解释器中：
+
+{% include_code fast-prime? lang:scheme sicp/fast-prime.scm %}
+
+然后加载使用`fast-prime?`过程的寻找素数的过程：
+
+{% include_code 练习1.24 lang:scheme sicp/ex1-24.scm %}
+
+使用新的寻找素数过程完成练习1.22中查找的素数。其结果如下：
+
+``` scheme
+(timed-search-for-primes 1000 3)
+1009
+1013
+1019
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 10000 3)
+10007
+10009
+10037
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 100000 3)
+100003
+100019
+100043
+are primes
+ *** 
+Time costed: 1
+;Unspecified return value
+
+(timed-search-for-primes 1000000 3)
+1000003
+1000033
+1000037
+are primes
+ *** 
+Time costed: 2
+;Unspecified return value
+```
+
+尽管费马检查具有$\Theta (\log {n})$的增长速度，但由于程序运行的速度并不只受到运
+行步数一个因素影响，所以只能说接近1000的素数检查一定比接近100000的素数检查快。
