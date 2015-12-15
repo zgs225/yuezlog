@@ -1,0 +1,40 @@
+---
+layout: mathjax
+title: "sicp-ex1-27"
+date: 2015-12-15 07:44:46 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+证明脚注47中列出的Carmichael数确实能骗过费马检查。也就是说，写一个过程，它以整数
+$n$为参数，对每个$a<n$检查$a\^n$是否与$a$模$n$同余。用你的过程去检查前面给出的那
+些Carmichael数。
+
+### 解答
+
+{% include_code 练习1.27 lang:scheme sicp/ex1-27.scm %}
+
+### 测试
+
+``` scheme
+(carmichael-prime? 561)
+;Value: #t
+
+(carmichael-prime? 1105)
+;Value: #t
+
+(carmichael-prime? 1729)
+;Value: #t
+
+(carmichael-prime? 2465)
+;Value: #t
+
+(carmichael-prime? 2821)
+;Value: #t
+
+(carmichael-prime? 6601)
+;Value: #t
+```
