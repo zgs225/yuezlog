@@ -1,0 +1,58 @@
+---
+layout: mathjax
+title: "sicp-ex1-28"
+date: 2015-12-15 08:23:58 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+费马检查的一种不会被欺骗的变形称为Miller-Rabin检查(Miller 1976; Rabin 1980)，它
+来源于费马小定理的一个变形。这一变形断言，如果$n$是素数，$a$是任何小于$n$的整数
+，则$a$的$(n-1)$次幂与$1$模$n$同余。要用Miller-Rabin检查考察数$n$的素性，我们应
+随机地取一个数$a<n$并用过程`expmod`求$a$的$(n-1)$次幂对$n$的模。然后，在执行`expmod`
+中的平方步骤时，我们需要查看是否遇到了“$1$取模$n$的非平凡平方根”，也就是说，是不
+是存在不等于$1$或者$n-1$的数，如果$n$是非素数的奇数，那么至少有一半的数$a<n$，按
+照这种方式计算$a\^{n-1}$，将会遇到$1$取模$n$的非平凡平方根。这也是Miller-Rabin检
+查不会受到欺骗的原因。请修改`expmod`过程，让它发现$1$的非平凡平方根时报告失败，
+并利用它实现一个类似于`fermat-test`的过程，完成Miller-Rabin检查。通过检查一些已
+知素数和非素数的方式考验你的过程。提示：送出失败信号的一种简单方式就是让它返回0。
+
+### 解答
+
+{% include_code 练习1.28 lang:scheme sicp/ex1-28.scm %}
+
+### 测试
+
+``` scheme
+;;; 检测Carmichael数
+(miller-rabin-prime? 561 10)
+;Value: #f
+
+(miller-rabin-prime? 1105 10)
+;Value: #f
+
+(miller-rabin-prime? 1729 10)
+;Value: #f
+
+(miller-rabin-prime? 2465 10)
+;Value: #f
+
+(miller-rabin-prime? 2821 10)
+;Value: #f
+
+(miller-rabin-prime? 6601 10)
+;Value: #f
+
+;;; 检测已知素数
+(miller-rabin-prime? 1000037 10)
+;Value: #t
+
+(miller-rabin-prime? 100019 10)
+;Value: #t
+
+(miller-rabin-prime? 3 2)
+;Value: #t
+```
