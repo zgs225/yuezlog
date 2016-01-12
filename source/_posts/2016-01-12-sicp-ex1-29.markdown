@@ -1,0 +1,38 @@
+---
+layout: mathjax
+title: "sicp-ex1-29"
+date: 2016-01-12 10:26:09 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+辛普森规则是另一种比上面所用规则更精确的数值积分方法。采用辛普森规则，函数$f$在
+范围$a$和$b$之间的定积分的近似值是：
+
+$$
+\frac {h} {3} [y\_0 + 4y\_1 + 2y\_2 + 4y\_3 + 2y\_4 + \dots + 2y\_{n-2} + 4y\_{n-1} + y\_n]
+$$
+
+其中，$h = \frac {b - a} {n}$，$n$是某个偶数，而$y\_k = f(a + kh)$，(增大$n$能提
+高近似值的精度)。请定义一个具有$f$、$a$、$b$、$n$，采用辛普森规则计算并返回积分
+值的过程。用你的函数求出`cube`在0和1之间的积分(用$n=100$和$n=1000$)，并将得到的
+值与上面用`integral`过程所得到的结果进行比较。
+
+{% include_code p38-sum lang:scheme sicp/p38-sum.scm %}
+
+{% include_code 练习1.29 lang:scheme sicp/ex1-29.scm %}
+
+### 测试
+
+``` scheme
+(simpson-integral cube 0.0 1.0 100)
+;Value: .24999999999999992
+
+(simpson-integral cube 0.0 1.0 1000)
+;Value: .2500000000000003
+```
+
+其得到的值比前文中的`integral`过程所得到的值精确度高。
