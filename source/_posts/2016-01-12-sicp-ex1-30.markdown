@@ -1,0 +1,37 @@
+---
+layout: mathjax
+title: "sicp-ex1-30"
+date: 2016-01-12 21:33:44 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+上面的过程`sum`将产生出一个线性递归。我们可以重写该过程，使之能够迭代地执行。请
+说明应该怎样通过填充下面定义中缺少的表达式，完成这一工作。
+
+``` scheme
+(define (sum term a next b)
+  (define (iter a result)
+    (if <??>
+        <??>
+        (iter <??> <??>)))
+  (iter <??> <??>))
+```
+
+### 解答
+
+{% include_code 练习1.30 lang:scheme sicp/ex1-30.scm %}
+
+### 测试
+
+``` scheme
+;;; Load ex1-30.scm
+(simpson-integral cube 0.0 1.0 1000)
+;Value: .25000000000000006
+
+(simpson-integral cube 0.0 1.0 100000)
+;Value: .2500000000000001
+```
