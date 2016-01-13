@@ -1,6 +1,10 @@
 ---
 layout: mathjax
 title: "sicp-ex1-9"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
 date: 2015-11-27 06:57:56 +0800
 comments: true
 hidden: true
