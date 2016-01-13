@@ -1,0 +1,64 @@
+---
+layout: mathjax
+title: "sicp-ex1-31"
+date: 2016-01-12 22:07:30 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+a) 过程`sum`是可以用高阶过程表示的大量类似抽象中最简单的一个。请写出一个类似的，
+称为`product`的过程，它返回在给定范围中各点的某个函数值的乘积。请说明如果和`product`
+定义`factorial`。另请按照下面公式计算$\pi$的近似值：
+
+$$
+\frac {\pi} {4} = \frac
+{2 \cdot 4 \cdot 4 \cdot 6 \cdot 6 \cdot 8 \cdots}
+{3 \cdot 3 \cdot 5 \cdot 5 \cdot 7 \cdot 7 \cdots}
+$$
+
+b) 如果你的`product`过程生成的是一个递归计算过程，那么请写出生成迭代计算过程的过
+程。如果它生成一个迭代计算过程，请写出一个生成递归计算过程的过程。
+
+### 解答(a)
+
+下面是迭代版`product`过程：
+
+{% include_code 迭代product过程 lang:scheme sicp/ex1-31-a.scm %}
+
+### 测试
+
+``` scheme
+(factorial 10)
+;Value: 3628800
+
+(factorial 3)
+;Value: 6
+
+(wallis-pi 100)
+;Value: 3.1570301764551676
+
+(wallis-pi 1000)
+;Value: 3.1431607055322663
+
+(wallis-pi 10000)
+;Value: 3.1417497057380523
+```
+
+### 解答(b)
+
+下面给出递归版`product`过程：
+
+{% include_code 迭代product过程 lang:scheme sicp/ex1-31-b.scm %}
+
+### 测试
+
+``` scheme
+(factorial 10)
+;Value: 3628800
+
+(factorial 3)
+;Value: 6
+```
