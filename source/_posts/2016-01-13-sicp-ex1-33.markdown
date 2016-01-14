@@ -1,0 +1,51 @@
+---
+layout: mathjax
+title: "sicp-ex1-33"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-13 22:11:05 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+你可以通过引进一个处理被组合项的过滤器(filter)概念，写出一个比`accumulate`更一般
+的版本。也就是说，在计算过程中，只组合起由给定范围得到的项里的那些满足特定条件的
+项。这样得到的`filtered-accumulate`抽象取与上面累积过程同样的参数，再加上一个另
+外的描述有关过滤器的谓词参数。请写出`filtered-accumulate`作为一个过程，说明如何用
+`filtered-accumulate`表达以下内容：
+
+a) 求出在区间$a$和$b$中所有素数之和（假定你已经写出了谓词`prime?`）。      
+b) 小于$n$的所有与$n$互素的正整数（即所有满足$GCD(i,n) = 1$的整数$i<n$）之乘积。
+
+### 解答
+
+{% include_code 练习1.33 lang:scheme sicp/ex1-33.scm %}
+
+### 测试
+
+``` scheme
+;;; 测试区间a和b中所有素数之和
+(primes-sum 2 100)
+;Value: 1060
+
+(primes-sum 3 1000)
+;Value: 76125
+
+(primes-sum 2 4)
+;Value: 5
+
+;;; 测试小于n的所有与n互素的正整数之乘积
+(coprimes-product 3)
+;Value: 2
+
+(coprimes-product 4)
+;Value: 3
+
+(coprimes-product 10)
+;Value: 189
+```
