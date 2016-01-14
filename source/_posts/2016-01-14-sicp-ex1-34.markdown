@@ -1,0 +1,70 @@
+---
+layout: mathjax
+title: "sicp-ex1-34"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-14 11:13:30 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们定义了：
+
+``` scheme
+(define (f g)
+  (g 2))
+```
+
+而后就有：
+
+``` scheme
+(f square)
+4
+
+(f (lambda (z) (* z (+ z 1))))
+6
+```
+
+如果我们（坚持）要求解释器去求值`(f f)`，那么会发生什么情况呢？请给出解释。
+
+### 解答
+
+先在解释器中执行`(f f)`：
+
+``` scheme
+(f f)
+;The object 2 is not applicable.
+```
+
+分析其原因，将调用过程展开：
+
+``` scheme
+(f f)
+
+;;; =
+
+(f (lambda (g) (g 2)))
+
+;;; =
+
+((lambda (g)
+    (g 2))
+  (lambda (g)
+    (g 2)))
+
+;;; =
+
+((lambda (g)
+    (g 2)
+  2))
+
+;;; =
+(2 2)
+```
+
+因为2不是一个过程，所以无法被调用。
