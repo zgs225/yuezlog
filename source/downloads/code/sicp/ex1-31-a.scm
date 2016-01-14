@@ -15,18 +15,14 @@
   (product term 1 n next))
 
 (define (wallis-pi n)
-  (define (numerator-term k)
-    (if (even? k)
-        (* 2 (+ (/ k 2) 1))
-        (* 2 (+ (/ (- k 1) 2) 1))))
+  (define (dec k) (- k 1))
 
-  (define (denominator-term k)
-    (if (even? k)
-        (+ k 1)
-        (+ k 2)))
+  (define (inc k) (+ k 1))
 
-  (define (next k) (+ k 1))
+  (define (term k)
+    (* (/ (dec k) k)
+       (/ (inc k) k)))
 
-  (exact->inexact
-   (* 4 (/ (product numerator-term 1 n next)
-           (product denominator-term 1 n next)))))
+  (define (next k) (+ k 2.0))
+
+  (* 4 (product term 3.0 n next)))
