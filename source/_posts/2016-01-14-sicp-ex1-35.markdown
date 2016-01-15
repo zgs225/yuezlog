@@ -1,0 +1,24 @@
+---
+layout: mathjax
+title: "sicp-ex1-35"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-14 13:51:32 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请证明黄金分割率$\phi$（1.2.2节）是变换$x \mapsto 1 + \frac {1} {x}$的不动点。请
+利用这一事实，通过过程`fixed-point`计算出$\phi$的值。
+
+### 解答
+
+由于$\phi \^ 2 = \phi + 1$，所以$\phi = 1 + \frac {1} {\phi}$，是变换$x \mapsto
+1 + \frac {1} {x}$的不动点。
+
+{% include_code 练习1.35 lang:scheme sicp/ex1-35.scm %}
