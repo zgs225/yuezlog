@@ -4,6 +4,11 @@ title: "Vim 技巧"
 date: 2016-01-18 07:29:28 +0800
 comments: true
 categories: 技术
+keywords:
+  - vim tips
+  - vim 技巧
+  - vim 教程
+  - 怎么使用vim
 ---
 
 > 在Github上看到的一些挺有用的技巧，转载、汇总过来。文章最后会有来源。
