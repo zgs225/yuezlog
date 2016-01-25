@@ -1,0 +1,34 @@
+---
+layout: mathjax
+title: "sicp-ex1-41"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 23:05:04 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一个过程`double`，它以一个有一个参数的过程为参数，`double`返回一个过程。这
+一过程将原来那个参数过程应用两次。例如，若`inc`是个给参数加1的过程，`(double inc)`
+将给参数加2.下面表达式返回什么值：
+``` scheme
+(((double (double double)) inc) 5)
+```
+
+### 解答
+
+``` scheme
+(define (double f)
+  (lambda (x)
+    (f (f x))))
+
+(define (inc x) (+ x 1))
+
+(((double (double double)) inc) 5)
+;Value: 21
+```
