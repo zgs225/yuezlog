@@ -28,3 +28,19 @@ $f$是求一个数的平方操作，$n$次重复应用$f$就求出其参数的$2
 提示：你可能发现使用练习1.42的`compose`能带来一些方便。
 
 ### 解答
+
+{% include_code 练习1.43 lang:scheme sicp/ex1-43.scm %}
+
+### 测试
+
+``` scheme
+;;; Load ex1-42.scm
+((repeated square 2) 5)
+;Value: 625
+
+((repeated square 1) 5)
+;Value: 25
+
+((repeated (lambda (x) (+ x 1)) 10) 10)
+;Value: 20
+```
