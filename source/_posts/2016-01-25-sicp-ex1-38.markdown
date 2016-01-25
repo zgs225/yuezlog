@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex1-38"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 08:24:28 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在1737年，瑞士数学家莱昂哈德·欧拉发表了一篇论文 De Fractionibus Continuis ，文中
+包含了$e - 2$的一个连分式展开，其中的$e$是自然对数的底。在这一分式中，$N\_i$全都
+是$1$，而$D\_i$依次为$1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, \cdots $。请写出一个程序，
+其中使用你在练习1.37中所做的`cont-frac`过程，并能基于欧拉的展开式求出$e$的近似值。
+
+### 解答
+
+观察$D\_i$的值，发现它有着如下的规律：当$(i - 2) \mod 3 = 0$的时候，$D\_i = 2 \times \frac {i - 2} {3}$，
+否则$D\_i = 1$。
+
+所以，求$e$的近似值过程如下：
+
+{% include_code 练习1.38 lang:scheme sicp/ex1-38.scm %}
+
+### 测试
+
+``` scheme
+(cont-frac-e 10)
+;Value: 2.3678756476683938
+
+(cont-frac-e 100)
+;Value: 2.3678794411714423
+
+(cont-frac-e 1000)
+;Value: 2.3678794411714423
+```
