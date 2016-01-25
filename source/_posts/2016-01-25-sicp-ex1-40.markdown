@@ -1,0 +1,35 @@
+---
+layout: mathjax
+title: "sicp-ex1-40"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 13:27:29 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一个过程`cubic`，它和`newtons-method`过程一起使用在下面的表达式里：
+``` scheme
+(newtons-method (cubic a b c) 1)
+```
+能逼近三次方程$x\^3 + ax\^2 + bx + c$的零点。
+
+### 解答
+
+{% include_code 练习1.40 lang:scheme sicp/ex1-40.scm %}
+
+### 测试
+
+``` scheme
+;;; Load p46-fixed-point.scm
+;;; Load p49-deriv.scm
+;;; Load p49-newton-transform.scm
+
+(newtons-method (cubic 3 4 5) 1.0)
+;Value: -2.2134116627621956
+```
