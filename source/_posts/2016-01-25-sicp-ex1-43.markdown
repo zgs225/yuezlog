@@ -5,11 +5,7 @@ keywords:
   - 计算机程序的构造和解释,
   - 习题解答,
   - Structure and Interpretation of Computer Programs,
-<<<<<<< HEAD
-date: 2016-01-25 23:41:25 +0800
-=======
 date: 2016-01-25 23:20:33 +0800
->>>>>>> 练习1.43
 comments: true
 hidden: true
 categories: draft
