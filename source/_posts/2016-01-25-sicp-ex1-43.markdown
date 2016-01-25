@@ -1,0 +1,30 @@
+---
+layout: mathjax
+title: "sicp-ex1-43"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 23:41:25 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+如果$f$是一个数值函数，$n$是一个正整数，那么我们可以构造出$f$的$n$次重复应用，将
+其定义为一个函数，这个函数在$x$的值是$f(f(\cdots (f(x))\cdots ))$。举例说，如果
+函数$f$是函数$x \mapsto x + 1$，$n$次重复应用$f$就是函数$x \mapsto x + n$。如果
+$f$是求一个数的平方操作，$n$次重复应用$f$就求出其参数的$2\^n$次幂。请写一个过程，
+它的输入是一个计算$f$的过程和一个正整数$n$，返回的是能计算$f$的$n$次重复应用的那
+个函数。你的过程应该能以如下方式使用：
+
+`` scheme
+((repeated square 2) 5)
+625
+``
+
+提示：你可能发现使用练习1.42的`compose`能带来一些方便。
+
+### 解答
