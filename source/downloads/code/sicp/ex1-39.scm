@@ -2,7 +2,7 @@
   (cont-frac (lambda (i)
                (if (= i 1)
                    x
-                   (square x)))
+                   (- (square x))))
              (lambda (i)
                (- (* 2.0 i) 1))
              k))
