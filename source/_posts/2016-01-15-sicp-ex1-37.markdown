@@ -1,0 +1,107 @@
+---
+layout: mathjax
+title: "sicp-ex1-37"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-15 10:53:29 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+a) 一个无穷连分式是一个如下形式的表达式：
+
+$$
+f = \cfrac {N_1} {D_1
+      + \cfrac {N_2} {D_2
+      + \cfrac {N_3} {D_3 + \cdots}}}
+$$
+
+作为一个例子，我们可以证明在所有的$N_1$和$D_1$都等于1时，这一无穷连分式产生出$1\over
+\phi$，其中的$\phi$就是黄金分割率（见1.2.2节描述）。逼近某个无穷连分式的一种方法
+是在给定数目的项之后截断，这样的一个截断称为$k$项有限连分式，其形式是：
+
+$$
+\cfrac {N_1} {D_1
+      + \cfrac {N_2} {\ddots
+      + \cfrac {N_k} {D_k}}}
+$$
+
+假定$n$和$d$都是只有一个参数（项的下标$i$）的过程，它们分别返回连分式的项$N_i$和
+$D_i$。请定义一个过程`cont-frac`，使得对`(cont-frac n d k)`的求值计算出k项有限
+连分式的值。通过如下调用检查你的过程对于顺序的k值是否逼近$1\over \phi$：
+
+``` scheme
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           k)
+```
+
+你需要取多大的k才能保证得到的近似值具有十进制的4位精度？
+
+b) 如果你的过程产生一个递归计算的过程，那么请写另一个产生迭代计算的过程。如果它
+产生一个迭代计算，请写出另一个过程，是指产生一个递归计算过程。
+
+### 解答(a)
+
+一个无穷连分式可以等价转化成下面的除法序列：
+
+$$
+f = N\_1 / (D\_1 + (N\_2 / (D\_2 + \cdots + (N\_k / (D\_k)))))
+$$
+
+而这一过程，使用递归过程表示为：
+
+{% include_code 递归过程cont-frac lang:scheme sicp/ex1-37-a.scm %}
+
+### 测试
+
+使用这一过程检查对于顺序的k值是否逼近$1 \over \phi$：
+
+``` scheme $1 \over \phi$的近似值
+(/ 2 (+ 1 (sqrt 5)))
+;Value: .6180339887498948
+```
+
+``` scheme
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           10)
+;Value: .6179775280898876
+
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           11)
+;Value: .6180555555555556
+```
+
+可以看到，当$k=11$的时候，其得到的近似值便具有十进制的4位精度。
+
+### 解答(b)
+
+使用迭代的过程逼近某个无穷连分式：
+
+{% include_code 迭代过程cont-frac lang:scheme sicp/ex1-37-b.scm %}
+
+### 测试
+
+``` scheme
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           11000)
+;Value: .6180339887498948
+
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           11)
+;Value: .6180555555555556
+
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           10)
+;Value: .6179775280898876
+```
