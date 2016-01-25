@@ -1,0 +1,32 @@
+---
+layout: mathjax
+title: "sicp-ex1-42"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 23:14:37 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+令$f$和$g$是两个单参数的函数，$f$在$g$之后的复合定义为函数 $x \mapsto f(g(x))$。
+请定义一个函数`compose`实现函数复合。例如，如果`inc`是将参数加1，那么：
+``` scheme
+((compose square inc) 6)
+49
+```
+
+### 解答
+
+{% include_code 练习1.42 lang:scheme sicp/ex1-42.scm %}
+
+### 测试
+
+``` scheme
+((compose square inc) 6)
+;Value: 49
+```
