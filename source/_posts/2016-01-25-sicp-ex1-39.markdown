@@ -1,0 +1,42 @@
+---
+layout: mathjax
+title: "sicp-ex1-39"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-25 10:12:27 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+正切函数的连分式表示由德国数学家 J.H. Lambert 在1770年发表：
+
+$$
+\tan x = \cfrac {x} {1 - \cfrac {x\^2} {
+3 - \cfrac {x\^2} {5 - \ddots}
+}}
+$$
+
+其中的$x$用弧度表示。请定义过程`(tan-cf x k)`，它基于 Lambert 公式计算正切函数的
+近似值。$k$描述的是计算的项数，就像练习1.37一样。
+
+### 解答
+
+{% include_code 练习1.39 lang:scheme sicp/ex1-39.scm %}
+
+### 测试
+
+``` scheme
+(tan-cf 3.14 1000)
+;Value: .9962602049458319
+
+(tan-cf 0.87 1000)
+;Value: .7013741309383125
+
+(tan-cf 6 1000)
+;Value: .9999877116507956
+```
