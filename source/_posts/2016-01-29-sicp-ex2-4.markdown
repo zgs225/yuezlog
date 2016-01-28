@@ -1,0 +1,61 @@
+---
+layout: mathjax
+title: "sicp-ex2-4"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-29 07:28:13 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面是序对的另一种过程性表示方式。请针对这一表示验证，对于任意的x和y，`(car (cons x y))`
+都将产生出x。
+
+``` scheme
+(define (cons x y)
+  (lambda (m) (m x y)))
+
+(define (car z)
+  (z (lambda (p q) p)))
+```
+
+对应的`cdr`该如何定义？（提示：为了验证这一表示确实能行，请利用1.1.5节的代换模型）
+
+### 解答
+
+对应的`cdr`定义如下：
+
+``` scheme
+(define (cdr z)
+  (z (lambda (p q) q)))
+```
+
+为了验证这一表示，将练习2.1中的`cons`和`car`换成上面表示。验证结果：
+
+``` scheme
+(define x (make-rat 8 3))
+;Value: x
+
+(numer x)
+;Value: 8
+
+(denom x)
+;Value: 3
+
+
+(define y (make-rat -13 3))
+;Value: y
+
+(numer y)
+;Value: -13
+
+(denom y)
+;Value: 3
+```
+
+可以看到，这一表示是可行的。
