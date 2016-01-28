@@ -1,0 +1,55 @@
+---
+layout: mathjax
+title: "sicp-ex2-3"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-28 21:27:39 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请实现一种平面矩阵的表示（提示：你有可能借用练习2.2的结果）。基于你的构造函数和
+选择函数定义几个过程，计算给定矩阵的周长和面积等。现在请再为矩阵实现另一种表示方
+式。你应该怎样设计系统，使之能提供适当的抽象屏障，使同一个周长或者面积过程对两种
+不同表示都能工作？
+
+### 解答
+
+可以使用一个点，以及宽和高的边长来确定一个长方形：
+
+{% include_code 练习2.3 lang:scheme sicp/ex2-3.scm %}
+
+另一种，使用宽和高的线段定义一个长方形：
+
+{% include_code 练习2.3 lang:scheme sicp/ex2-3-b.scm %}
+
+### 测试
+
+``` scheme
+(define rect (make-rect (make-point 3 4)
+                        4
+                        5))
+;Value: rect
+
+(perimeter rect)
+;Value: 18
+
+(area rect)
+;Value: 20
+
+;;; Other make-rect
+(define rect (other-make-rect (make-segment 3 4 6 4)
+                              (make-segment 3 4 3 9)))
+;Value: rect
+
+(area rect)
+;Value: 15
+
+(perimeter rect)
+;Value: 16
+```
