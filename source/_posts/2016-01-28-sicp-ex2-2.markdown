@@ -1,0 +1,56 @@
+---
+layout: mathjax
+title: "sicp-ex2-2"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-28 20:50:05 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请考虑平面上线段的表示问题。一个线段用一对点表示，它们分别是线段的始点和终点。请
+定义构造函数`make-segment`和选择函数`start-segment`、`end-segment`，它们基于点定
+义线段的表示。进而，一个点可以用数的序对表示，序对的两个成分分别表示点的$x$坐标
+和$y$坐标。请据此进一步给出构造函数`make-point`和选择函数`x-point`、`y-point`，
+用它们定义出点的这种表示。最后，请基于所定义的构造函数，定义出过程`midpoint-segment`，
+它以一个线段为参数，返回线段的中点（也就是坐标值是两个端点的平均值的点）。为了试
+验这些过程，还需要定义一种打印点的方法：
+
+{% include_code print-point过程 lang:scheme sicp/p60-print-point.scm %}
+
+### 解答
+
+{% include_code 练习2.2 lang:scheme sicp/ex2-2.scm %}
+
+### 测试
+
+``` scheme
+(define s (make-segment 3 4 9 12))
+;Value: s
+
+(start-segment s)
+;Value 15: (3 . 4)
+
+(end-segment s)
+;Value 16: (9 . 12)
+
+(print-point (start-segment s))
+
+(3,4)
+;Unspecified return value
+
+(print-point (end-segment s))
+
+(9,12)
+;Unspecified return value
+
+(print-point (midpoint-segment s))
+
+(6,8)
+;Unspecified return value
+```
