@@ -1,0 +1,62 @@
+---
+layout: mathjax
+title: "sicp-ex1-46"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-26 17:21:36 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+本章描述的一些数值算法都是迭代式改进的实例。迭代是改进是一种非常有一般性的计算策
+略，它说的是：为了计算出某些东西，我们可以从对答案的某个初始猜测开始，检查这一猜
+测是否足够好，如果不行就改进这一猜测，将改进之后的猜测作为新的猜测去继续这一计算
+过程。请写一个过程`iterative-improve`，它以两个过程为参数：其中之一表示告知某个
+猜测是否足够好的方法，另一个表示改进猜测的方法。`iterative-improve`的返回值应该
+是一个过程，它以某一个猜测为参数，通过不断改进，直至得到的猜测足够好为止。利用
+`iterative-improve`过程，它以某一个猜测为参数，通过不断的改进，直到得到的猜测足
+够好为止。利用`iterative-improve`过程重写1.1.7节的`sqrt`和1.3.3节的`fixed-point`
+过程。
+
+### 解答
+
+{% include_code 练习1.46 lang:scheme sicp/ex1-46.scm %}
+
+### 测试
+
+``` scheme
+;;; 重写sqrt
+(define (sqrt x)
+    (define dx 0.00001)
+    (define (close-enough? v1 v2)
+        (< (abs (- v1 v2)) dx))
+    (define (improve guess)
+        (average guess (/ x guess)))
+    (define (average x y)
+        (/ (+ x y) 2))
+    ((iterative-improve close-enough? improve) 1.0))
+
+(sqrt 9)
+;Value: 3.
+
+(sqrt 32)
+;Value: 5.65685424949238
+
+;;; 重写fixed-point
+(define (fixed-point f first-guess)
+  (define tolerance 0.00001)
+
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+
+  ((iterative-improve close-enough? f) first-guess))
+
+(fixed-point (lambda (y) (+ (sin y) (cos y)))
+       1.0)
+;Value: 1.2587315962971173
+```
