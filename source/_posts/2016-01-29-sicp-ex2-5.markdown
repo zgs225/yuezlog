@@ -1,0 +1,34 @@
+---
+layout: mathjax
+title: "sicp-ex2-5"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-29 07:41:54 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请证明，如果将$a$和$b$表示为乘积$2\^a3\^b$对应的整数，那么我们就可以只用非负整数
+和算数运算表示序对。请给出对应的过程`cons`、`car`和`cdr`的定义。
+
+### 解答
+
+{% include_code 练习2.5 lang:scheme sicp/ex2-5.scm %}
+
+### 测试
+
+``` scheme
+(define z (cons 3 4))
+;Value: z
+
+(car z)
+;Value: 3
+
+(cdr z)
+;Value: 4
+```
