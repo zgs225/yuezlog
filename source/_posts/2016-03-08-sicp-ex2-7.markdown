@@ -1,0 +1,40 @@
+---
+layout: mathjax
+title: "sicp-ex2-7"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-08 22:39:12 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Alyssa的程序是不完整的，因为她还没有确定区间的抽象实现。这里是区间构造符的定义：
+
+``` scheme
+(define (make-interval a b) (cons a b))
+```
+
+请定义选择符`upper-bound`和`lower-bound`，完成这一实现。
+
+### 解答
+
+``` scheme
+(define (upper-bound x) (cdr x))
+
+(define (lower-bound x) (car x))
+```
+
+### 测试
+
+``` scheme
+(upper-bound (make-interval 100 200))
+;Value: 200
+
+(lower-bound (make-interval 100 200))
+;Value: 100
+```
