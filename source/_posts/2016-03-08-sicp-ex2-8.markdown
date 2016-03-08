@@ -1,0 +1,42 @@
+---
+layout: mathjax
+title: "sicp-ex2-8"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-08 22:53:01 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+通过类似于Alyssa的推理，说明两个区间的差应该怎样计算。请定义出相应的减法过程`sub-interval`。
+
+### 解答
+
+``` scheme
+(define (sub-interval x y)
+  (make-interval (- (lower-bound x) (upper-bound y))
+     (- (upper-bound x) (lower-bound y))))
+```
+
+### 测试
+
+``` scheme
+(define a
+  (make-interval 10 20))
+;Value: a
+
+(define b
+  (make-interval 13 19))
+;Value: b
+
+(lower-bound (sub-interval a b))
+;Value: -9
+
+(upper-bound (sub-interval a b))
+;Value: 7
+```
