@@ -1,0 +1,69 @@
+---
+layout: mathjax
+title: "sicp-ex2-6"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-01-29 23:21:28 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+如果觉得将序对表示为过程还不足以令人如雷灌顶，那么请考虑，在一个可以对过程做各种
+操作的语言里，我们完全可以没有数（至少在只考虑非负整数的情况下），可以将0和加一
+操作实现为：
+
+``` scheme
+(define zero (lambda (f) (lambda (x) x)))
+
+(define (add-1 n)
+  (lambda (f) (lambda (x) (f ((n f) x)))))
+```
+
+这一表示称为Church计数，名字来源于其发明人数理逻辑学家Alonzo Church（丘奇），$\lambda$
+演算也是他发明的。
+
+请直接定义`one`和`two`（不用`zero`和`add-1`）（提示：利用代换去求值`(add-1 zero)`)。
+请给出加法过程+的一个直接定义（不要通过反复应用`add-1`）。
+
+### 解答
+
+将过程`(add-1 zero)`展开，看看这种表示是怎样的：
+
+``` scheme
+(add-1 zero)
+
+(lambda (f) (lambda (x) (f (((lambda (f) (lambda (x) x)) f) x))))
+
+(lambda (f) (lambda (x) (f ((lambda (x) x) x))))
+
+(lambda (f) (lambda (x) (f x)))
+```
+
+所以，`one`可以定义成：
+
+``` scheme
+(define one (lambda (f) (lambda (x) (f x))))
+```
+
+同样的，将过程`(add-1 one)`展开：
+
+``` scheme
+(add-1 one)
+
+(lambda (f) (lambda (x) (f ((((lambda (f) (lambda (x) (f x))) f) x)))))
+
+(lambda (f) (lambda (x) (f (((lambda (x) (f x)) x)))))
+
+(lambda (f) (lambda (x) (f (f x))))
+```
+
+所以，`two`的定义应该是
+
+``` scheme
+(define two (lambda (f) (lambda x) (f (f x))))
+```
