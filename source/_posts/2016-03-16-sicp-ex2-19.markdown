@@ -1,0 +1,85 @@
+---
+layout: mathjax
+title: "sicp-ex2-19"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-16 07:22:32 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请考虑1.2.2节的兑换零钱方式的计数程序。如果能够轻而易举的改变程序里面所用的兑换
+货币就更好了。譬如说，那样我们就能计算出1英镑的不同兑换方式的数目。在写前面那个
+程序时，有关币种的知识有一部分出现在过程`first-denomination`里，另一部分出现在过
+程`count-change`（它知道有5种USD）。如果能够用一个表来提供可用于兑换的硬币就更好
+了。
+
+我们希望重写出过程`cc`，使其第二个参数是一个可用硬币的币值表，而不是一个指定可用
+硬币种类的整数。而后我们就可以针对各种货币定义出一些表：
+
+``` scheme
+(define us-coins (list 50 25 10 5 1))
+
+(define uk-coins (list 100 50 20 10 5 2 1 0.5))
+```
+
+然后我们就可以通过如下方式调用`cc`：
+
+``` scheme
+(cc 100 us-coins)
+
+292
+```
+
+为了做到这件事，我们需要对程序`cc`做一些修改。它仍然具有同样的形式，但将以不同的
+方式访问自己的第二参数，如下面所示：
+
+``` scheme
+(define (cc amount coin-values)
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (no-more? coin-values)) 0)
+        (else
+          (+ (cc amount
+                 (except-first-denomination coin-values))
+             (cc (- amount
+                    (first-denomination coin-values))
+                 coin-values)))))
+```
+
+请基于表结构上的操作，定义出过程`first-denomination`、`except-first-denomination`
+和`no-more?`。表`coin-values`的排列顺序会影响`cc`给出的回答吗？为什么？
+
+### 解答
+
+{% include_code 练习2.19 lang:scheme sicp/ex2-19.scm %}
+
+**表`coin-values`的排列顺序会影响结果吗？**
+
+我认为表`coin-values`排列的顺序是不会影响`cc`给出的答案的。因为`cc`计算兑换种类
+的方式是：
+
++ 将现金总数换成除第一种硬币外的所有其他硬币的不同方式数目，加上
++ 将现金总数减去第一种硬币币值后换成所有硬币的不同方式数目
+
+其与排序无关，所以不会影响结果。
+
+### 测试
+
+``` scheme
+(define us-coins (list 50 25 10 5 1))
+;Value: us-coins
+
+(cc 100 us-coins)
+;Value: 292
+
+;; 打乱us-coins的顺序
+(define (us-coins (list 10 50 25 1 5)))
+
+(cc 100 us-coins)
+;Value: 292
+```
