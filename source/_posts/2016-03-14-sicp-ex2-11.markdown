@@ -19,20 +19,4 @@ categories: draft
 
 ### 解答
 
-{% include_code 练习2.17 lang:scheme sicp/ex2-17.scm %}
-
 ### 测试
-
-``` scheme
-(define items (list 1 2 3 4))
-;Value: items
-
-(last-pair items)
-;Value 16: (4)
-
-(define items (list 1 3 4 (cons 1 3)))
-;Value: items
-
-(last-pair items)
-;Value 17: ((1 . 3))
-```

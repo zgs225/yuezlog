@@ -1,0 +1,40 @@
+---
+layout: mathjax
+title: "sicp-ex2-18"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-15 07:32:29 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义出过程`reverse`，它以一个表为参数，返回的表中所包含的元素与参数表相同，但
+排列顺序与参数表相反：
+
+``` scheme
+(reverse (list 1 4 9 16 25))
+
+(25 16 9 4 1)
+```
+
+### 解答
+
+{% include_code 练习2.18 lang:scheme sicp/ex2-18.scm %}
+
+### 测试
+
+``` scheme
+(reverse (list 1 2 3 4))
+;Value 21: (4 3 2 1)
+
+(reverse (list 1 4 9 16 25))
+;Value 22: (25 16 9 4 1)
+
+(reverse (list))
+;Value: ()
+```
