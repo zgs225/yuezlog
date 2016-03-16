@@ -78,7 +78,7 @@ categories: draft
 ;Value: 292
 
 ;; 打乱us-coins的顺序
-(define (us-coins (list 10 50 25 1 5)))
+(define us-coins (list 10 50 25 1 5))
 
 (cc 100 us-coins)
 ;Value: 292
