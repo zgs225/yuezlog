@@ -1,0 +1,49 @@
+---
+layout: mathjax
+title: "sicp-ex2-21"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-18 07:22:11 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`square-list`以一个数值表为参数，返回每个数的平方构成的表：
+
+``` scheme
+(square-list (list 1 2 3 4))
+(1 4 9 16)
+```
+
+下面是`square-list`的两个定义，请填充其中缺少的表达式以完成它们：
+
+``` scheme
+(define (square-list items)
+  (if (null? items)
+      nil
+      (cons <??> <??>)))
+
+(define (square-list items)
+  (map <??> <??>))
+```
+
+### 解答
+
+{% include_code 练习2.21 lang:scheme sicp/ex2-21.scm %}
+
+### 测试
+
+``` scheme
+;; 加载定义1
+(square-list (list 1 2 3 4))
+;Value 14: (1 4 9 16)
+
+;; 加载定义2
+(square-list (list 1 2 3 4))
+;Value 15: (1 4 9 16)
+```
