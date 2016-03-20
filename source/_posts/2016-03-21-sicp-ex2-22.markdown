@@ -1,0 +1,84 @@
+---
+layout: mathjax
+title: "sicp-ex2-22"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-21 07:10:43 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Louis Reasonner 试图重写练习2.21的第一个`square-list`过程，希望使它能生成一个迭
+代计算过程：
+
+``` scheme
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons (square (car things))
+                    answer))))
+  (iter items nil)))
+```
+
+但是很不幸，在按这种方式定义出的`square-list`产生出的结果表中，元素的顺序正好与
+我们所需要的相反。为什么？
+
+Louis 又试着修正其程序，交换了cons的参数：
+
+``` scheme
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons answer
+                    (square (car things))))))
+  (iter items nil)))
+```
+
+但还是不行。请解释为什么？
+
+### 解答
+
+1. **为什么所需要的相反？**
+
+运行第一段代码：
+
+``` scheme
+(square-lsit (list 1 2 3 4))
+;Value 15: (16 9 4 1)
+```
+
+因为第一段程序的逻辑是依次将list中的第一个元素拿出来，对元素做完平方处理后，将它
+放到新list中的第一位。这样，第二个元素就会在第一个元素前面，第三个元素在第二个元
+素前面，…… ，最后一个元素在第一个。所以，得到的结果与我们需要的相反。
+
+2. **为什么还是不行？**
+
+运行第二段代码：
+
+``` scheme
+(square-list (list 1 2 3 4))
+;Value 16: ((((() . 1) . 4) . 9) . 16)
+```
+
+因为：
+
+``` scheme
+(list 1 4 9 16) = (cons 1 (cons 4 (cons 9 (cons 16))))
+```
+
+而第二段程序执行后的结果是：
+
+``` scheme
+(cons (cons (cons (cons () 1) 4) 9) 16)
+```
+
+所以，这个结果还是不行。
