@@ -1,0 +1,33 @@
+---
+layout: mathjax
+title: "sicp-ex2-24"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-21 23:31:27 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定现在要求值表达式`(list 1 (list 2 (list 3 4)))`，请给出由解释器打印出的结果，
+给出与之对应的指针结构，并将它解释为一棵树（参见图2-6）。
+
+### 解答
+
+解释器打印出的值如下：
+
+``` scheme
+(1 (2 (3 4)))
+```
+
+其对应的盒子指针结构如下：
+
+{% lazy_img lazy no-shadow /photos/sicp/ex2-24.png 640 200 练习2.24-盒子指针结构 %}
+
+其树结构如下：
+
+{% lazy_img lazy no-shadow /photos/sicp/ex2-24-tree.png 640 200 练习2.24-树结构 %}
