@@ -1,0 +1,46 @@
+---
+layout: mathjax
+title: "sicp-ex2-23"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-21 07:34:20 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`for-each`与`map`类似，它以一个过程和一个元素表为参数，但它并不返回结果的表，
+只是将这一过程从左到右应用于各个元素，将过程应用于元素得到的值都丢掉不用。`for-each`
+通常用于执行了某些动作的过程，如打印等。看下面例子：
+
+``` scheme
+(for-each (lambda (x) (newline) (display x))
+          (list 57 321 88))
+
+57
+321
+88
+```
+
+由`for-each`返回的值（上面没有显示）可以是某种任意的东西，例如逻辑值真。请给出一
+个`for-each`的实现。
+
+### 解答
+
+{% include_code 练习2.23 lang:scheme sicp/ex2-23.scm %}
+
+### 测试
+
+``` scheme
+(for-each (lambda (x) (newline) (display x))
+    (list 57 321 88))
+
+57
+321
+88
+;Unspecified return value
+```
