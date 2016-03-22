@@ -13,4 +13,5 @@ vendor
 node_modules
 Gemfile.lock
 source/javascripts/dist.min.js
+source/javascripts/dist.min.js.map
 source/photos/**/*
