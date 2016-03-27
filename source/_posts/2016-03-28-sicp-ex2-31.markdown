@@ -1,0 +1,39 @@
+---
+layout: mathjax
+title: "sicp-ex2-31"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-28 07:04:54 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+将你在练习2.30做出的解答进一步抽象，做出一个过程，使它的性质能保证以下面的形式定
+义`square-tree`：
+
+``` scheme
+(define (square-tree tree) (tree-map square tree))
+```
+
+### 解答
+
+{% include_code 练习2.31 lang:scheme sicp/ex2-31.scm %}
+
+### 测试
+
+``` scheme
+(define (square-tree tree)
+  (tree-map square tree))
+;Value: square-tree
+
+(square-tree
+ (list 1
+       (list 2 (list 3 4) 5)
+       (list 6 7)))
+;Value 16: (1 (4 (9 16) 25) (36 49))
+```
