@@ -1,0 +1,49 @@
+---
+layout: mathjax
+title: "sicp-ex2-30"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-27 23:04:31 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一个与练习2.21中`square-list`过程类似的`square-tree`过程。也就是说，它应该
+具有下面的行为：
+
+``` scheme
+(square-tree
+  (list 1
+        (list 2 (list 3 ) 5)
+        (list 6 7)))
+
+(1 (4 (9 16) 25) (36 49))
+```
+
+请以两种方式定义`square-tree`，直接定义（即不使用任何高阶函数），以及使用`map`
+和递归定义。
+
+### 解答
+
+{% include_code 练习2.30 lang:scheme sicp/ex2-30.scm %}
+
+### 测试
+
+``` scheme
+(square-tree-nomap
+ (list 1
+       (list 2 (list 3 4) 5)
+       (list 6 7)))
+;Value 14: (1 (4 (9 16) 25) (36 49))
+
+(square-tree-map
+ (list 1
+       (list 2 (list 3 4) 5)
+       (list 6 7)))
+;Value 15: (1 (4 (9 16) 25) (36 49))
+```
