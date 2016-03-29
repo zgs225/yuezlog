@@ -150,6 +150,12 @@ task :sicp, :title do |t, args|
     post.puts "hidden: true"
     post.puts "categories: draft"
     post.puts "---"
+    post.puts ""
+    post.puts "### 问题"
+    post.puts ""
+    post.puts "### 解答"
+    post.puts ""
+    post.puts "### 测试"
   end
 end
 
