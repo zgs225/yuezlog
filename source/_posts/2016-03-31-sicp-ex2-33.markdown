@@ -1,0 +1,58 @@
+---
+layout: mathjax
+title: "sicp-ex2-33"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-03-31 07:46:38 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请填充下面缺失的表达式，完成将一些基本操作看做累积的定义：
+
+``` scheme
+(define (map p sequence)
+  (accumulate (lambda (x y) <??>) nil sequence))
+
+(define (append seq1 seq2)
+  (accumulate cons <??> <??>))
+
+(define (length sequence)
+  (accumulate <??> 0 sequence))
+```
+
+### 解答
+
+``` scheme
+(define (map p sequence)
+  (accumulate (lambda (x y)
+                (cons (p x) y))
+              (list)
+              sequence))
+
+(define (append seq1 seq2)
+  (accumulate cons seq2 seq1))
+
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y))
+        0
+        sequence))
+```
+
+### 测试
+
+``` scheme
+(map square (list 1 2))
+;Value 14: (1 4)
+
+(append (list 1 2) (list 3))
+;Value 16: (1 2 3)
+
+(length (list 1 2 3 4))
+;Value: 4
+```
