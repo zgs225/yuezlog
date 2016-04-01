@@ -1,0 +1,58 @@
+---
+layout: mathjax
+title: "sicp-ex2-34"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-01 07:28:24 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+对于$x$的某个给定值，求出一个多项式在$x$的值，也可以形式化为一种积累。假定需要求
+下面多项式的值：
+
+$$
+a\_nx\^n + a\_{n-1}x\^{n-1} + \cdots + a\_1x + a\_0
+$$
+
+采用著名的_Horner规则_，可以构造出下面的计算：
+
+$$
+(\cdots (a\_nx + a\_{n-1})x + \cdots + a\_1)x + a\_0
+$$
+
+换句话说，我们可以从$a\_n$开始，乘以$x$，再加上$a\_{n-1}$乘以$x$，如此下去，直到
+处理完$a\_0$。请填充下面的模板，做出一个利用Horner规则求多项式值的过程。假定多项
+式的系数安排在一个序列里面，从$a\_0$直至$a\_n$。
+
+``` scheme
+(define (honer-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms) <??>)
+              0
+              coefficient-sequence))
+```
+
+例如，为了计算$1 + 3x + 5x\^3 + x\^5$在$x = 2$的值，你需要求值：
+
+``` scheme
+(honer-eval 2 (lambda 1 3 0 5 0 1))
+```
+
+### 解答
+
+{% include_code 练习2.34 lang:scheme sicp/ex2-34.scm %}
+
+### 测试
+
+``` scheme
+(humer-eval 2 (list 1 3 0 5 0 1))
+;Value: 79
+
+(humer-eval 2 (list 5 1 4 3 3 1))
+;Value: 127
+```
