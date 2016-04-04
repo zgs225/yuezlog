@@ -1,0 +1,92 @@
+---
+layout: mathjax
+title: "sicp-ex2-37"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-04 21:22:43 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们将向量$v = (v\_i)$表示为数的序列，将矩阵$m = (m\_i)$表现为向量（矩阵行）
+的序列。例如，矩阵：
+
+$$
+\begin{bmatrix}
+1 & 2 & 3 & 4 \\\\\\\\
+4 & 5 & 6 & 6 \\\\\\\\
+6 & 7 & 8 & 9
+\end{bmatrix}
+$$
+
+用序列`((1 2 3 4) (4 5 6 6) (6 7 8 9))`表示。对于这种表示，我们可以用序列操作简
+洁地表达基本的矩阵与向量运算。这些运算（任何有关矩阵代数的书里都有描述）如下：
+
++ `(dot-product v w)` 返回和$\sum\_iv\_iw\_i$;
++ `(matrix-*-vector m v)` 返回向量$t$，其中$t\_i = \sum\_jm\_{ij}v\_j$;
++ `(matrix-*-matrix m n)` 返回矩阵$p$，其中$p\_{ij} = \sum\_km\_{ik}n\_{kj}$;
++ `(transpose m)` 返回矩阵$n$，其中$n\_{ij} = m\_{ji}$
+
+我们可以将点积`(dot-product)`定义为：
+
+``` scheme
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+```
+
+请填充下面过程里缺失的表达式，它们计算出其他的矩阵运算结果（过程`accumuluate-n`
+练习2.36中定义）。
+
+``` scheme
+(define (matrix-*-vector m v)
+  (map <??> m))
+
+(define (transpose mat)
+  (accumulate-n <??> <??> mat))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map <??> m)))
+```
+
+### 解答
+
+{% include_code 练习2.37 lang:scheme sicp/ex2-37.scm %}
+
+### 测试
+
+``` scheme
+(define v (list 1 2 3))
+;Value: v
+
+(define w (list 4 5 6))
+;Value: w
+
+(dot-product v w)
+;Value: 32
+
+(define m (list (list 1 2 3 4)
+                (list 4 5 6 6)
+                (list 6 7 8 9)))
+;Value: m
+
+(matrix-*-vector m v)
+;Value 34: (14 32 44)
+
+(transpose m)
+;Value 35: ((1 4 6) (2 5 7) (3 6 8) (4 6 9))
+
+(define n (list (list 1 2 3)
+                (list 4 5 6)
+                (list 7 8 9)
+                (list 10 11 12)))
+;Value: n
+
+(matrix-*-matrix m n)
+;Value 36: ((70 80 90) (126 147 168) (180 210 240))
+```
