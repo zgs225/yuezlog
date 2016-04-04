@@ -1,0 +1,62 @@
+---
+layout: mathjax
+title: "sicp-ex2-38"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-05 07:26:30 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`accumulate`也称为`fold-right`，因为它将序列的序列的第一个元素组合到右边所有
+元素的组合结果上。也有一个`fold-left`，它与`fold-right`类似，但却按照相反的方向
+去操作各个元素：
+
+{% include_code fold-left lang:scheme sicp/p82-fold-left.scm %}
+
+下面表达式的值是什么？
+
+``` scheme
+(fold-right / 1 (list 1 2 3))
+
+(fold-left / 1 (list 1 2 3))
+
+(fold-right list '() (list 1 2 3))
+
+(fold-left list '() (list 1 2 3))
+```
+
+如果要求用某个`op`时保证`fold-right`和`fold-left`对任何序列都产生同样的结果，请
+给出`op`应该满足的性质。
+
+### 解答
+
+``` scheme
+(accumulate / 1 (list 1 2 3))
+;Value: 3/2
+
+(fold-left / 1 (list 1 2 3))
+;Value: 1/6
+
+(accumulate list '() (list 1 2 3))
+;Value 37: (1 (2 (3 ())))
+
+(fold-left list '() (list 1 2 3))
+;Value 38: (((() 1) 2) 3)
+```
+
+如果要求保证`fold-right`和`fold-left`对任何序列计算都产生同样的结果，则`op`应该
+满足交换律和结合律。例如`+`。
+
+``` scheme
+(accumulate + 0 (list 1 2 3))
+;Value: 6
+
+(fold-left + 0 (list 1 2 3))
+;Value: 6
+```
