@@ -1,0 +1,35 @@
+---
+layout: mathjax
+title: "sicp-ex2-35"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-04 16:07:36 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+将2.2.2节的`count-leaves`重定义为一个积累：
+
+``` scheme
+(define (count-leaves t)
+  (accumulate <??> <??> (map <??> <??>)))
+```
+
+### 解答
+
+{% include_code 练习2.35 lang:scheme sicp/ex2-35.scm %}
+
+### 测试
+
+``` scheme
+(count-leaves (list 1 (list 2 (list 3 4)) 5))
+;Value: 5
+
+(count-leaves (list 1 2 3))
+;Value: 3
+```
