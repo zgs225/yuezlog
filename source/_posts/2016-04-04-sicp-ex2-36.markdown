@@ -1,0 +1,49 @@
+---
+layout: mathjax
+title: "sicp-ex2-36"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-04 16:52:55 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`accumulate-n`与`accumulate`类似，除了它的第三个参数是一个序列的序列，假定其
+中每个序列的元素个数相同。它用指定的累积过程去组合起所有序列的第一个元素，而后是
+所有序列的第二个元素，并如此做下去，返回得到的所有结果的序列。假如，如果s是包含4
+个序列的序列 `((1 2 3) (4 5 6) (7 8 9) (10 11 12))`，那么`(accumulate-n + 0 s)`
+就应该是序列`(22 26 30)`。请填充下面`accumulate-n`定义中所缺少的表达式：
+
+``` scheme
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+      nil
+      (cons (accumulate op init <??>)
+            (accumulate-n op init <??>))))
+```
+
+### 解答
+
+{% include_code 练习2.36 lang:scheme sicp/ex2-36.scm %}
+
+### 测试
+
+``` scheme
+(define lst (list (list 1 2 3)
+                  (list 4 5 6)
+                  (list 7 8 9)
+                  (list 10 11 12)))
+;Value: lst
+
+(accumulate-n + 0 lst)
+;Value 31: (22 26 30)
+
+(accumulate-n * 1 (list (list 3 4 5)
+                        (list 2 3 4)))
+;Value 32: (6 12 20)
+```
