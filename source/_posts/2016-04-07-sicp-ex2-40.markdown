@@ -1,0 +1,34 @@
+---
+layout: mathjax
+title: "sicp-ex2-40"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-07 07:16:47 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义过程`unique-pairs`，给它正数n，它产生出序对`(i, j)`，其中$1 \leqslant j < i \leqslant n$。
+请用`unique-pairs`去简化上面`prime-sum-pairs`的定义。
+
+### 解答
+
+{% include_code 练习2.40 lang:scheme sicp/ex2-40.scm %}
+
+### 测试
+
+``` scheme
+(unique-pairs 6)
+;Value 28: ((2 1) (3 1) (3 2) (4 1) (4 2) (4 3) (5 1) (5 2) (5 3) (5 4) (6 1) (6 2) (6 3) (6 4) (6 5))
+
+(prime-sum-pairs 6)
+;Value 26: ((2 1 3) (3 2 5) (4 1 5) (4 3 7) (5 2 7) (6 1 7) (6 5 11))
+
+(prime-sum-pairs 10)
+;Value 27: ((2 1 3) (3 2 5) (4 1 5) (4 3 7) (5 2 7) (6 1 7) (6 5 11) (7 4 11) (7 6 13) (8 3 11) (8 5 13) (9 2 11) (9 4 13) (9 8 17) (10 1 11) (10 3 13) (10 7 17) (10 9 19))
+```
