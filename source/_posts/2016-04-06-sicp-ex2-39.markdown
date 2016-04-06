@@ -1,0 +1,40 @@
+---
+layout: mathjax
+title: "sicp-ex2-39"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-06 22:43:08 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+基于练习2.38的`fold-right`和`fold-left`完成`reverse`（练习2.18）下面的定义：
+
+``` scheme
+(define (reverse sequence)
+  (fold-right (lambda (x y) <??>) nil sequence))
+
+(define (reverse sequence)
+  (fold-left (lambda (x y) <??>) nil sequence))
+```
+
+### 解答
+
+{% include_code 练习2.39 lang:scheme sicp/ex2-39.scm %}
+
+### 测试
+
+``` scheme
+;; 第一个reverse
+(reverse (list 1 2 3))
+;Value 16: (3 2 1)
+
+;; 第二个reverse
+(reverse (list 1 2 3))
+;Value 18: (3 2 1)
+```
