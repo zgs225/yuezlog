@@ -1,0 +1,33 @@
+---
+layout: mathjax
+title: "sicp-ex2-41"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-07 07:43:06 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请写出一个过程，它能产生出所有小于等于给定整数$n$的正的相异整数$i$、$j$和$k$的有
+序三元组，使每个三元组的三个元之和等于给定的整数$s$。
+
+### 解答
+
+可以利用练习2.40定义的`unique-pairs`过程来生成三元组：
+
+{% include_code 练习2.41 lang:scheme sicp/ex2-41.scm %}
+
+### 测试
+
+``` scheme
+(sum-equal-tuple 10 8)
+;Value 20: ((4 3 1) (5 2 1))
+
+(sum-equal-tuple 12 24)
+;Value 21: ((9 8 7) (10 8 6) (10 9 5) (11 7 6) (11 8 5) (11 9 4) (11 10 3) (12 7 5) (12 8 4) (12 9 3) (12 10 2) (12 11 1))
+```
