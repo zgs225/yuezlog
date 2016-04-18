@@ -17,7 +17,6 @@ gulp.task('minify-js', () => {
   return gulp.src(paths.scripts)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.babel())
     .pipe($.concat('dist.min.js'))
     .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
