@@ -1,0 +1,21 @@
+---
+layout: mathjax
+title: "sicp-ex2-44"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-19 07:32:35 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义出`corner-split`里使用的过程`up-split`，它与`right-split`相似，除在其中交换了`below`
+和`beside`的角色之外。
+
+### 解答
+
+{% include_code 练习2.44 lang:scheme sicp/ex2-44.scm %}
