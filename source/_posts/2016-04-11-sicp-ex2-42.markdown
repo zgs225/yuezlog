@@ -27,7 +27,7 @@ categories: draft
 解的序列。`queens`内部的过程`queen-cols`，返回在棋盘的前$k$列中放皇后的所有格局
 的序列。
 
-{% lazy_img lazy /photos/p85-queens.gif 300 300 八皇后谜题的一个解 %}
+{% lazy_img lazy no-shadow /photos/p85-queens.gif 300 300 八皇后谜题的一个解 %}
 
 {% include_code 八皇后问题 lang:scheme sicp/p85-queens.scm %}
 
