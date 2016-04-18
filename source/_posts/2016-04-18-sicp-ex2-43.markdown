@@ -1,0 +1,35 @@
+---
+layout: mathjax
+title: "sicp-ex2-43"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-18 23:04:39 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Louis Reasoner 在做练习2.42时遇到了麻烦，他的`queens`过程看起来能行，但却运行的极慢（Louis
+居然无法忍耐到它解$6 \times 6$棋盘的问题）。当Louis请Eva Lu Ator帮忙时，她指出他在`flatmap`
+里面交换了嵌套映射的顺序，将它写成了：
+
+``` scheme
+(flatmap
+  (lambda (new-row)
+    (map (lambda (rest-of-queens)
+      (adjoin-position new-row k rest-of-queens))
+        (queen-cols (- k 1))))
+    (enumerate-interval 1 board-size))
+```
+
+请解释一下，为什么这样交换顺序会使程序运行得非常慢。估计一下，用Louis的程序去解决八皇后问题大约
+需要多少时间，假定练习2.42中的程序需要用的时间为$T$求解这一难题。
+
+### 解答
+
+Louis的方案问题在重复计算$a\_{n-1}$，然后$a\_{n-1}$又重复计算$a\_{n-2}$，如此反复。假定棋
+盘为$k$列，则解决问题需要的时间是：$T\^k$。
