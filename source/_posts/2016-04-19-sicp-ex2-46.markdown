@@ -1,0 +1,31 @@
+---
+layout: mathjax
+title: "sicp-ex2-46"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-19 22:47:47 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+从远点除法的一个两维向量$v$可以用一个由$x$坐标和$y$坐标构成的序对表示。请为这样
+像向量实现一个数据抽象：给出一个构造函数`make-vect`，以及对应的选择函数`xcor-vect`
+和`ycor-vect`。借助于你给出的构造函数和选择函数，实现过程`add-vect`、`sub-vect`
+和`scale-vect`，他们够能完成向量加法、向量减法和向量的伸缩。
+
+$$
+\begin{align}
+(x\_1, y\_1) + (x\_2, y\_2) & = (x\_1 + x\_2, y\_1 + y\_2) \\\\\\\\
+(x\_1, y\_1) - (x\_2, y\_2) & = (x\_1 - x\_2, y\_1 - y\_2) \\\\\\\\
+s \cdot (x, y) & = (sx, sy)
+\end{align}
+$$
+
+### 解答
+
+{% 练习2.46 lang:scheme sicp/ex2-46.scm %}
