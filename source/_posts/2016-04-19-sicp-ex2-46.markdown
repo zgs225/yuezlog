@@ -28,4 +28,4 @@ $$
 
 ### 解答
 
-{% 练习2.46 lang:scheme sicp/ex2-46.scm %}
+{% include_code 练习2.46 lang:scheme sicp/ex2-46.scm %}
