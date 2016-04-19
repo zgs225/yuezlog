@@ -1,0 +1,30 @@
+---
+layout: mathjax
+title: "sicp-ex2-47"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-19 23:10:51 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面是实现框架的两个可能的过程函数：
+
+``` scheme
+(define (make-frame origin edge1 edge2)
+  (list origin edge1 edge2))
+
+(define (make-frame origin edge1 edge2)
+  (cons origin (cons edge1 edge2)))
+```
+
+请为每个构造函数提供适当的选择函数，为框架做出相应的实现。
+
+### 解答
+
+{% include_code 练习2.47 lang:scheme sicp/ex2-47.scm %}
