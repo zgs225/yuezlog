@@ -1,0 +1,29 @@
+---
+layout: mathjax
+title: "sicp-ex2-45"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-19 22:18:52 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+可以将`right-split`和`up-split`表述为某种广义划分操作的实例。请定义一个过程`split`，
+是它具有如下性质，求值：
+
+``` scheme
+(define right-split (split deside below))
+
+(define up-split (split below beside))
+```
+
+产生能够出过程`right-split`和`up-split`，其行为与前面定义的过程一样。
+
+### 解答
+
+{% include_code 练习2.45 lang:scheme sicp/ex2-45.scm %}

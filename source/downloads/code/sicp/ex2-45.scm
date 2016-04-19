@@ -1,0 +1,5 @@
+(define (split lf rt)
+  (lambda (painter)
+    (let ((left (lf painter))
+          (right (rt painter)))
+      (beside left right))))
