@@ -1,0 +1,23 @@
+---
+layout: mathjax
+title: "sicp-ex2-51"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-29 07:26:45 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+定义对画家的`below`操作，它以两个画家为参数。在给定了一个框架后，由`below`得到的
+画家要求将第一个画家在框架下面画图，要求第二个画家在框架的上部画图。请按两种方式
+定义`below`：首先写一个类似于上面`beside`过程；另一个直接通过`beside`和适当的旋
+转操作（来自练习2.50）完成有关工作。
+
+### 解答
+
+{% include_code 练习2.51 lang:scheme sicp/ex2-51.scm %}
