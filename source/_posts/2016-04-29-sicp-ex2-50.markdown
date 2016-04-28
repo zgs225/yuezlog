@@ -1,0 +1,21 @@
+---
+layout: mathjax
+title: "sicp-ex2-50"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-29 07:11:39 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义变换`flip-horiz`，它能在水平方向上反转画家。再定义出对画家做逆时针上180度
+和270度旋转的变换。
+
+### 解答
+
+{% include_code 练习2.50 lang:scheme sicp/ex2-50.scm %}
