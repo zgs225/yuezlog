@@ -1,0 +1,25 @@
+---
+layout: mathjax
+title: "sicp-ex2-49"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-04-21 07:02:00 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+利用`segments->painter`定义下面基本画家：
+
++ 画出给定框架边界的画家
++ 通过连接给定框架两对角画出一个大叉子的画家
++ 通过连接框架各边的中点画出一个菱形的画家
++ 画家`wave`
+
+### 解答
+
+{% include_code 练习2.49 lang:scheme sicp/ex2-49.scm %}
