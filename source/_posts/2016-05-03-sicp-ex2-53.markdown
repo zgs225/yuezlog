@@ -1,0 +1,57 @@
+---
+layout: mathjax
+title: "sicp-ex2-53"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-03 06:55:43 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+解释器在求值下面各个表达式时将打印出什么？
+
+``` scheme
+(list 'a 'b 'c)
+
+(list (list 'george))
+
+(cdr '((x1 x2) (y1 y2)))
+
+(cadr '((x1 x2) (y1 y2)))
+
+(pair? (car '(a short list)))
+
+(memq 'red '((red shoes) (blue socks)))
+
+(memq 'red '(red shoes blue socks))
+```
+
+### 解答
+
+``` scheme
+(list 'a 'b 'c)
+;Value 13: (a b c)
+
+(list (list 'george))
+;Value 14: ((george))
+
+(cdr '((x1 x2) (y1 y2)))
+;Value 15: ((y1 y2))
+
+(cadr '((x1 x2) (y1 y2)))
+;Value 16: (y1 y2)
+
+(pair? (car '(a short list)))
+;Value: #f
+
+(memq 'red '((red shoes) (blue socks)))
+;Value: #t
+
+(memq 'red '(red shoes blue socks))
+;Value 18: (red shoes blue socks)
+```
