@@ -1,0 +1,45 @@
+---
+layout: mathjax
+title: "sicp-ex2-55"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-03 07:23:14 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Eva Lu Ator输入了表达式：
+
+``` scheme
+(car '' abracadabra)
+```
+
+她吃惊的是解释器打印出的是`quote`。请解释这一情况。
+
+### 解答
+
+解释器将原表达式看成了：
+
+``` scheme
+(car (list ' abracadabra))
+```
+
+所以会打印出`quote`。如果计算表达式
+
+``` scheme
+(cadr '' abracadabra)
+```
+
+则应该打印出`abracadabra`。
+
+### 测试
+
+``` scheme
+(cadr '' abracadabra)
+;Value: abracadabra
+```
