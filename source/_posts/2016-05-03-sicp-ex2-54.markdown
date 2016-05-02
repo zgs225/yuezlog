@@ -1,0 +1,56 @@
+---
+layout: mathjax
+title: "sicp-ex2-54"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-03 07:08:14 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+如果两个表包含着同样的元素，这些元素也按同样的顺序排列，那么就称这两个表`equal?`。
+例如：
+
+``` scheme
+(equal? '(this is a list) '(this is a list))
+```
+
+是真，而
+
+``` scheme
+(equal? '(this is a list) '(this (is a ) list))
+```
+
+是假。说的更准确些，我们可以从符号相等的基本`eq?`出发，以递归方式定义出`equal?`。
+`a`和`b`是`equal?`的，如果它们都是符合，而且这两个符号满足`eq?`；或者它们都是表，
+而`(car a)`和`(car b)`相互`equal?`，它们的`(cdr a)`和`(cdr b)`也是`equal?`。请利
+用这一思路定义出`equal?`过程。
+
+### 解答
+
+{% include_code 练习2.54 lang:scheme sicp/ex2-54.scm %}
+
+### 测试
+
+``` scheme
+(equal? '(this is a list) '(this is a list))
+;Value: #t
+
+(equal? '(this is a list) '(this (is a) list))
+;Value: #f
+
+(equal? '() '(a b))
+;Value: #f
+
+(equal? '() '())
+;Value: #t
+
+(equal? '(this is list)
+  '(this (is a) list))
+;Value: #f
+```
