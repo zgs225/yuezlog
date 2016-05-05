@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex2-56"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-05 06:49:14 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请说明如何扩充基本求导规则，以便能够处理更多类型的表达式。例如，通过给程序`deriv`
+添加一个新字句，并以适当方式定义过程`exponentiation?`、`base`、`exponent`和`make-exponentiation`
+的方式，实现下述求导规则（你可以考虑用符号\*\*表示乘幂）：
+
+$$
+\frac {d(u\^n)} {dx} = nu\^{n-1}(\frac {du} {dx})
+$$
+
+请将如下规则也构造到程序里：任何东西的0次幂都是1，而它们的1次幂都是其自身。
+
+### 解答
+
+{% include_code 练习2.56 lang:scheme sicp/ex2-56.scm %}
+
+### 测试
+
+``` scheme
+(deriv '(** x 3) 'x)
+;Value 14: (* 3 (** x 2))
+
+(deriv '(+ (** x 2) (* 2 x y) 3) 'x)
+;Value 16: (+ (* 2 x) 2)
+
+(deriv '(** (+ (+ x 3) (* x y)) 5) 'x)
+;Value 17: (* (* 5 (** (+ (+ x 3) (* x y)) 4)) (+ 1 y))
+```
