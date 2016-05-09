@@ -1,0 +1,56 @@
+---
+layout: mathjax
+title: "sicp-ex2-57"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-09 07:10:01 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请扩充求导程序，使之能处理任意项（两项或者更多项）的和与乘积。这样上面的最后一个
+例子就可以表示为：
+
+``` scheme
+(deriv '(* x y (+ x 3)) 'x)
+```
+
+设法通过值修改和与乘积的表示，而完全不修改过程`deriv`的方式完成这一扩充。例如：
+让一个和式的`addend`是它的第一项，而其`augend`是和式中的其余项。
+
+### 解答
+
+{% include_code 练习2.57 lang:scheme sicp/ex2-57.scm %}
+
+### 测试
+
+``` scheme
+;; (load sicp/ex2-56.scm)
+;; (load sicp/ex2-57.scm)
+
+(make-product 3 4)
+;Value: 12
+
+(make-product 'x 'y 'z)
+;Value 14: (* x y z)
+
+(multiplicand (list '* 'x 'y 'z))
+;Value 15: (* y z)
+
+(make-sum 'x 'y 3)
+;Value 16: (+ x y 3)
+
+(make-sum 3 4)
+;Value: 7
+
+(augend (make-sum 'x 'y 3))
+;Value 17: (+ y 3)
+
+(deriv '(* x y (+ x 3)) 'x)
+;Value 18: (+ (* x (* y 1)) (* y (+ x 3)))
+```
