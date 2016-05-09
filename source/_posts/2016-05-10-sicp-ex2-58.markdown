@@ -1,0 +1,55 @@
+---
+layout: mathjax
+title: "sicp-ex2-58"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-10 07:16:27 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们希望修改求导程序，是它能用于常规数学公式，其中+和\*采用的是中缀运算符而
+不是前缀。由于求导程序是基于抽象数据定义的，要修改它，使之能用于另一种不同的表达
+式表示，我们只需要换一套工作在新的，求导程序需要使用的代数表示式的表示形式上的谓
+词、选择函数和构造函数。
+
+a) 请说明怎样做出这些过程，以便完成在中缀表示形式（例如 `(x + (3 * (x + (y + 2))))`
+）上的代数表达式求导。为了简化有关工作，现在可以假定+和\*总是取两个参数，而且表达
+式中已经加上了所有的括号。
+
+b) 如果允许标准的代数写法，例如`(x + 3 * (x + y + 2))`，问题就会变得更困难许多。
+在这种表达式里可能不写不必要的括号，并要假定乘法应该在加法之前完成。你还能为这种
+表示方式设计好适当的谓词、选择函数和构造函数，使我们的求导程序仍能完成工作吗？
+
+### 解答
+
+{% include_code 练习2.58 lang:scheme sicp/ex2-58.scm %}
+
+### 测试
+
+``` scheme
+;; (load sicp/ex2-58.scm)
+
+(make-sum 'x 'y)
+;Value 19: (x + y)
+
+(make-product 'x 'y)
+;Value 20: (x * y)
+
+(make-exponentiation 'x 4)
+;Value 21: (x ** 4)
+
+(deriv '(x + (3 * (x + (y + 2)))) 'x)
+;Value: 4
+
+(deriv '(x * y) 'x)
+;Value: y
+
+(deriv '((x * y) * (x + 3)) 'x)
+;Value 22: ((x * y) + (y * (x + 3)))
+```
