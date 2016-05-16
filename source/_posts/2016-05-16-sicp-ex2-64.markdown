@@ -1,0 +1,44 @@
+---
+layout: mathjax
+title: "sicp-ex2-64"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-16 06:49:08 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面过程`list->tree`将一个有序表变换为一棵平衡二叉树。其中的辅助函数`partial-tree`
+以整数n和一个至少包含n各元素的表为参数，构造出一棵包含这个表前n个元素的平衡树。
+由`partial-tree`返回的结果是一个序对（用`cons`构造），其中`car`是构造出的树，其
+`cdr`是没有包含在树中那些元素的表。
+
+{% include_code list->tree lang:scheme sicp/p108-list-to-tree.scm %}
+
+a) 请简要地并尽可能清除地解释为什么`partial-tree`能完成工作。请画出将`list->tree`
+   用于表`(1 3 5 7 9 11)`产生出的树。
+
+b) 过程`list->tree`转换n个元素的表所需的步数以什么量级增长？
+
+### 解答
+
+`partial-tree`是一个递归函数，当`n=0`是这个递归函数的退出条件。`partial-tree`
+先是将表中前`(quotient (- n 1) 2)`个元素通过`partial-tree`递归构造成一棵平衡树，
+然后这棵平衡树作为所需要树的左子树；同理，将剩下的元素变成根节点和右子树。最后返
+回需要的结果。
+
+表`(1 3 5 7 9 11)`产生的树如下：
+
+``` scheme
+(list->tree '(1 3 5 7 9 11))
+;Value 38: (5 (1 () (3 () ())) (9 (7 () ()) (11 () ())))
+```
+
+{% lazy_img lazy no-shadow photos/sicp/ex2-64.png 100 200 练习2.64 %}
+
+过程`list->tree`所需要的步数以$\Theta (n)$的量级增长。
