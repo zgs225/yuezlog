@@ -1,0 +1,46 @@
+---
+layout: mathjax
+title: "sicp-ex2-65"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-17 07:11:13 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+利用练习2.63和练习2.64的结果，请给出采用（平衡）二叉树方式实现的集合的`union-set`
+和`intersection-set`操作的$\Theta (n)$的实现。
+
+### 解答
+
+{% include_code 练习2.65 lang:scheme sicp/ex2-65.scm %}
+
+### 测试
+
+``` scheme
+;; (load 'p102-intersection-set.scm)
+;; (load 'ex2-62.scm)
+;; (load 'p105-tree.scm)
+;; (load 'p108-tree->list-2.scm)
+
+(define a-tree (make-tree 7
+                          (make-tree 5 '() '())
+                          (make-tree 9 '() '())))
+;Value: a-tree
+
+(define b-tree (make-tree 10
+                          (make-tree 5 '() '())
+                          (make-tree 21 '() '())))
+;Value: b-tree
+
+(union-tree a-tree b-tree)
+;Value 21: (9 (5 () (7 () ())) (10 () (21 () ())))
+
+(intersection-tree a-tree b-tree)
+;Value 22: (5 () ())
+```
