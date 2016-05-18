@@ -1,0 +1,21 @@
+---
+layout: mathjax
+title: "sicp-ex2-66"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-19 06:13:29 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假设记录的集合采用二叉树实现，按照其中作为键值的数值排序。请实现相应的`lookup`过
+程。
+
+### 解答
+
+{% include_code 练习2.66 lang:scheme sicp/ex2-66.scm %}
