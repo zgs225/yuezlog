@@ -1,0 +1,38 @@
+---
+layout: mathjax
+title: "sicp-ex2-67"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-19 06:49:25 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一棵编码树和一个样例消息：
+
+``` scheme
+(define sample-tree
+  (make-code-tree (make-leaf 'A 4)
+                  (make-code-tree
+                    (make-leaf 'B 2)
+                    (make-code-tree (make-leaf 'D 1)
+                                    (make-leaf 'C 1)))))
+
+(define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
+```
+
+然后用过程`decode`完成该消息的编码，请给出编码的结果。
+
+### 解答
+
+``` scheme
+;; (load 'p112-huffman-tree.scm)
+
+(decode sample-message sample-tree)
+;Value 23: (a d a b b c a)
+```
