@@ -46,3 +46,47 @@
   (cond ((= bit 0) (left-branch branch))
         ((= bit 1) (right-branch branch))
         (else (error "bad bit -- CHOOSE-BRANCH" bit))))
+
+(define (adjoin-set x set)
+  (cond ((null? set) (list x))
+        ((< (weight x) (weight (car set))) (cons x set))
+        (else (cons (car set)
+                    (adjoin-set x (cdr set))))))
+
+(define (make-leaf-set pairs)
+  (if (null? pairs)
+      '()
+      (let ((pair (car pairs)))
+        (adjoin-set (make-leaf (car pair)
+                               (cadr pair))
+                    (make-leaf-set (cdr pairs))))))
+
+(define (encode message tree)
+  (if (null? message)
+      '()
+      (append (encode-symbol (car message) tree)
+              (encode (cdr message) tree))))
+
+(define (encode-symbol symbol tree)
+  (define (concat-bit lst ele)
+    (reverse (cons ele (reverse lst))))
+
+  (define (in-branch? char tree)
+    (define (iter char symbol-set)
+      (cond ((null? symbol-set) #f)
+            ((eq? char (car symbol-set)) #t)
+            (else (iter char (cdr symbol-set)))))
+    (iter char (symbols tree)))
+
+  (define (encode-action bits symbol current-tree)
+    (cond ((leaf? current-tree) bits)
+          ((in-branch? symbol (left-branch current-tree))
+           (encode-action (concat-bit bits 0)
+                          symbol
+                          (left-branch current-tree)))
+          ((in-branch? symbol (right-branch current-tree))
+           (encode-action (concat-bit bits 1)
+                          symbol
+                          (right-branch current-tree)))
+          (else (error "Char" symbol "not in encoding dict."))))
+  (encode-action '() symbol tree))

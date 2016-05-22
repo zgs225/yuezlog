@@ -1,0 +1,80 @@
+---
+layout: mathjax
+title: "sicp-ex2-68"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-19 07:05:54 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`encode`以一个消息和一棵树为参数，产生出被编码消息所对应的二进制位的表：
+
+``` scheme
+(define (encode message tree)
+  (if (null? message)
+      '()
+      (append (encode-symbol (car message) tree)
+              (encode (cdr message) tree))))
+```
+
+其中的`encode-symbol`是需要你写出的过程，它能根据给定的树产生出给定符号的二进制位
+表。你所设计的`encode-symbol`在遇到未出现在树中的符号时应报告错误。请用练习2.67中
+得到的结果检查所实现的过程，工作中用同样一棵树，看看得到的结果是不是原来的那个消
+息。
+
+### 解答
+
+``` scheme
+(define (encode-symbol symbol tree)
+  (define (concat-bit lst ele)
+    (reverse (cons ele (reverse lst))))
+
+  (define (in-branch? char tree)
+    (define (iter char symbol-set)
+      (cond ((null? symbol-set) #f)
+            ((eq? char (car symbol-set)) #t)
+            (else (iter char (cdr symbol-set)))))
+    (iter char (symbols tree)))
+
+  (define (encode-action bits symbol current-tree)
+    (cond ((leaf? current-tree) bits)
+          ((in-branch? symbol (left-branch current-tree))
+           (encode-action (concat-bit bits 0)
+                          symbol
+                          (left-branch current-tree)))
+          ((in-branch? symbol (right-branch current-tree))
+           (encode-action (concat-bit bits 1)
+                          symbol
+                          (right-branch current-tree)))
+          (else (error "Char" symbol "not in encoding dict."))))
+  (encode-action '() symbol tree))
+```
+
+### 测试
+
+``` scheme
+;; (load 'p112-huffman-tree.scm)
+
+(define sample-tree
+  (make-code-tree (make-leaf 'A 4)
+                  (make-code-tree
+                    (make-leaf 'B 2)
+                    (make-code-tree (make-leaf 'D 1)
+                                    (make-leaf 'C 1)))))
+;Value: sample-tree
+
+(define  sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
+;Value: sample-message
+
+(decode sample-message sample-tree)
+;Value 14: (a d a b b c a)
+
+(encode (list 'a 'd 'a 'b 'b 'c 'a) sample-tree)
+;Value 22: (0 1 1 0 0 1 0 1 0 1 1 1 0)
+```
