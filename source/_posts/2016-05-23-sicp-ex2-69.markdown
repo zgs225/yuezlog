@@ -1,0 +1,61 @@
+---
+layout: mathjax
+title: "sicp-ex2-69"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-23 07:47:51 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面过程以一个符号-频度对偶表为参数（其中没有任何符合出现在多于一个对偶中），并
+根据_Huffman_算法生成出_Huffman_编码树。
+
+``` scheme
+(define (generate-huffman-tree pairs)
+  (successive-merge (make-leaf-set pairs)))
+```
+
+其中的`make-leaf-set`是前面给出的过程，它将对偶表变换为叶的有序集，`successive-merge`
+是需要你写的过程，它使用`make-code-tree`反复归并集合中具有最小权重的元素，直至集
+和里面只剩下一个元素为止。这个元素就是我们所需要的_Huffman_树。（这个过程稍微有
+点技巧性，但并不是很复杂。如果你正在设计的过程变得很复杂，那么几乎可以肯定是在什
+么地方搞错了。你应该尽可能地利用有序集合表示这一事实。）
+
+### 解答
+
+``` scheme
+(define (generate-huffman-tree pairs)
+  (successive-merge (make-leaf-set pairs)))
+
+(define (successive-merge leaf-set)
+  (cond ((null? leaf-set) '())
+        ((= (length leaf-set) 1) (car leaf-set))
+        (else (successive-merge (adjoin-set
+                                  (make-code-tree (car leaf-set)
+                                                  (cadr leaf-set))
+                                  (cddr leaf-set))))))
+```
+
+### 测试
+
+``` scheme
+;; (load 'p112-huffman-tree.scm)
+
+(define sample-tree (generate-huffman-tree (list (list 'A 4)
+                                                 (list 'B 2)
+                                                 (list 'C 1)
+                                                 (list 'D 1))))
+;Value: sample-tree
+
+(decode '(0 1 1 0 0 1 0 1 0 1 1 1 0) sample-tree)
+;Value 15: (a d a b b c a)
+
+(encode (list 'a 'd 'a 'b 'b 'c 'a) sample-tree)
+;Value 16: (0 1 1 0 0 1 0 1 0 1 1 1 0)
+```
