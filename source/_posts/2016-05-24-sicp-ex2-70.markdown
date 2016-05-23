@@ -1,0 +1,82 @@
+---
+layout: mathjax
+title: "sicp-ex2-70"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-24 07:11:48 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面带有相对频度的8个符号的字母表，是为了有效编码20世纪50年代的摇滚歌曲中的歌词
+而设计的。（请注意，“字母表”中的“符号”不必是单个字母。）
+
+ 符号   | 频度    |  符号   | 频度
+--------|---------|---------|---------
+ A      | 2       | NA      | 16
+ BOOM   | 1       | SHA     | 3
+ GET    | 2       | YIP     | 9
+ JOB    | 2       | WAH     | 1
+
+请用（练习2.69的）`generate-huffman-tree`过程生成对应的_Huffman_树，用（练习2.68
+的）`encode`过程编写下面的消息：
+
+Get a job    
+Sha na na na na na na na na    
+Get a job    
+Sha na na na na na na na na    
+Wah yip yip yip yip yip yip yip yip yip    
+Sha boom
+
+这一编码需要多少个二进制位？如果对这8个符号的字母表采用定长编码，完成这个歌曲的
+编码最少需要多少个二进制位？
+
+### 解答
+
+``` scheme
+(define note-tree (generate-huffman-tree (list
+                                          (list 'A 2)
+                                          (list 'NA 16)
+                                          (list 'BOOM 1)
+                                          (list 'SHA 3)
+                                          (list 'GET 2)
+                                          (list 'YIP 9)
+                                          (list 'JOB 2)
+                                          (list 'WAH 1))))
+;Value: note-tree
+
+(encode (list 'Get 'a 'job) note-tree)
+;Value 19: (1 1 1 1 1 1 1 0 0 1 1 1 1 0)
+;占用了14个二进制位
+
+(encode (list 'Sha 'na 'na 'na 'na 'na 'na 'na 'na) note-tree)
+;Value 20: (1 1 1 0 0 0 0 0 0 0 0 0)
+;占用了12个二进制位
+
+(encode (list 'Get 'a 'job) note-tree)
+;Value 21: (1 1 1 1 1 1 1 0 0 1 1 1 1 0)
+;占用了14个二进制位
+
+(encode (list 'Sha 'na 'na 'na 'na 'na 'na 'na 'na) note-tree)
+;Value 22: (1 1 1 0 0 0 0 0 0 0 0 0)
+;占用了12个二进制位
+
+(encode (list 'Wah 'yip 'yip 'yip 'yip 'yip 'yip 'yip 'yip 'yip) note-tree)
+;Value 23: (1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0)
+;占用了21个二进制位
+
+(encode (list 'Sha 'boom) note-tree)
+;Value 24: (1 1 1 0 1 1 0 1 1)
+;占用了9个二进制位
+```
+
+可以看到，这一编码需要$14 + 12 + 14 + 12 + 21 + 9 = 82$个二进制位。
+
+如果使用定长编码表示，因为一共有8个符号，所以每个符号至少用3位二进制位表示。这个
+歌曲一个有$3 + 9 + 3 + 9 + 10 + 2 = 36$个符号。所以，最少需要$3 \times 36 = 108$
+个二进制位。
