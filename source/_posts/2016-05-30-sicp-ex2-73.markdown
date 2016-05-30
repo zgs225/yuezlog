@@ -1,0 +1,120 @@
+---
+layout: mathjax
+title: "sicp-ex2-73"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-30 07:05:14 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+2.3.2节描述了一个执行符号求导的程序：
+
+``` scheme
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp) (if (same-variable? exp var) 1 0))
+        ((sum? exp)
+         (make-sum (deriv (addend exp) var)
+                   (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+           (make-product (multiplier exp)
+                         (deriv (multiplicand exp) var))
+           (make-product (deriv (multiplier exp) var)
+                         (multiplicand exp))))
+        ;; <更多规则可以加在这里>
+        (else (error "unknown expression type -- DERIV" exp))))
+```
+
+可以认为，这个程序是在执行一种基于被求导表达式类型的分派工作。在这里，数据的“类型
+标志”就是代数运算符（例如+），需要执行的操作是`deriv`。我们也可以将这一过程变换到
+数据导向的风格，将基本的求导过程重新写成
+
+``` scheme
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp) (if (same-variable? exp var) 1 0))
+        (else ((get 'deriv (operator exp)) (operands exp)
+                                           var))))
+
+(define (operator exp) (car exp))
+
+(define (operand exp) (cdr exp))
+```
+
+a) 请解释上面究竟做了写什么？为什么我们无法将相近的谓词`number?`和`same-variable?`
+也加入到数据导向分派中？    
+b) 请写出针对和式与积式的求导过程，并把它们安装到表格里，以便上面的程序使用所需
+要的辅助性代码。    
+c) 请选择一些你希望包括的求导规则，例如对乘幂（练习2.56）求导等等，并将它们安装
+到这一数据导向系统里面。    
+d) 在这一简单的代数运算器中，表达式的类型就是构造起它们的代数运算符。假定我们想
+以另一种想法的方式做索引，使得`deriv`里完成分派的代码像下面这样：
+
+``` scheme
+((get (operator exp) 'deriv) (operands exp) var)
+```
+
+求导系统里面还需要做哪些改动？
+
+### 解答
+
+a) 在上述过程中，如果`exp`是一个常数，则返回`0`；如果是一个一次变量，并且是需要
+求导的边栏则返回`1`，否则返回`0`；最后，调用相应的求导过程。将上述过程分为1, 2,
+3，其中3是一个递归过程，而1，2是它的退出条件，所以1，2不能假如到数据导向分派中。
+
+``` scheme
+;; 求和
+(define (install-sum-deriv-package)
+  (define (make-sum a1 a2)
+    (cond ((=number? a1 0) a2)
+          ((=number? a2 0) a1)
+          ((and (number? a1) (number? a2)) (+ a1 a2))
+          (else (list '+ a1 a2))))
+
+  (define (deriv exp var)
+    (make-sum (deriv (addend exp) var)
+              (deriv (augend exp) var)))
+
+  (put 'deriv '+ deriv)
+
+  'done)
+
+;; 乘积
+(define (install-product-deriv-package)
+  (define (make-product m1 m2)
+    (cond ((or (=number? m1 0) (= number? m2 0)) 0)
+          ((=number? m1 1) m2)
+          ((=number? m2 1) m1)
+          ((and (number? m1) (number? m2) (* m1 m2))
+          (else (list '* m1 m2)))))
+
+  (define (make-sum a1 a2)
+    (cond ((=number? a1 0) a2)
+          ((=number? a2 0) a1)
+          ((and (number? a1) (number? a2)) (+ a1 a2))
+          (else (list '+ a1 a2))))
+
+  (define (deriv exp var)
+    (make-sum
+      (make-product (multiplier exp)
+                    (deriv (multiplicand exp) var))
+      (make-product (deriv (mulpiplier exp) var)
+                    (multiplicand exp))))
+
+  (put 'deriv '* deriv)
+
+  'done)
+```
+
+如果要改动成(d)中所述形式，只需要修改`put`的调用参数顺序即可，如
+
+``` scheme
+(put '+ 'deriv deriv)
+```
