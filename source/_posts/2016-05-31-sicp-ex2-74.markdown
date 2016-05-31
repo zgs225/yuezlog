@@ -1,0 +1,82 @@
+---
+layout: mathjax
+title: "sicp-ex2-74"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-05-31 07:21:18 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Insatiable Enterprise公司是一个高度分散经营的联合公司，由大量分布在世界各地的分
+支机构组成。公司的计算机设施已经通过一种非常巧妙的网络连接模式联为一体，它使得从
+任何一个用户角度看，整个网络就像是一台计算机。在第一次试图利用网络能力从各分支机
+构的文件中提取管理信息时，Insatiable的总经理非常沮丧地发现，虽然所有分支机构的文
+件都被实现位Scheme的数据结构，但是各分支机构所用的数据结构却各不相同。她马上召集
+了各分支机构的经理会议，希望寻找一种策略集成起这些文件，以便在维持各分支机构中现
+存独立工作方式的同时，又能满足公司总部管理的需要。
+
+请说明这种策略可以如何通过数据导向的程序设计技术实现。作为例子，假定每个机构的人
+事记录都存放在一个独立的文件里，其中包含了一集以雇员名字作为键值的记录。而有关集
+合的结构却由于分支机构的不同而不同。进一步说，某个雇员的记录本身又是一个集合（各
+分支机构所用的结构也不同），其中所包含的信息也在一些作为键值的标识符之下，例如：
+address和salary。特别是考虑如下问题：
+
+a) 请为公司总部实现一个`get-record`的过程，使它能从一个特定的人事文件里提取出一
+个特定的雇员记录。这一过程应该能应用于任何分支机构的文件。请说明各独立分支机构的
+文件应该具有怎样的结构。特别提供的是，它们必需提供哪些类型信息？
+
+b) 请位公司总部实现一个`get-salary`的过程，它能从任何分支机构的人事文件中取得某
+个雇员的薪金信息。为了使这一操作能够工作，这些记录应具有怎样的结构？
+
+c) 请为公司总部实现一个过程`find-employee-record`，该过程需要针对一个特定雇员名，
+在所有分支机构的文件中查找对应的记录，并返回找到的记录。假定这一过程的参数是一个
+雇员名和所有分支文件的表。
+
+d) 当Insatiable购并新公司后，要将新的人事文件结合到系统中，必需做哪些修改？
+
+### 解答
+
+a)
+
+``` scheme
+(define (get-record name subsidiary)
+  ((get 'get-record subsidiary) name))
+```
+
+每个独立分支机构必需提供一个根据人员名称获取雇员记录的过程。
+
+b)
+
+``` scheme
+(define (get-salary name subsidiary)
+  ((get 'get-salary subsidiary) name))
+```
+
+c)
+
+``` scheme
+(define (find-employee-record name)
+  (define (find name subsidiaries)
+    (if (null? subsidiaries)
+        (error 'Not-found- name)
+        (let ((subsidiary (car subsidiaries)))
+          (let ((employ ((get 'find-employee-record subsidiary) name)))
+            (if (car employ)
+                (cadr employ)
+                (find name (cdr subsidiaries)))))))
+
+  (find name (list 'A 'B 'C 'D)))
+```
+
+其中每个独立分支机构需要返回`(#t (...))`这样的表，表中第一个元素用来表示是否找到
+
+d)
+
+当并购新的公司后，需要建立以这个人事机构名称为标识的安装包，并将新的机构添加到机
+构列表中。
