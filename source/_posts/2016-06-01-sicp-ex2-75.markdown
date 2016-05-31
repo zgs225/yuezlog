@@ -1,0 +1,52 @@
+---
+layout: mathjax
+title: "sicp-ex2-75"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-01 07:04:25 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请用消息传递的风格实现构造函数`make-from-mag-ang`。这个过程应该与上面给出的过程
+`make-from-real-imag`过程类似。
+
+### 解答
+
+``` scheme
+(define (make-from-mag-ang r a)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) (* r (sin a)))
+          ((eq? op 'image-part) (* r (cos a)))
+          ((eq? op 'magnitude) r)
+          ((eq? op 'angle) a)
+          (else (error "Unkown op -- MAKE-FROM-MAG-ANG" op))))
+  dispatch)
+```
+
+### 测试
+
+``` scheme
+(define m (make-from-mag-ang 10 45))
+;Value: m
+
+(m 'real-part)
+;Value: 8.509035245341185
+
+(m 'image-part)
+;Value: 5.253219888177298
+
+(m 'magnitude)
+;Value: 10
+
+(m 'angle)
+;Value: 45
+
+(m 'unknown)
+;Unkown op -- MAKE-FROM-MAG-ANG unknown
+```
