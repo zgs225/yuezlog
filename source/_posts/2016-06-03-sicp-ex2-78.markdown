@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex2-78"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-03 06:47:35 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+包`scheme-number`里的内部过程几乎什么也没做，只不过是调用基本过程`+`、`-`等等。
+直接使用语言的基本过程当然是不可能，因为我们的类型标志系统要求每个对象都附加一个
+类型。然而，事实上所有Lisp实现都有自己的类型系统，使用在系统实现的内部基本谓词
+`symbol?`和`number?`等用于确定某个数据对象是否具有特定的类型。请修改2.4.2节中的
+`type-tag`、`contents`和`attach-tag`的定义，使我们的通用算数系统可以利用Scheme内
+部类型系统。这也就是说，修改后的系统应该像原来一样，除了其中常规的数直接采用Scheme
+的数形式，而不是表示为一个`car`部分是符号`scheme-number`的序对。
+
+### 解答
+
+``` scheme
+(define (attach-tag type-tag contents)
+  (if (number? contents)
+      contents
+      (cons type-tag contents)))
+
+(define (type-tag datum)
+  (cond ((number? datum) 'scheme-number)
+        ((pair? datum) (car datum))
+        (else (error "Bad tagged datum -- TYPE-TAG" datum))))
+
+(define (contents datum)
+  (cond ((number? datum) datum)
+        ((pair? datum) (cdr datum))
+        (else (error "Bad tagged datum -- CONTENTS" datum))))
+```
