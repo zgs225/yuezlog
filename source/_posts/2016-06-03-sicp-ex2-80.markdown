@@ -1,0 +1,21 @@
+---
+layout: mathjax
+title: "sicp-ex2-80"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-03 07:17:03 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一个通用谓词`=zero?`，检查其参数是否为0，并将它安装到通用算术包里。这一操作
+应该能够处理常规的数、有理数和复数。
+
+### 解答
+
+{% include_code 练习2.80 lang:scheme sicp/ex2-80.scm %}
