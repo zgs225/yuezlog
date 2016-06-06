@@ -1,0 +1,61 @@
+---
+layout: mathjax
+title: "sicp-ex2-81"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-07 06:51:50 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+uis Reasoner 注意到，甚至在两个参数的类型实际相同的情况下，`apply-generic`也可能
+试图去做参数间的类型强制。由此，他推论说，需要在强制表格中加入一些过程，以将每个
+类型的参数“强制”到它们自己的类型。例如，除了上面给出的`scheme-number->complex`强
+制之外，他觉得应该有：
+
+``` scheme
+(define (scheme-number->scheme-number n) n)
+(define (complex->complex z) z)
+(put-coercion 'scheme-number 'scheme-number
+              scheme-number->scheme-number)
+(put-coercion 'complex 'complex complex->complex)
+```
+
+a) 如果安装了Louis的强制过程，如果在调用`apply-generic`时各参数的类型都为`scheme-number`
+或者类型都为`complex`，而在表格中又找不到相应的操作，这时会出现什么情况？例如，
+假定我们定义了一个通用型的求幂运算：
+
+``` scheme
+(define (exp x y) (apply-generic x y))
+```
+
+并在scheme数值包里放了一个求幂过程，但其它程序包里没有：
+
+``` scheme
+;; following added to Scheme number package
+(put 'exp '(scheme-number scheme-number)
+     (lambda (x y) (tag (expt x y)))) ; using primitive expt
+```
+
+如果对两个复数调用`exp`会出现什么情况？
+
+b) Louis真的纠正了有关同样类型参数的强制问题吗？`apply-generic`还能像原来那样正
+确工作吗？
+
+c) 请修改`apply-generic`，使之不会去试着强制两个同样类型的参数。
+
+### 解答
+
+a) 问中，当对复数调用`exp`时，会发生超过最大递归调用栈的情况。因为，在`apply-generic`
+中会因为找到了第一个参数到第二个参数的强制过程，继而继续调用`apply-generic`，如
+此反复。
+
+b) 从a)问的回答中可以看到，`apply-generic`已经不能在上述情况下正常的抛出异常了。
+Loius没有纠正有关同样类型参数强制的问题。
+
+{% include_code 练习2.81 lang:scheme sicp/ex2-81.scm %}
