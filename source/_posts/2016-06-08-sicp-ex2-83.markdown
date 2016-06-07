@@ -1,0 +1,38 @@
+---
+layout: mathjax
+title: "sicp-ex2-83"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-08 06:56:57 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定你现在正在设计一个通用型的算术包，处理图2-25所示的类型塔，包括整数、有理数、
+实数和复数。请为每个类型（除负数外）设计一个过程，它能将该类型的对象提升到塔中的
+上面一层。请说明如何安装一个通用的`raise`操作，使之能对各个类型工作（除复数之外）。
+
+### 解答
+
+``` scheme
+(define (install-raise-package)
+  (define (integer->rational x)
+    (make-rational (contents x) 1))
+  (define (rational->real x)
+    (make-real (numer (contents x)) (denom (contents x)))
+  (define (real->complex x)
+    (make-complex-from-real-imag (contents x) 0)))
+
+  (put-coercion 'raise 'integer integer->rational)
+  (put-coercion 'raise 'rational rational->real)
+  (put-coercion 'raise 'real real->complex)
+
+  'done)
+
+(define (raise x) (apply-generic 'raise x))
+```
