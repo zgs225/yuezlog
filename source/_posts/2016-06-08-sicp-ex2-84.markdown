@@ -1,0 +1,23 @@
+---
+layout: mathjax
+title: "sicp-ex2-84"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-08 07:11:42 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+利用练习2.83的`raise`操作修改`apply-generic`过程，使它能通过逐层提升的方式将参数
+强制到同样的类型，正如本书中讨论的。你将需要安排一种方式，去检查两个类型中那个更
+高。请以一种能与系统中其他部分“相容”，而且又不会影响向塔中加入新层次的方式完成这
+一工作。
+
+### 解答
+
+{% include_code 练习2.84 lang:scheme sicp/ex2-84.scm %}
