@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex2-86"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-13 07:16:18 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们希望处理一些复数，它们的实部、虚部、模和幅角都可以是常规数值、有理数或我
+们希望加入系统的任何其他数值类型。请描述和实现系统需要做的各种修改，以满足这一需
+要。你应设法将例如`sine`和`cosine`一类的运算也定义为在常规数和有理数上的通用运算。
+
+### 解答
+
+首先，需要将两个构造函数修改成调用通用构造函数的方式：
+
+``` scheme
+(define (make-complex-from-real-imag x y)
+  (apply-generic 'make-complex-from-real-imag x y))
+
+(define (make-complex-from-mag-ang r a)
+  (apply-generic 'make-complex-from-mag-ang r a))
+```
+
+然后在`install-complex-package`中安装相应的过程，以参数都是有理数举例：
+
+``` scheme
+(put 'make-complex-from-real-imag '(rational rational) make-from-real-imag)
+(put 'make-complex-from-mag-ang '(rational rational) make-from-mag-ang)
+```
+
+依次类推，将需要定义的组合一一实现。
+
+对于通用型`sine`和`cosine`其定义过程没有什么区别，不再写。
