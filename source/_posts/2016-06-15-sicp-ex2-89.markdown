@@ -1,0 +1,33 @@
+---
+layout: mathjax
+title: "sicp-ex2-89"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-15 07:16:25 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请定义一些过程，实现上面讨论的稠密多项式的项表表示。
+
+### 解答
+
+``` scheme
+(define (display-polynomial p)
+  (define (internal L current-order)
+    (cond ((< current-order 0) '())
+          ((empty-termlist? p)
+           (cons 0 (internal L (- current-order 1))))
+          (else
+            (let ((t (first-term L)))
+              (if (= (order t) current-order)
+                  (cons (coeff t) (internal (rest-terms L) (- current-order 1)))
+                  (cons 0 (internal L (- current-order 1))))))))
+
+  (internal p (order (first-term p)))
+```
