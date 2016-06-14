@@ -1,0 +1,32 @@
+---
+layout: mathjax
+title: "sicp-ex2-87"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-15 06:50:08 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请在通用算数包中为多项式安装`=zero?`，这样使`adjoin-term`也能对系数本身是多项式的
+多项式使用。
+
+### 解答
+
+``` scheme
+(define (install-polynomial-package)
+  ;; ... 省略
+  
+  (define (=zero? term)
+    (= (coeff term) 0))
+
+  (put '=zero? 'polynomial
+       (lambda (term) (tag (=zero? term))))
+
+  'done)
+```

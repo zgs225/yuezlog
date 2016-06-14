@@ -1,0 +1,46 @@
+---
+layout: mathjax
+title: "sicp-ex2-88"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-15 07:02:05 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请扩充多项式系统，加上多项式的减法。（提示：你可能发现定义一个通用的求负操作非常
+有用。）
+
+### 解答
+
+``` scheme
+(define (install-polynomial-package)
+  ;; ... 省略
+
+  (define (sub-poly L1 L2)
+    (cond ((empty-termlist? L1) L2)
+          ((empty-termlist? L2) L1)
+          (else
+            (let ((t1 (first-term L1))
+                  (t2 (first-term L2)))
+              (cond ((> (order t1) (order t2))
+                     (adjoin-term t1 (sub-poly (rest-terms L1) L2)))
+                    ((< (order t1) (order t2))
+                     (adjoin-term t2 (sub-poly L1 (rest-terms L2)))
+                    (else
+                      (adjoin-term
+                        (make-term (order t1)
+                                   (sub (coeff t1) (coeff t2)))
+                        (sub-poly (rest-terms L1)
+                                   (rest-terms L2))))))))))
+
+  (put 'sub '(polynomial polynomial)
+    (lambda (p1 p2) (tag (sub-poly p1 p2))))
+
+  'done)
+```
