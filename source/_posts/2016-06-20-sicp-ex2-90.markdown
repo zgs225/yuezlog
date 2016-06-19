@@ -1,0 +1,64 @@
+---
+layout: mathjax
+title: "sicp-ex2-90"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-20 06:45:24 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们希望有一个多项式系统，它应该对稠密多项式和稀疏多项式都非常有效。一种途径
+就是在我们的系统里同时允许两种表示。这时的情况类似于2.4节复数的例子，那里同时允
+许采用直角坐标表示和极坐标表示。为了完成这一工作，我们必需区分不同的项表类型，并
+将针对项表的操作通用化。请重新设计这个多项式系统，实现这种推广。这将是一项需要付
+出许多努力的工作，而不是一个局部修改。
+
+### 解答
+
+这里应该设计一个稠密多项式和系数多项式以多项式作为父类的层次结构。并在`apply-generic`
+过程中使用`coercion`过程。
+
+``` scheme
+(define (install-dense-polynomial-package)
+  (define (tag p) (attach-tag 'dense-polynomial p))
+
+  (define (display p)
+    ;; ... 省略
+  )
+
+  (put 'make 'dense-polynomial
+    (lambda (var terms) (tag (make-poly var terms))))
+
+  (put 'display 'dense-polynomial)
+    (lambda (p) (tag (display p)))
+
+  'done)
+```
+
+类似的，建立一个系数多项式的安装包：
+
+``` scheme
+(define (install-sparse-polynomial-package)
+  (define (tag p) (attach-tag 'sparse-polynomial p))
+
+  (define (display p)
+    ;; ... 省略
+  )
+
+  (put 'make 'sparse-polynomial
+    (lambda (var terms) (tag (make-poly var terms))))
+
+  (put 'display 'sparse-polynomial)
+    (lambda (p) (tag (display p)))
+
+  'done)
+```
+
+这样，在执行`display`等各自独立的过程时便在安装包中定义好；其他类似`add-terms`的
+过程使用`coercion`机制，执行`make-polynomial-package`安装包中定义的过程。
