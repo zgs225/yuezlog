@@ -1,0 +1,57 @@
+---
+layout: mathjax
+title: "sicp-ex2-91"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-20 07:15:49 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+一个单变元多项式可以除以另一个多项式，产生一个商式和一个余式。例如：
+
+$$
+\frac {x\^5 - 1} {x\^2 - 1} = x\^3 + x, \text {余氏$x-1$}
+$$
+
+除法可以通过长除完成。也就是说，用被除式的最高次项除以除式的最高次项，得到商式的
+第一项；而后用这个结果乘以除式，并从被除式中减去这个乘积。剩下的工作就是用减后得
+到的差作为新的被除式，以便产生随后的结果。当除式的次数超过被除式的次数时结束，将
+此时的被除式作为余氏。还有，如果被除式就是0，那么就返回0作为商和余氏。
+
+我们可以基于`add-poly`和`mul-poly`的模型，设计出一个除法过程`div-poly`。这一过程
+首先检查两个多项式是否具有相同的变元，如果是的话就剥去变元这一层，将问题送给过程
+`div-terms`，它执行项表上的除法运算。`div-poly`最后将变元重新附加到`div-terms`的
+返回结果上。将`div-terms`设计为同时计算出除法的商式和余式是比较方便的。`div-terms`
+可以以两个多项式为参数，返回一个包含商和余式多项式的表。
+
+请完成下面`div-terms`的定义，填充其中空缺的表达式，并基于它实现`div-poly`。该过
+程应该以两个多项式为参数，返回一个包含商和余式多项式的表。
+
+``` scheme
+(define (div-terms L1 L2)
+  (if (empty-termlist? L1)
+      (list (the-empty-termlist) (the-empty-termlist))
+      (let ((t1 (first-term L1))
+            (t2 (first-term L2)))
+        (if (> (order t2) (order t1))
+            (list (the-empty-termlist) L1)
+            (let ((new-c (div (coeff t1) (coeff t2)))
+                  (new-o (- (order t1) (order t2))))
+              (let ((rest-of-result
+                      <递归地计算结果的其余部分>
+                      ))
+                <形成完整的结果>
+                ))))))
+```
+
+### 解答
+
+{% include_code 练习2.91 lang:scheme sicp/ex2-91.scm %}
+
+### 测试
