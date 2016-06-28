@@ -1,0 +1,48 @@
+---
+layout: mathjax
+title: "sicp-ex3-1"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-29 06:31:33 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+一个_累加器_是一个过程，反复用数值参数调用它，就会是它的各个参数累加到一个和数中。每次调用时，累加器将返回当前的累加和。请写出一个生成累加器的过程`make-accumulator`，它所生成的每个累加器维持着一个独立的和。松给`make-accumulate`的输入描述了有关和的初始值，例如：
+
+``` scheme
+(define A (make-accumulator 5))
+
+(A 10)
+15
+
+(A 10)
+25
+```
+
+### 解答
+
+``` scheme
+(define (make-accumulator v)
+  (lambda (value)
+    (set! v (+ value v))
+    v))
+```
+
+### 测试
+
+``` scheme
+(define a (make-accumulator 10))
+;Value: a
+
+(a 1)
+;Value: 11
+
+(a 10)
+;Value: 21
+```
