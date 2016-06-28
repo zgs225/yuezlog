@@ -1,0 +1,50 @@
+---
+layout: mathjax
+title: "sicp-ex3-3"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-29 07:15:26 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请修改`make-account`过程，使它能创建一种带密码保护的账户。也就是说，应该让`make-account`以一个符号作为附加参数，就像：
+
+``` scheme
+(define acc (make-account 100 'secret-password))
+```
+
+这样产生的账户对象在接到一个请求时，只有同时提供了账户创建时的密码，它才处理这以请求，否则就发出一个抱怨信息：
+
+``` scheme
+((acc 'secret-password 'withdraw) 40)
+60
+
+((acc 'other-password 'deposit) 50)
+"Incorrect password"
+```
+
+### 解答
+
+{% include_code 练习3.3 lang:scheme sicp/ex3-3.scm %}
+
+### 测试
+
+``` scheme
+(define acc (make-account 100 'secret))
+;Value: acc
+
+((acc 'secret 'withdraw) 10)
+;Value: 90
+
+((acc 'secret 'deposit) 100)
+;Value: 190
+
+((acc 'hello 'withdraw) 100)
+;Value 18: "Incorrect password"
+```
