@@ -1,0 +1,49 @@
+---
+layout: mathjax
+title: "sicp-ex3-2"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-29 06:53:25 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在对应用程序做软件测试时，能够统计出在计算过程中某个给定的过程被调用的次数常常很有用处。请写出一个过程`make-monitored`，它以一个过程`f`作为输入，该过程本身有一个输入。`make-monitored`返回的结果是第三个过程，比如说`mf`，它将用一个内部计数器维持着自己被调用的次数。如果`mf`的输入是特殊符号`has-many-call?`，那么`mf`就返回内部计数器的值，如果输入的是特殊符号`reset-count`，那么`mf`就将计数器重新设置为`0`；对于任何其他输入，`mf`将返回过程`f`应用于这一输入的结果，并将内部的计数器加一。例如，我们可能以下面的方式做出过程`sqrt`的一个受监视的版本：
+
+``` scheme
+(define s (make-monitored sqrt))
+
+(s 100)
+10
+
+(s 'how-many-calls)
+1
+```
+
+### 解答
+
+{% include_code 练习3.2 lang:scheme sicp/ex3-2.scm %}
+
+### 测试
+
+``` scheme
+(define s (make-monitored sqrt))
+;Value: s
+
+(s 100)
+;Value: 10
+
+(s 'how-many-calls?)
+;Value: 1
+
+(s 'reset)
+;Value: 0
+
+(s 'how-many-calls?)
+;Value: 0
+```
