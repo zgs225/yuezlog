@@ -1,0 +1,33 @@
+---
+layout: mathjax
+title: "sicp-ex3-4"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-29 07:42:48 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请修改练习3.3中的`make-account`过程，加上另一个局部状态变量，使得如果一个账户被用不正确的密码连续访问了7次，它就将去调用过程`call-the-cops`（叫警察）。
+
+### 解答
+
+{% include_code 练习3.4 lang:scheme sicp/ex3-4.scm %}
+
+### 测试
+
+``` scheme
+((acc 'hello 'withdraw) 10)
+;Value 13: "Inccorect password"
+
+;;; call repeatly
+
+((acc 'hello 'withdraw) 10)
+;Value 20: "Call the cops"
+
+```
