@@ -1,0 +1,45 @@
+---
+layout: mathjax
+title: "sicp-ex3-5"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-30 06:16:52 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+蒙特卡洛积分是一种通过蒙特卡洛模拟估计定积分值的方法。考虑由谓词$P(x, y)$描述的一个区域的面积计算问题，该谓词对于此区域内部的点$(x, y)$为真，对于不在区域内的点为假。举例来说，包含在以$(5, 7)$为圆心半径为3的圆圈所围成的区域，可以用检查公式$(x-5)\^2 + (y-7)\^2 <= 3\^2$是否成立的谓词描述。要估计这样一个谓词所描述的区域的面积，我们应首先选取一个包含该区域的矩形。例如，以$(2, 4)$和$(8, 10)$为对角线的矩形包含着上面的圆。需要确定的积分也就是这一矩形中位于所关注区域内的那个部分。我们可以这样估计积分值：随机选取位于矩形中的点$(x, y)$，对每个点检查$P(x, y)$，确定该点是否位于所考虑的区域内。如果试了足够多的点，那么落在区域内的点的比率能够给出矩形中有关区域的比率。这样，用这一比率去乘整个矩形的面积，就能得到相应积分的一个估计值。
+
+将蒙特卡洛积分实现为一个过程`estimate-integral`，它以一个谓词$P$，矩形的上下边界$x1$、$x2$、$y1$和$y2$，以及为产生估计值而要求试验次数作为参数。你的过程应该使用上面用于估计$\pi$值的同一个`monte-carlo`过程。请用你的`estimate-integral`，通过对单位圆面积的度量产生出$\pi$的一个估计值。
+
+你可能发现，有一个从给定区域中选取随机数的过程非常有用。下面的`random-in-range`过程利用1.2.6节中的`random`实现这一工作，它返回一个小于其输入的非负数。
+
+``` scheme
+(define (random-in-range low high)
+  (let ((range (- high low)))
+    (+ low (random range))))
+```
+
+### 解答
+
+假设单位圆是圆心在$(1, 1)$的单位圆：
+
+{% include_code 练习3.5 lang:scheme sicp/ex3-5.scm %}
+
+### 测试
+
+``` scheme
+(estimate-integral in-range? 0 2.0 0 2.0 1000)
+;Value: 3.112
+
+(estimate-integral in-range? 0 2.0 0 2.0 10000)
+;Value: 3.1404
+
+(estimate-integral in-range? 0 2.0 0 2.0 100000)
+;Value: 3.14968
+```
