@@ -1,0 +1,13 @@
+(define (rand m)
+  (let ((x random-init))
+    (cond ((eq? m 'generate)
+           (lambda ()
+             (seq! x (rand-update x))
+             x))
+          ((eq? m 'reset)
+           (lambda (n)
+             (seq! x (rand-update n))
+             x))
+          (else
+           (lambda ()
+             "Unrecognize message")))))

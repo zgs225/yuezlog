@@ -1,0 +1,20 @@
+---
+layout: mathjax
+title: "sicp-ex3-6"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-06-30 07:49:21 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+有时也需要能重置随机数生成器，以便从某个给定值开始生成的随机数序列。请重新设计一个`rand`过程，使得我们可以用符号`generate`或者符号`reset`作为参数去调用它。其行为是：`(rand 'generate)`将产生出一个新的随机数，`((rand 'reset) <new-value>)`将内部状态变量重新设置为指定的值。通过这样重置状态，我们就可以重复生成同样的序列。在使用随机数测试程序，排除其中错误时，这种功能非常有用。
+
+### 解答
+
+{% include_code 练习3.6 lang:scheme sicp/ex3-6.scm %}
