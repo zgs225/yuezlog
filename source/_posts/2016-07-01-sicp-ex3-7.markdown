@@ -1,0 +1,47 @@
+---
+layout: mathjax
+title: "sicp-ex3-7"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-01 06:26:34 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+考虑如练习3.3所描述的，由`make-account`创建的带有密码的银行账户对象。假定我们的银行系统中需要一种提供公用账户的能力。请定义过程`make-joint`创建这种账户。`make-join`应该有三个参数：第一个是有密码保护的账户；第二个参数是一个密码，它必须与那个已经定义的密码匹配，以使`make-joint`操作能够继续下去；第三个参数是新密码。`make-joint`用这一新密码创建起对那个原来账户的另一访问途径。
+例如，如果`peter-acc`是一个具有密码的`open-sesame`的银行账户，那么
+
+``` scheme
+(define paul-acc
+  (make-joint petter-acc 'open-sesame 'rosebud))
+```
+
+将使我们可以通过名字`paul-acc`和密码`rosebud`对账户`peter-acc`做现金交易。你可能希望修改自己对练习3.3的解，加入这一新功能。
+
+### 解答
+
+{% include_code 练习3.7 lang:scheme sicp/ex3-7.scm %}
+
+### 测试
+
+``` scheme
+(define peter-acc (make-account 100 'open-sesame))
+;Value: peter-acc
+
+(define paul-acc (make-joint peter-acc 'open-sesame 'rosebud))
+;Value: paul-acc
+
+((paul-acc 'rosebud 'deposit) 100)
+;Value: 200
+
+((peter-acc 'open-sesame 'withdraw) 150)
+;Value: 50
+
+((paul-acc 'rose 'deposit) 100)
+;Incorrect password
+```
