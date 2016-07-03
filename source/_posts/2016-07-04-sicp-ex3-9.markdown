@@ -1,0 +1,56 @@
+---
+layout: mathjax
+title: "sicp-ex3-9"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-04 06:10:32 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在1.2.1节里，我们用代换模型分析两个计算阶乘的函数，递归版本：
+
+``` scheme
+(define (factorial n)
+  (if (= n 1)
+  1
+  (* n (factorial (- n 1)))))
+```
+
+和迭代版本：
+
+``` scheme
+(define (factorial n)
+  (fact-iter 1 1 n))
+
+(define (fact-iter product counter max-count)
+  (if (> counter max-count)
+      product
+      (fact-iter (* counter product)
+                 (+ counter 1)
+                 max-count)))
+```
+
+请说明采用过程`factorial`的上述版本求值`(factorial 6)`时所创建的环境结构。
+
+### 解答
+
+`(factorial 6)`在递归版本调用下：
+
+递归版的`factorial`过程每次调用的时候都会创建一个新的环境框架。
+
+`(factorial 6)`的环境框架引向全局环境框架；
+`(factorial 5)`的环境框架引向`(factorial 6)`的环境框架；
+
+以此类推，`(factorial 1)`的环境框架引向`(factorial 2)`的环境框架。
+
+然后`(factorial 1)`的返回值引用的`(factorial 2)`中去。最后得到结果。
+
+在迭代版本中：
+
+每次过程的调用同样会产生一个新的环境框架，但是这些新的环境框架都是引向全局环境框架。所得到的返回值也不会传递到上一次生成的环境框架中。
