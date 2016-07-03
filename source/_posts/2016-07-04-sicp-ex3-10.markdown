@@ -1,0 +1,62 @@
+---
+layout: mathjax
+title: "sicp-ex3-10"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-04 06:40:33 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在`make-withdraw`过程里，局部变量`balance`是作为`make-withdraw`的参数创建的。我们也可以显示地通过使用`let`创建局部状态变量，就像下面所做的：
+
+``` scheme
+(define (make-withdraw initial-amount)
+  (let ((balance initial-amount))
+    (lambda (amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))))
+```
+
+请重温1.3.2节，`let`实际上是一个过程调用的语法糖衣：
+
+``` scheme
+(let ((<var> <exp>)) <body>)
+```
+
+它将被解释为
+
+``` scheme
+((lambda (<var>) <body>) <exp>)
+```
+
+的另一种语法形式。请用环境模型分析`make-withdraw`的这个版本，画出像上面那样的图示，说明调用：
+
+``` scheme
+(define w1 (make-withdraw 100))
+
+(w1 50)
+
+(define w2 (make-withdraw 100))
+```
+
+时的情况并阐释`make-withdraw`的这两个版本创建出的对象具有相同的行为。两个版本的环境结构有什么不同吗？
+
+### 解答
+
+`(define w1 (make-withdraw 100))`和`(define w2 (make-withdraw 100))`都是一些代码和在全局环境中的一个序对。与另一个`make-withdraw`过程并无太大区别。
+
+{% lazy_img lazy no-shadow /photos/sicp/环境1.png 600 300 求值环境1 %}
+
+但是在执行`(w1 50)`时，二者的环境模型便有了较大的区别。
+
+`let`表达式创建了一个新的环境框架；并且在调用`let`创建的过程时，又创建了一个环境框架：
+
+{% lazy_img lazy no-shadow /photos/sicp/环境2.png 600 300 求值环境1 %}
