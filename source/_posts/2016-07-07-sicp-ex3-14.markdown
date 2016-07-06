@@ -1,0 +1,97 @@
+---
+layout: mathjax
+title: "sicp-ex3-14"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-07 06:21:03 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+下面过程相当有用，但也有些费解，
+
+``` scheme
+(define (mystery x)
+  (define (loop x y)
+    (if (null? x)
+        y
+        (let ((temp (cdr x)))
+          (set-cdr! x y)
+          (loop temp x))))
+  (loop x '()))
+```
+
+`loop`里面用一个临时变量`temp`保存`x`的`cdr`原来的值，因为下一行里的`set-cdr!`将破坏这个`cdr`。请一般性地解释`mystery`做些什么。假定`v`通过`(define v (list 'a 'b 'c 'd))`定义，请画出`v`约束的表对应的盒子指针模型。假定现在求值`(define w (mystery v))`，请画出求值这个表达式之后结构`v`和结构`w`的盒子指针图形。`v`和`w`的值打印出来是什么？
+
+### 解答
+
+要知道`mystery`做些什么，先看它的执行过程。将`v`代入`mystery`后展开：
+
+``` scheme
+(mystery (list 'a 'b 'c 'd))
+
+(loop (list 'a 'b 'c 'd) '())
+
+(if (null? (list 'a 'b 'c 'd))
+    '()
+    (let ((temp (list 'b 'c 'd)))
+      (set-cdr! (list 'a 'b 'c 'd) '())
+      (loop (list 'b 'c 'd) (list 'a))))
+
+(loop (list 'b 'c 'd) (list 'a))
+
+(if (null? (list 'b 'c 'd))
+    (list 'a)
+    (let ((temp (list 'c 'd)))
+      (set-cdr! (list 'b 'c 'd) (list 'a))
+      (loop (list 'c 'd) (list 'b 'a))))
+
+(loop (list 'c 'd) (list 'b 'a))
+
+(if (null? (list 'c 'd))
+    (list 'b 'a)
+    (let ((temp (list 'd)))
+      (set-cdr! (list 'c 'd) (list 'b 'a))
+      (loop (list 'd) (list 'c 'b 'a))))
+
+(loop (list 'd) (list 'c 'b 'a))
+
+(if (null? (list 'd))
+    (list 'c 'b 'a)
+    (let ((temp '()))
+      (set-cdr! (list 'd) (list 'c 'b 'a))
+      (loop '() (list 'd 'c 'b 'a))))
+
+(list 'd 'c 'b 'a)
+```
+
+所以很明显可以看出，`mystery`过程的作用是将链表反序。
+
+刚创建时，`v`的盒子指针模型如下：
+
+{% lazy_img lazy no-shadow photos/sicp/变量v.png 483 150 练习3.13 %}
+
+求值`(define w (mystery v))`后，盒子指针模型如下：
+
+{% lazy_img lazy no-shadow photos/sicp/变量w和v.png 483 263 练习3.13 %}
+
+### 测试
+
+``` scheme
+(define v (list 'a 'b 'c 'd))
+;Value: v
+
+(define w (mystery v))
+;Value: w
+
+v
+;Value 15: (a)
+
+w
+;Value 16: (d c b a)
+```
