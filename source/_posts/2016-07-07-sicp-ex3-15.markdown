@@ -1,0 +1,22 @@
+---
+layout: mathjax
+title: "sicp-ex3-15"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-07 07:21:06 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请画出盒子指针图形，解释`set-to-wow!`对于上面结构`z1`和`z2`的作用。
+
+### 解答
+
+{% lazy_img lazy no-shadow photos/sicp/z1.png 302 205 练习3.15 %}
+
+{% lazy_img lazy no-shadow photos/sicp/z2.png 395 205 练习3.15 %}
