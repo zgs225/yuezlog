@@ -1,0 +1,36 @@
+---
+layout: mathjax
+title: "sicp-ex3-13"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-07 05:55:35 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请考虑下面的`make-circle`过程，其中使用了练习3.12定义的`last-pair`过程：
+
+``` scheme
+(define (make-circle x)
+  (set-cdr! (last-pair x) x)
+  x)
+```
+
+画出盒子指针图形，说明下面表达式创建起的`z`的结构：
+
+``` scheme
+(define z (make-cycle (list 'a 'b 'c)))
+```
+
+如果我们试着去计算`(last-pair z)`那会出现什么情况？
+
+### 解答
+
+`make-circle`过程将一个链表的最后一个序对的`cdr`部分指向了自身，形成一个回环链表。当我们试着去调用`(last-pair z)`的时候，会因为程序永远无法停止从而产生错误。`z`的盒子指针图形如下：
+
+{% lazy_img lazy no-shadow photos/sicp/z的盒子指针模型.png 300 150 练习3.13 %}
