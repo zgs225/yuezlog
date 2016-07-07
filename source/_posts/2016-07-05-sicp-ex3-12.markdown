@@ -71,8 +71,8 @@ w
 
 `append`之后$x$的盒子模型如下图：
 
-{% lazy_img lazy no-shadow photos/sicp/盒子指针x.png 333 165 练习3.12 %}
+{% lazy_img lazy no-shadow /photos/sicp/盒子指针x.png 333 165 练习3.12 %}
 
 调用`append!`之后其结构变成如下所示：
 
-{% lazy_img lazy no-shadow photos/sicp/盒子指针x2.png 537 165 练习3.12 %}
+{% lazy_img lazy no-shadow /photos/sicp/盒子指针x2.png 537 165 练习3.12 %}

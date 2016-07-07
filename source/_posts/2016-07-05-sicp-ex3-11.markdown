@@ -57,7 +57,7 @@ categories: draft
 
 其生成的环境结构如下：
 
-{% lazy_img lazy no-shadow photos/sicp/调用环境结构.png 600 600 练习3.11 %}
+{% lazy_img lazy no-shadow /photos/sicp/调用环境结构.png 600 600 练习3.11 %}
 
 由上图可以看到`acc`的局部状态保存在环境`E1`中。
 

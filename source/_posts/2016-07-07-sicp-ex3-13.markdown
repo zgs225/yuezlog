@@ -33,4 +33,4 @@ categories: draft
 
 `make-circle`过程将一个链表的最后一个序对的`cdr`部分指向了自身，形成一个回环链表。当我们试着去调用`(last-pair z)`的时候，会因为程序永远无法停止从而产生错误。`z`的盒子指针图形如下：
 
-{% lazy_img lazy no-shadow photos/sicp/z的盒子指针模型.png 300 150 练习3.13 %}
+{% lazy_img lazy no-shadow /photos/sicp/z的盒子指针模型.png 300 150 练习3.13 %}

@@ -17,6 +17,6 @@ categories: draft
 
 ### 解答
 
-{% lazy_img lazy no-shadow photos/sicp/z1.png 302 205 练习3.15 %}
+{% lazy_img lazy no-shadow /photos/sicp/z1.png 302 205 练习3.15 %}
 
-{% lazy_img lazy no-shadow photos/sicp/z2.png 395 205 练习3.15 %}
+{% lazy_img lazy no-shadow /photos/sicp/z2.png 395 205 练习3.15 %}

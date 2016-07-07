@@ -74,11 +74,11 @@ categories: draft
 
 刚创建时，`v`的盒子指针模型如下：
 
-{% lazy_img lazy no-shadow photos/sicp/变量v.png 483 150 练习3.13 %}
+{% lazy_img lazy no-shadow /photos/sicp/变量v.png 483 150 练习3.13 %}
 
 求值`(define w (mystery v))`后，盒子指针模型如下：
 
-{% lazy_img lazy no-shadow photos/sicp/变量w和v.png 483 263 练习3.13 %}
+{% lazy_img lazy no-shadow /photos/sicp/变量w和v.png 483 263 练习3.13 %}
 
 ### 测试
 
