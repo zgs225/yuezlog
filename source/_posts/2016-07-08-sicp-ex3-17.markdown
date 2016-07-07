@@ -1,0 +1,45 @@
+---
+layout: mathjax
+title: "sicp-ex3-17"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-08 07:12:52 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请设计出练习3.16中`count-pairs`过程的一个正确版本，使它对任何结构都能返回不同序对的个数。（提示：遍历有关的结构，维护一个辅助性数据结构，用它记录已经计算过的序对的轨迹。）
+
+### 解答
+
+{% include_code 练习3.17 lang:scheme sicp/ex3-17.scm %}
+
+### 测试
+
+``` scheme
+(count-pairs (list 'a 'b 'c))
+;Value: 3
+
+(define z (list 'b 'c))
+;Value: z
+
+(define a (cons z z))
+;Value: a
+
+(count-pairs a)
+;Value: 3
+
+(define a (list 'a 'b 'c))
+;Value: a
+
+(set-cdr! (last-pair a) a)
+;Unspecified return value
+
+(count-pairs a)
+;Value: 3
+```
