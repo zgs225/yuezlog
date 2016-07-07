@@ -1,0 +1,45 @@
+---
+layout: mathjax
+title: "sicp-ex3-16"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-08 06:45:03 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Ben Bitdiddle 决定写一个过程，统计任何一个表结构中的序对个数。“这太简单了，”他说，“任何表结构里的序对个数就是其`car`部分的统计值加上`cdr`部分的统计值再加上1，以计入当前这个序对”。所以 Ben 就写了下面过程：
+
+``` scheme
+(define (count-pairs x)
+  (if (not (pair? x))
+      0
+      (+ (count-pairs (car x))
+         (count-pairs (cdr x))
+         (1))))
+```
+
+请说明这一过程并不正确。请画出几个表示表结构的盒子指针图，它们都正好由三个序对构成，而 Ben 的过程对它们分别返回3, 4, 7，或者根本就不返回。
+
+### 解答
+
+长度为3的序对：
+
+{% lazy_img lazy no-shadow /photos/sicp/长度3的序对.png 395 78 练习3.16 %}
+
+长度为4的序对：
+
+{% lazy_img lazy no-shadow /photos/sicp/长度4的序对.png 395 106 练习3.16 %}
+
+长度为7的序对：
+
+{% lazy_img lazy no-shadow /photos/sicp/长度7的序对.png 395 134 练习3.16 %}
+
+不会返回的序对：
+
+{% lazy_img lazy no-shadow /photos/sicp/没有返回值的序对.png 300 150 练习3.16 %}
