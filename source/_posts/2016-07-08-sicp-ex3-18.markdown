@@ -22,6 +22,12 @@ categories: draft
 ### 测试
 
 ``` scheme
+(define a (list 'a 'b 'c))
+;Value: a
+
+(set-cdr! (last-pair a) a)
+;Unspecified return value
+
 (ring? a)
 ;Value: #t
 
