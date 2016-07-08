@@ -1,0 +1,30 @@
+---
+layout: mathjax
+title: "sicp-ex3-18"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-08 07:45:48 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请写出一个过程检查一个表，确定其中是否包含环，也就是说，如果某个程序打算通过不断的做`cdr`去找到这个表的结尾，是否会陷入无穷循环。练习3.13构造了这种表。
+
+### 解答
+
+{% include_code 练习3.18 lang:scheme sicp/ex3-18.scm %}
+
+### 测试
+
+``` scheme
+(ring? a)
+;Value: #t
+
+(ring? (list 'a 'b 'c))
+;Value: #f
+```
