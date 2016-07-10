@@ -1,0 +1,33 @@
+---
+layout: mathjax
+title: "sicp-ex3-20"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-11 06:33:28 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请画出显示下面一系列表达式的求值过程的环境图示：
+
+``` scheme
+(define x (cons 1 2))
+
+(define z (cons x x))
+
+(set-car! (cdr z) 17)
+
+(car x)
+17
+```
+
+其中使用上面给出的序对的过程实现（请与练习3.11比较）。
+
+### 解答
+
+{% lazy_img lazy no-shadow /photos/sicp/练习3-20.png 1007 600 练习3.20 %}
