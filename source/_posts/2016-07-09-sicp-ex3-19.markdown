@@ -1,0 +1,36 @@
+---
+layout: mathjax
+title: "sicp-ex3-19"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-09 21:41:13 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+重做练习3.18，采用一种只需要常量空间的算法（需要一个很聪明的想法）。
+
+### 解答
+
+{% include_code 练习3.19 lang:scheme sicp/ex3-19.scm %}
+
+### 测试
+
+``` scheme
+(ring? (list 'a 'b 'c))
+;Value: #f
+
+(define x (list 'a 'b 'c))
+;Value: x
+
+(set-cdr! (last-pair x) x)
+;Unspecified return value
+
+(ring? x)
+;Value: #t
+```
