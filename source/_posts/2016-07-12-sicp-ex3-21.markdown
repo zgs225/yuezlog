@@ -1,0 +1,81 @@
+---
+layout: mathjax
+title: "sicp-ex3-21"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-12 06:16:21 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Ben Bitdiddle 决定对上面描述的队列实现做一些测试，他顺序地给Lisp解释器输入了下面的实验表达式：
+
+``` scheme
+(define q1 (make-queue))
+
+(insert-queue! q1 'a)
+((a) a)
+
+(insert-queue! q1 'b)
+((a b) b)
+
+(delete-queue! q1)
+((b) b)
+
+(delete-queue! q1)
+(() b)
+```
+
+“不对”，他抱怨说，“解释器的响应说明最后一个数据项被插入了队列两次，因为我把两个数据项都删除了，但是第二个还在那里。因此此时这个表不空，虽然它应该已经空了。” Eva Lu Ator说是 Ben 错误理解了所出现的情况。“这里根本没有数据项进入队列两次的事情”，她解释说，“问题不过是Lisp的标准输出函数不知道应如何理解队列的表示。如果你希望能看到队列的正确打印结果，你就必需自己去对队列定义一个打印过程。” 请解释 Eva Lu 说的是什么意思，特别是说明，为什么 Ben 的例子产生出那样的输出结果。请定义一个过程`print-queue`它以队列为输入，打印出队列里的数据项序列。
+
+### 解答
+
+出现这样的问题，是因为队列本身的数据结构。队列序对中的最后一个元素和其`rear-ptr`指针都是指向同一个序对。而标准输出不能理解这其中的差别，所以会把最后一个元素重复输出两次。当将两个元素都从队列中删除时，其`rear-ptr`指针并没有删除，所以依然会打印出最后一个元素。
+
+`print-queue`过程可以如下定义：
+
+``` scheme
+(define (print-queue queue)
+  (display (front-ptr queue))
+  (newline))
+```
+
+### 测试
+
+``` scheme
+(define q1 (make-queue))
+;Value: q1
+
+(insert-queue! q1 'a)
+;Value 13: ((a) a)
+
+(print-queue q1)
+(a)
+;Unspecified return value
+
+(insert-queue! q1 'b)
+;Value 13: ((a b) b)
+
+(print-queue q1)
+(a b)
+;Unspecified return value
+
+(delete-queue! q1)
+;Value 13: ((b) b)
+
+(print-queue q1)
+(b)
+;Unspecified return value
+
+(delete-queue! q1)
+;Value 13: (() b)
+
+(print-queue q1)
+()
+;Unspecified return value
+```
