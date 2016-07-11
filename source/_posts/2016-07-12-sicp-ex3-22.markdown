@@ -1,0 +1,59 @@
+---
+layout: mathjax
+title: "sicp-ex3-22"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-12 06:42:10 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+除了可以用一对指针表示队列外，我们也可以将队列构造成一个带有局部状态的过程。这里的局部状态由指向一个常规表的开始和结束指针组成。这样，过程`make-queue`将具有下面的形式：
+
+``` scheme
+(define (make-queue)
+  (let ((front-ptr ...)
+        (rear-ptr ...))
+    <内部过程定义>
+    (define (dispatch m) ...)
+    dispatch))
+```
+
+请完成`make-queue`的定义，进而采用这一表示提供队列操作的实现。
+
+### 解答
+
+{% include_code 练习3.22 lang:scheme sicp/ex3-22.scm %}
+
+### 测试
+
+```
+(define q1 (make-queue))
+;Value: q1
+
+(q1 'front-ptr)
+;Value: ()
+
+(q1 'rear-ptr)
+;Value: ()
+
+((q1 'empty-queue?))
+;Value: #t
+
+((q1 'insert-queue!) 'a)
+;Value 14: (a)
+
+((q1 'insert-queue!) 'b)
+;Value 14: (a b)
+
+((q1 'delete-queue!))
+;Value 15: (b)
+
+((q1 'delete-queue!))
+;Value: ()
+```
