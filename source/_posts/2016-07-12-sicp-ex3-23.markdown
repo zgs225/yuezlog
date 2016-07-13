@@ -1,0 +1,72 @@
+---
+layout: mathjax
+title: "sicp-ex3-23"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-12 07:05:37 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+双端队列(deque)也是一种数据项的序列，其中的数据项可以从前端或后端插入和删除。双端队列的操作包括构造函数`make-deque`，谓词`empty-deque?`，选择函数`front-deque`、`rear-deque`、`rear-deque`，改变函数`front-insert-deque!`、`rear-insert-deque!`、`front-delete-deque!`、`rear-delete-deque!`。请说明如何用序对表示双端队列，并给出各个操作的实现。所有的操作都应该在$\Theta (1)$步骤内完成。
+
+### 解答
+
+为了满足所有操作都是$\Theta (1)$步骤内完成，需要使用一个双向链表实现。
+
+{% include_code 练习3.23 lang:scheme sicp/ex3-23.scm %}
+
+### 测试
+
+``` scheme
+(print-deque q)
+;()
+;Unspecified return value
+
+(front-insert-deque! q 'a)
+;Unspecified return value
+
+(print-deque q)
+;(a )
+;Unspecified return value
+
+(front-insert-deque! q 'b)
+;Unspecified return value
+
+(print-deque q)
+;(b a )
+;Unspecified return value
+
+(rear-insert-deque! q 'c)
+;Unspecified return value
+
+(print-deque q)
+;(b a c )
+;Unspecified return value
+
+(rear-insert-deque! q 'd)
+;Unspecified return value
+
+(print-deque q)
+;(b a c d )
+;Unspecified return value
+
+(front-delete-deque! q)
+;Unspecified return value
+
+(print-deque q)
+;(a c d )
+;Unspecified return value
+
+(rear-delete-deque! q)
+;Unspecified return value
+
+(print-deque q)
+;(a c )
+;Unspecified return value
+```
