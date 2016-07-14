@@ -1,0 +1,30 @@
+---
+layout: mathjax
+title: "sicp-ex3-24"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-15 06:24:22 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在上面的表格实现里，对于关键码的检查用`equal?`比较是否相等（它被`assoc`调用）。这一检查方式并不一定总是合适的。举例来说，我们可能需要一个采用数值关键码的表格，对于这种表格，我们需要的不是找到对应的数值的准确匹配，而可以是有一个容许误差的数值。请设计一个表格构造函数`make-table`，它以一个`same-key?`过程为参数，利用这个过程检查关键码的“相等”与否。`make-table`过程应该返回一个过程`dispatch`，可以通过它去访问对应于局部表格的`lookup`和`insert!`过程。
+
+### 解答
+
+{% include_code 练习3.24 lang:scheme sicp/ex3-24.scm %}
+
+### 测试
+
+``` scheme
+(put 'hello 'world 'zhongyu)
+;Value: ok
+
+(get 'hello 'world)
+;Value: zhongyu
+```
