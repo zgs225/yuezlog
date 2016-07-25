@@ -1,0 +1,42 @@
+---
+layout: mathjax
+title: "sicp-ex3-25"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-15 06:48:28 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请推广一维表格和二维表格的概念，说明如何实现一种表格，其中的值可以保存在任一个关键码之下，不同的值可能对于不同数目的关键码。对应的`lookup`和`insert!`过程以一个关键码的表作为参数去访问这一表格。
+
+### 解答
+
+{% include_code 练习3.25 lang:scheme sicp/ex3-25.scm %}
+
+### 测试
+
+``` scheme
+(put (list 'a 'b) 'c)
+;Value: ok
+
+(get (list 'a 'b))
+;Value: c
+
+(put (list 'a 'd 'c) 1)
+;Value: ok
+
+(get (list 'a 'd 'c))
+;Value: 1
+
+(put (list 1 'c 'd 'f) 4)
+;Value: ok
+
+(get (list 1 'c 'd 'f))
+;Value: 4
+```
