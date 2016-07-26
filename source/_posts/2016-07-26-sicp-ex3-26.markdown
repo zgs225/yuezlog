@@ -1,0 +1,53 @@
+---
+layout: mathjax
+title: "sicp-ex3-26"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-26 06:08:45 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+为了在上面这样实现的表格中检索，我们需要扫描这个记录表。从本质上说，这就是2.3.3节中的无序表表示方式。对于很大的表，以其他方式构造表格可能更加高效。请描述一种表格实现，其中的`(key, value)`记录用二叉树的形式组织起来。这要假定关键码能以某种方式排序（例如，数值序或者字典序）。（请与第2章练习2.66比较）。
+
+### 解答
+
+将采用`(list (cons key children) left-branch right-branch)`这样的结构来表示结构。其中，`children`可以是它的子树，也可以是当前`key`对应的值。这里采用字典序排序方法。程序表示如下：
+
+{% include_code 练习3.36 lang:scheme sicp/ex3-26.scm %}
+
+### 测试
+
+``` scheme
+(put (list 'a 'b) 3)
+;Value: ok
+
+(put (list 'a 'd) 4)
+;Value: ok
+
+(put (list 'a 'e) 10)
+;Value: ok
+
+(get (list 'a 'b))
+;Value: 3
+
+(get (list 'a 'd))
+;Value: 4
+
+(get (list 'a 'e))
+;Value: 10
+
+(put (list 'a 'b 'c) 20)
+;Value: ok
+
+(get (list 'a 'b 'c))
+;Value: 20
+
+(get (list 'a 'b))
+;Value 49: ((c . 20) () ())
+```
