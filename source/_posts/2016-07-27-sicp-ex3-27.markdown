@@ -1,0 +1,98 @@
+---
+layout: mathjax
+title: "sicp-ex3-27"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-27 07:05:37 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+记忆法（memoization, 或称表格法，tabulation）是一种技术，采用这种技术的过程将把前面已经算出的一些值记录在局部状态里。这种技术可能大大改变一个程序的性能。在一个采用记忆法的过程里维持着一个表格，其中保存着前面已经做过的调用求出的值，以产生这些值的实际参数作为关键码。当这种过程被调用去计算某个值时，它首先检查有关的表格，看看相应的值是否已经在那里，如果找到了就直接返回这个值，否则就以正常方式计算出相应的值，并将它保存到这个表格里。作为记忆过程的一个例子，让我们重温一下1.2.2节里计算斐波那契数的指数计算过程：
+
+``` scheme
+(define (fib n)
+  (cond ((= n 0) 0)
+        ((= n 1) 1)
+        (else (+ (fib (- n 1))
+                 (fib (- n 2))))))
+```
+
+同一过程的记录版本是：
+
+``` scheme
+(define memo-fib
+  (memoize (lambda (n)
+              (cond ((= n 0) 0)
+                    ((= n 1) 1)
+                    (else (+ (memo-fib (- n 1))
+                             (memo-fib (- n 2))))))))
+```
+
+其中记录器定义为：
+
+``` scheme
+(define (memoize f)
+  (let ((table (make-table)))
+    (lambda (x)
+      (let ((previously-computed-result (lookup x table)))
+        (or previously-computed-result
+          (let ((result (f x)))
+            (insert! x result table)
+            result))))))
+```
+
+请为`(memo-fib 3)`的计算画出一个环境图，解释为什么`memo-fib`能以正比于$n$的步数计算出第$n$个斐波那契数。如果简单地将`memo-fib`定义为`(memoize fib)`，这一模式还能工作吗？
+
+### 解答
+
+环境图如下：
+
+{% lazy_img no-shadow lazy /photos/sicp/练习3-27.png 522 420 练习3.27 %}
+
+当`memo-fib`简单地定义成`(memoize fib)`之后，这一模式将不能工作。因为如果这样做，那么`(memo-fib 100)`将被分解成：
+
+``` scheme
+(+ (fib 99)
+   (fib 98))
+```
+
+从而失去了从表格中获取计算结果的能力。
+
+如果采用练习3.26中的表格，`memoize`的程序应当这样：
+
+``` scheme
+(define (memoize f)
+  (let ((table (make-table)))
+    (lambda (x)
+      (let ((pre-result ((table 'lookup-proc) (list x))))
+        (or pre-result
+            (let ((result (f x)))
+              ((table 'insert-proc!) (list x) result)
+              result))))))
+```
+
+### 测试
+
+``` scheme
+(memo-fib 3)
+;Value: 2
+
+(memo-fib 2)
+;Value: 1
+
+(memo-fib 10)
+;Value: 55
+
+(memo-fib 100)
+;Value: 354224848179261915075
+
+(memo-fib 1000)
+;Value:
+43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875
+```
