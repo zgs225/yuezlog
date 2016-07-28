@@ -1,0 +1,20 @@
+---
+layout: mathjax
+title: "sicp-ex3-28"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-28 06:27:24 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请将或门定义为一个基本功能模块。你的`or-gate`构造函数应该和上面的`and-gate`构造函数类似。
+
+### 解答
+
+{% include_code 练习3.28 lang:scheme sicp/ex3-28.scm %}

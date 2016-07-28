@@ -1,0 +1,15 @@
+(define (or-gate input-1 input-2 output)
+  (define (or-action-procedure)
+    (let ((new-value (logical-or (get-signal input-1)
+                                 (get-signal input-2))))
+      (after-delay or-gate-delay
+                   (lambda ()
+                     (set-signal! output new-value)))))
+  (add-action! input-1 or-action-procedure)
+  (add-action! input-2 or-action-procedure)
+  'ok)
+
+(define (logical-or s1 s2)
+  (cond ((or (= s1 1) (= s2 1)) 1)
+        ((and (= s1 0) (= s2 0)) 0)
+        (else (error "Invalid signal" s1 s2))))

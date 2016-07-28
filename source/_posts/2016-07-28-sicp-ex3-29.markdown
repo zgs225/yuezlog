@@ -1,0 +1,26 @@
+---
+layout: mathjax
+title: "sicp-ex3-29"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-28 06:35:39 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+构造或门的另一方式是将它作为一种符合的数字逻辑设备，用与门和反门构造出或门。请采用这种方式定义出`or-gate`。如何用`and-gate-delay`和`inverter-delay`表示这样定义的或门的延迟？
+
+### 解答
+
+{% include_code 练习3.29 lang:scheme sicp/ex3-29.scm %}
+
+在这里，或门的延迟为：
+
+$$
+\text {or\_gate\_delay} = 2 \times \text {inverter\_delay} + \text {and\_gate\_delay}
+$$
