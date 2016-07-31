@@ -1,0 +1,44 @@
+---
+layout: mathjax
+title: "sicp-ex3-30"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-07-28 07:04:45 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+图3-27展示的是通过串接起$n$个全加器组成的一个级联进位加法器。这是用于求$n$位二进制数之和的并行加法器的最简单形式。输入$A\_1, A\_2, A\_3 \dots A\_n$与$B\_1, B\_2, B\_3 \dots B\_n$是需要求和的两个二进制数（每个$A\_k$和$B\_k$都是$0$或者$1$）。这一电路产生出与之对应的和的$n$个二进制数$S\_1, S\_2, S\_3 \dots S\_n$，以及这一求和的最终进位值$C$。请写出一个过程`ripple-carry-adder`生成这种电路，该过程应以各包含着$n$条线路的三个表——$A\_k，B\_k和S\_k$——作为输入，还有另一线路$C$。级联进位加法器的主要缺点是需要等待进位信号器向前传播。请设法确定，为了得到$n$位级联进位加法器的完整输出，我们将需要怎样的延时。请用与门、或门和反门的时延来表示这一时延。
+
+{% lazy_img lazy no-shadow /photos/sicp/图3-27.png 600 200 一个对n位二进制数的逐位进位加法器 %}
+
+### 解答
+
+用$D\_{and}$、$D\_{or}$和$D\_{not}$分别表示与门、或门和反门的时延。那么一个半加器所需要的时延是：
+
+$$
+D\_{HA} = max(D\_{or}, \; D\_{not} + D\_{and}) + D\_{and}
+$$
+
+所以一个全加器的时延是：
+
+$$
+\begin{align}
+D\_{FA} &= 2 \times D\_{HA} + D\_{or} \\\\\\\\
+        &= 2 \times (max(D\_{or}, \; D\_{not} + D\_{and}) + D\_{and}) + D\_{or}
+\end{align}
+$$
+
+所以一个$n$级联进位加法器的时延是：
+
+$$
+\begin{align}
+D\_{nFA} &= n \times D\_{FA} \\\\\\\\
+         &= 2n \times (max(D\_{or}, \; D\_{not} + D\_{and}) + D\_{and}) + nD\_{or}
+\end{align}
+$$
