@@ -1,0 +1,25 @@
+---
+layout: mathjax
+title: "sicp-ex3-31"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-01 07:21:05 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在`make-wire`里定义的内部过程`accept-action-procedure!`描述的是，当一个新的动作过程加入线路时，这一过程应立即运行。请解释为什么需要这种初始动作。特别是，请追踪上面段落里的半加器例子，看看如果我们不这样做，而是将`accept-action-procedure!`定义为下面形式，那么会出现什么情况：
+
+``` scheme
+(define (accept-action-procedure! proc)
+  (set! action-producres (cons proc action-procedures)))
+```
+
+### 解答
+
+因为第一次不初始化动作的话，那么半加器第一次的值便没有办法获得。只有当半加器的一条线路的值再次改变的时候，才能获取到值。
