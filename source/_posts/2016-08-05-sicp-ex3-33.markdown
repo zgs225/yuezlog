@@ -1,0 +1,50 @@
+---
+layout: mathjax
+title: "sicp-ex3-33"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-05 07:07:58 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+利用基本的加法、乘法和常量约束定义一个`average`过程，它以三个连接`a`、`b`和`c`作为输入，建立起一个约束，使得`c`总是`a`和`b`的平均值。
+
+### 解答
+
+{% include_code 练习3.33 lang:scheme sicp/ex3-33.scm %}
+
+### 测试
+
+``` scheme
+(define a (make-connector)
+(define b (make-connector))
+(define c (make-connector))
+
+(average a b c)
+$24 = ok
+
+(probe "A" a)
+$25 = #<procedure me (request)>
+
+(probe "B" b)
+$26 = #<procedure me (request)>
+
+(probe "C" c)
+$27 = #<procedure me (request)>
+
+(set-value! a 10 'user)
+Probe: A = 10
+$28 = done
+
+(set-value! b 20 'user)
+
+Probe: B = 20
+Probe: C = 15
+$29 = done
+```
