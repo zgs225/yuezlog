@@ -1,0 +1,51 @@
+---
+layout: mathjax
+title: "sicp-ex3-34"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+  - 练习3.34
+date: 2016-08-05 07:22:03 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Louis Reasoner 想做一个平方器，也就是一种带有两条引线的约束装置，使得连接在它的第二条引线上的连接器`b`的值是其第一条引线上的值`a`的平方。他提出了用乘法约束定义这一设备的简单方法：
+
+``` scheme
+(define (squarer a b)
+  (multiplier a a b))
+```
+
+这一建议有一个严重缺陷，请给出解释。
+
+### 解答
+
+将通过`b`的值求`a`的值的时候，因为`multiplier`需要两个已知变量的值才能计算另一个变量的值。所以，无法通过只设置`b`而获取到`a`的值。
+
+### 测试
+
+``` scheme
+(define a (make-connector))
+(define b (make-connector))
+
+(squarer a b)
+$47 = #<procedure me (request)>
+
+(probe "Squarer a" a)
+$48 = #<procedure me (request)>
+
+(probe "Squarer b" b)
+$49 = #<procedure me (request)>
+
+(set-value! b 0 'user)
+Probe: Squarer b = 0
+$50 = done
+
+(has-value? a)
+$51 = #f
+```
