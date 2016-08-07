@@ -1,0 +1,35 @@
+---
+layout: mathjax
+title: "sicp-ex3-36"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+  - 练习3.36
+date: 2016-08-08 06:24:41 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定我们要在全局环境里求值下面的表达式序列：
+
+``` scheme
+(define a (make-connector))
+(define b (make-connector))
+(set-value! a 10 'user)
+```
+
+在对`set-value!`求值的某个时刻，需要在连接器的局部过程中求值下面表达式：
+
+``` scheme
+(for-each-except setter infom-about-value constraints)
+```
+
+请画出表示上述表达式的求值环境的环境图。
+
+### 解答
+
+{% lazy_img lazy no-shadow /photos/sicp/练习3-36.png 370 360 练习3.36 %}
