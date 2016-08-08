@@ -1,0 +1,44 @@
+---
+layout: mathjax
+title: "sicp-ex3-38"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+  - 练习3.38
+date: 2016-08-09 06:05:01 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+假定 Peter、Paul 和 Mary 共享一个共用的账户，其中开始有100元钱。按照并发方式执行下面命令，Peter 存入10元，Paul 取出20元，而 Mary 取出了账户中款额的一半：
+
+``` scheme
+Peter: (set! balance (+ balance 10))
+Paul:  (set! balance (- balance 20))
+Mary:  (set! balance (- balance (/ balance 2)))
+```
+
+a) 请列出完成了这3项交易后`balance`的所有可能值。这里假定银行系统这三个进程按照某种顺序方式运行。
+
+b) 如果系统允许这些进程交错进行，还可能产生另外一些值吗？请画出类似图3-29的时序图，解释各个值将如何出现。
+
+### 解答
+
+按照顺序方式运行的话，一共有6种可能的顺序组合。分别是：
+
++ `Peter -> Paul -> Mary`: 45
++ `Peter -> Mary -> Paul`: 35
++ `Mary -> Peter -> Paul`: 40
++ `Mary -> Paul -> Peter`: 40
++ `Paul -> Peter -> Mary`: 45
++ `Paul -> Mary -> Peter`: 50
+
+如果运行程序交错运行的话，那么可能性又多了很多种。这里只画出其中一种：
+
+{% lazy_img lazy no-shadow /photos/sicp/练习3-38.png 732 886 练习3.38 %}
+
+这里，`balance`最后的值是80.
