@@ -1,0 +1,43 @@
+---
+layout: mathjax
+title: "sicp-ex3-42"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-10 06:32:41 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Ben Bitdiddle 建议说，在响应每个`withdraw`和`deposit`消息时创建一个新的串行化过程完全就是浪费时间。他说，可以修改`make-account`，使得对`protected`的调用都可以在过程`dispatch`之外进行。这样，在每次要求去执行提款过程时，这个账户将总返回同一个串行化过程（它是与这个账户同时创建的）。
+
+``` scheme
+(define (make-account balance)
+  (define (withdraw amount)
+    (if (>= balance amount)
+      (begin (set! balance (- balance amount))
+             balance)
+      "Insufficient funds"))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (let ((protected (make-serializer)))
+    (let ((protected-withdraw (protected withdraw))
+          (protected-deposit  (protected deposit)))
+      (define (dispatch m)
+        (cond ((eq? m 'withdraw) protected-withdraw)
+              ((eq? m 'deposit) protected-deposit)
+              ((eq? m 'balance) balance)
+              (else (error "Unknown request -- MAKE-ACCOUNT" m))))
+      dispatch)))
+```
+
+这样修改安全吗？特别是这样修改之后，在所允许的并发性方面，`make-account`的两个版本之间有什么不同？
+
+### 解答
+
+这样修改应该是不安全的。
