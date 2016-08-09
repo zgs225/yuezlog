@@ -1,0 +1,48 @@
+---
+layout: mathjax
+title: "sicp-ex3-40"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-10 06:02:33 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请给出下面的执行可能产生出的所有`x`值：
+
+``` scheme
+(define x 10)
+
+(parallel-execute (lambda () (set! x (* x x)))
+                  (lambda () (set! x (* x x x))))
+```
+
+如果我们改用下面的串行化过程，上述可能性中的哪些还会存在：
+
+``` scheme
+(define x 10)
+
+(define s (make-serializer))
+
+(parallel-execute (s (lambda () (set! x (* x x))))
+                  (s (lambda () (set! x (* x x x)))))
+```
+
+### 解答
+
+将上述两个过程分别记为$P\_1$和$P\_2$，那么在第一种情况中，会出现的情况如下：
+
+* $P\_1$将x设为100，$P\_2$将x设为1000000
+* $P\_2$将x设为1000，$P\_2$将x设为100000
+* $P\_2$将x从10设为1000的过程发生在$P\_1$两次访问x之间，这两次是为了求值`(* x x)`
+* $P\_1$访问x，而后$P\_2$给x赋值，最后$P\_1$又设置x
+* $P\_2$访问x（三次），而后$P\_1$设置x，最后$P\_2$又设置x
+
+当采用串行化过程后，还会出现的情况是：
+
+* $P\_1$将x设为100，$P\_2$将x设为1000000
