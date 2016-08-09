@@ -1,0 +1,32 @@
+---
+layout: mathjax
+title: "sicp-ex3-39"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-10 05:48:22 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+如果我们换用下面的串行化执行，上面正文中所示的5种并行执行结果中的哪一些还有可能出现？
+
+``` scheme
+(define x 10)
+
+(define s (make-serializer))
+
+(parallel-execute (lambda () (set! x ((s (lambda () (* x x))))))
+                  (s (lambda () (set! x (+ x 1)))))
+```
+
+### 解答
+
+可能出现一下两种情况：
+
+* x的值先被设置成100，然后变成了101。
+* 在给x的值赋值为100之前，因为第一个执行过程中赋值不是串行化操作，所以可能在这里让第二个过程先执行。所以x先变成11，然后又变成100。
