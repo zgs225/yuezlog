@@ -1,0 +1,26 @@
+---
+layout: mathjax
+title: "sicp-ex3-44"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-11 06:22:16 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+现在考虑从一个账户向另一个账户转移款项的问题。Ben Bitdiddle 说这件事可以通过下面过程完成，即使存在着多个人并发地在许多账户之间转移款项。在这里可以使用任何经过存款和取款交易串行化的账户机制，例如上面正文中的`make-account`版本。
+
+``` scheme
+(define (transfer from-account to-account amount)
+  ((from-account 'withdraw) amount)
+  ((to-account 'deposit) amount))
+```
+
+Louis Reasoner 说这里存在一个问题，因此需要使用更复杂精细的方法，例如在处理交换问题中所用的方法。Louis 是对的吗？如果不是，那么在转移问题和交换问题之间存在着什么本质性的不同？（你应该假设`from-account`至少有`amount`那么多钱。）
+
+### 解答
