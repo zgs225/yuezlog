@@ -1,0 +1,41 @@
+---
+layout: mathjax
+title: "sicp-ex3-50"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-12 06:47:11 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请完成下面的定义，这个过程是`stream-map`的推广，它允许过程带有多个参数，类似于2.2.3节的脚注78.
+
+``` scheme
+(define (stream-map proc . argstreams)
+  (if (<??> (car argstreams))
+      the-empty-stream
+      (<??>
+        (apply proc (map <??> argstreams))
+        (apply stream-map
+               (cons proc (map <??> argstreams))))))
+```
+
+### 解答
+
+{% include_code 练习3.50 lang:scheme sicp/ex3-50.scm %}
+
+### 测试
+
+``` scheme
+(define result (stream-map +
+                           (list->stream '(3 4 5 6))
+                           (list->stream '(4 5 6 7))))
+
+(stream->list result)
+;Value 41: (7 9 11 13)
+```
