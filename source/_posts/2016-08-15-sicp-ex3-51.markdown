@@ -1,0 +1,53 @@
+---
+layout: mathjax
+title: "sicp-ex3-51"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-15 06:53:51 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+为了更仔细地观察延时求值的情况，我们将使用下面的过程，它在打印其参数之后简单地返回它：
+
+``` scheme
+(define (show x)
+  (display-line x)
+  x)
+```
+
+解释器对于顺序的求值下面各个表达式的响应是什么？
+
+``` scheme
+(define x (stream-map show (stream-enumerate-interval 0 10)))
+
+(stream-ref x 5)
+
+(stream-ref x 7)
+```
+
+### 解答
+
+答案如下：
+
+``` scheme
+(stream-ref x 5)
+
+1
+2
+3
+4
+5
+;Value: 5
+
+(stream-ref x 7)
+
+6
+7
+;Value: 7
+```
