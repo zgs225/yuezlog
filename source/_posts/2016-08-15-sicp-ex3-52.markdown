@@ -1,0 +1,58 @@
+---
+layout: mathjax
+title: "sicp-ex3-52"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-15 07:05:07 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+考虑下面的表达式序列：
+
+``` scheme
+(define sum 0)
+
+(define (accum x)
+  (set! sum (+ x sum))
+  sum)
+  
+(define seq (stream-map accum (stream-enumerate-interval 1 20)))
+(define y (stream-filter even? seq))
+(define z (stream-filter (lambda (x) (= (remainder x 5) 0))
+                         seq))
+                         
+(stream-ref y 7)
+
+(display-stream z)
+```
+
+在上面每个表达式求值之后`sum`的值是什么？求值其中的`stream-ref`和`display-stream`表达式将打印出什么响应？如果我们简单地将`(display <exp>)`实现为`lambda () <exp>`，而不使用`memo-proc`所提供的优化，这些响应会有什么不同吗？请给出解释。
+
+### 解答
+
+前两个表达式执行后，`sum`的值都是0。到第三行表达式执行的时候，`stream-map`会调用一次`(accum 1)`，所以，`sum`会变成1。到了第四行，`stream-filter`会找到第一个偶数为止，这个时候`sum`的值变成了6。执行第五个表达式的时候，`sum`变成了10。
+
+``` scheme
+(define sum 0) ; => sum = 0
+
+(define (accum x)
+  (set! sum (+ x sum)) ; => sum = 0
+  sum)
+  
+(define seq (stream-map accum (stream-enumerate-interval 1 20))) ; => sum = 1
+(define y (stream-filter even? seq)) ; => sum = 6
+(define z (stream-filter (lambda (x) (= (remainder x 5) 0)) ; => sum = 10
+                         seq))
+                         
+(stream-ref y 7) ; => sum = 136
+
+(display-stream z) ; => sum = 210
+```
+
+如果不使用优化的话，`sum`的值会随着调用次数而无限制的上升。
