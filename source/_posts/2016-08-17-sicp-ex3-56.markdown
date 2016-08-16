@@ -1,0 +1,54 @@
+---
+layout: mathjax
+title: "sicp-ex3-56"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-17 06:50:52 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+这是一个非常著名的问题，首先由 R. Hamming 提出。问题是要按照递增的顺序不重复地枚举出所有满足条件的整数，这些整数都没有2、3和5之外的素数因子。完成此事的一种明显方法是简单地检查每一个整数，看看它们是否有2、3和5之外的素数因子。但这样做极其低效，因为随着整数的变大，它们之中满足要求的数也会越来越少。换一种看法，让我们将所需的流称作S，看看有关它的下述事实：
+
+* S从1开始。
+* `(scale-stream S 2)`的元素也是S的元素。
+* 这一说法对于`(scale-stream S 3)`和`(scale-stream S 5)`也都对。
+* 这些也就是S的所有元素了。
+
+现在需要做的就是将这些来源的元素组合起来。为此我们先定义一个函数`merge`，它能将两个排好顺序的流合并为一个排好顺序的流，并删除其中的重复：
+
+{% include_code merge函数 lang:scheme sicp/p230-merge.scm %}
+
+而后就可以利用`merge`，以如下的方式构造出所需的流了：
+
+``` scheme
+(define S (cons-stream 1 (merge <??> <??>)))
+```
+
+请在上面<??>标记的位置填充所缺的表达式。
+
+### 解答
+
+``` scheme
+(define S (cons-stream 1 (merge (scale-stream S 2)
+                                (merge (scale-stream S 3)
+                                       (scale-stream S 5)))))
+```
+
+### 测试
+
+``` scheme
+(stream-ref S 1)
+;Value: 2
+
+(stream-ref S 5)
+;Value: 6
+
+(stream-ref S 101)
+;Value: 1620
+```

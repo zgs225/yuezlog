@@ -1,0 +1,53 @@
+---
+layout: mathjax
+title: "sicp-ex3-53"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-17 06:08:47 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请不要运行程序，描述一下由下面程序定义出的流里的元素：
+
+``` scheme
+(define s (cons-stream 1 (add-streams s s)))
+```
+
+### 解答
+
+用$P\_k$表示流中的第$k$个元素，则其表示的流是：
+
+$$
+P\_{k+1}=
+\begin{cases}
+1, &\text {如果$k$ = 0} \\\\\\\\
+2P\_k
+\end{cases}
+$$
+
+即，其中的元素应该是：$1, 2, 4, 8, \cdots$
+
+### 测试
+
+``` scheme
+(stream-ref s 0)
+;Value: 1
+
+(stream-ref s 1)
+;Value: 2
+
+(stream-ref s 2)
+;Value: 4
+
+(stream-ref s 3)
+;Value: 8
+
+(stream-ref s 4)
+;Value: 16
+```
