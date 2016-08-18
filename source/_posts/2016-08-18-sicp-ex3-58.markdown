@@ -1,0 +1,53 @@
+---
+layout: mathjax
+title: "sicp-ex3-58"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-18 06:28:20 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请给下面过程所计算的流的一种解释：
+
+``` scheme
+(define (expand num den radix)
+  (cons-stream
+    (quotient (* num radix) den)
+    (expand (remainder (* num radix) den) den radix)))
+```
+
+(这里的`quotient`是求两个整数的整数商的基本函数)。`(expand 1 7 10)`会顺序的产生哪些元素？`(expand 3 8 10)`会产生哪些元素？
+
+### 解答
+
+这个流是求整数`num`被放大`radix`倍后的值与`den`整数的整数商，然后将其余当做下一个`num`。
+
+### 测试
+
+``` scheme
+(define s (expand 1 7 10))
+
+(stream-ref s 0)
+;Value: 1
+
+(stream-ref s 1)
+;Value: 4
+
+(stream-ref s 2)
+;Value: 2
+
+(stream-ref s 3)
+;Value: 8
+
+(stream-ref s 4)
+;Value: 5
+
+(stream-ref s 5)
+;Value: 7
+```

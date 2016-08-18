@@ -1,0 +1,20 @@
+---
+layout: mathjax
+title: "sicp-ex3-57"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-18 06:08:45 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+当我们用基于`add-streams`过程的`fibs`定义计算出第$n$个斐波那契数时，需要执行多少次加法？请证明，如果我们简单地用`(lambda () <exp>)`实现`(delay <exp>)`，又不用3.5.1节给出的`memo-proc`过程所提供的优化，那么所需的加法将会成指数倍的增加。
+
+### 解答
+
+执行`fib(n)`时需要执行$n$次加法。
