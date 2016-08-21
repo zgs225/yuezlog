@@ -1,0 +1,55 @@
+---
+layout: mathjax
+title: "sicp-ex3-59"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-18 06:57:10 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+在2.5.3节里，我们说明了如何实现一个多项式算数系统，其中将多项式表示为项的表。我们可以按类似的方式处理幂级数，例如，将
+
+$$
+\begin{align}
+& e\^x = 1 + x + \frac {x\^2} {2} + \frac {x\^3} {3 \cdotp 2} + \frac {x\^4} {4 \cdotp 3 \cdotp 2} + \cdots, \\\\\\\\
+& \cos x = 1 - \frac {x\^2} {2} + \frac {x\^4}{4 \cdotp 3 \cdotp 2} - \cdots, \\\\\\\\
+& \sin x = x - \frac {x\^3} {3 \cdotp 2} + \frac {x\^5} {5 \cdotp 4 \cdotp 3 \cdotp 2} - \cdots
+\end{align}
+$$
+
+表示为无穷的流，我们把级数$a\_0 + a\_1x + a\_2x\^2 + a\_3x\^3 + \cdots$表示为流，流的元素就是级数的系数$a\_0, a\_1, a\_2, a\_3, \cdots$。
+
+a) 级数$a\_0 + a\_1x + a\_2x\^2 + a\_3x\^3 + \cdots$的积分是级数：
+
+$$
+c + a\_0x + \frac {1} {2} a\_1x\^2 + \frac {1} {3} a\_2x\^3 + \frac {1} {4} a\_3x\^4 + \cdots
+$$
+
+这里$c$是任意常数。请定义过程`integrate-series`，它以一个表示幂级数的流$a\_0, a\_1, \cdots$为参数，返回这个幂级数的积分中各个非常数项的系数流$a\_0, \frac {1} {2} a\_1, \frac {1} {3} a\_2, \cdots$。（因为返回的记过中不包含常数项，因此它不是幂级数。如果要对它们使用`integrate-series`，我们可以用`cons`加上一个常数项。）
+
+b) 函数$x \mapsto e\^x$是其自身的导数。这也意味着$e\^x$和$e\^x$的积分是同一个级数，除了常数项之外。而常数项应该是$e\^0 = 1$。根据这种情况，我们可以按如下方式生成$e\^x$的级数：
+
+``` scheme
+(define exp-series
+  (cons-stream 1 (integrate-series exp-series)))
+```
+
+我们知道$\sin$的导数是$\cos$，$\cos$的导数是负的$\sin$，请说明如何根据这些事实，生成$\sin$和$\cos$的级数：
+
+``` scheme
+(define cosin-series
+  (cons-stream 1 <??>))
+  
+(define since-series
+  (cons-stream 0 <??>))
+```
+
+### 解答
+
+{% include_code 练习3.59 lang:scheme sicp/ex3-59.scm %}
