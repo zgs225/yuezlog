@@ -53,3 +53,42 @@ b) 函数$x \mapsto e\^x$是其自身的导数。这也意味着$e\^x$和$e\^x$�
 ### 解答
 
 {% include_code 练习3.59 lang:scheme sicp/ex3-59.scm %}
+
+### 测试
+
+``` scheme
+
+;; cosine
+
+(stream-ref cosine-series 0)
+;Value: 1
+
+(stream-ref cosine-series 1)
+;Value: 0
+
+(stream-ref cosine-series 2)
+;Value: -1/2
+
+(stream-ref cosine-series 4)
+;Value: 1/24
+
+(stream-ref cosine-series 6)
+;Value: -1/720
+
+;; sine
+
+(stream-ref sine-series 0)
+;Value: 0
+
+(stream-ref sine-series 1)
+;Value: 1
+
+(stream-ref sine-series 3)
+;Value: -1/6
+
+(stream-ref sine-series 5)
+;Value: 1/120
+
+(stream-ref sine-series 7)
+;Value: -1/5040
+```
