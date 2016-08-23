@@ -1,0 +1,40 @@
+---
+layout: mathjax
+title: "sicp-ex3-60"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-08-24 06:16:54 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+像练习3.59里那样将幂级数表示为流之后，级数的和就可以直接用过程`add-stream`实现了。请完成下面级数乘积过程的定义：
+
+``` scheme
+(define (mul-series s1 s2)
+  (cons-stream <??> (add-streams <??> <??>)))
+```
+
+你可以利用公式$\sin \^2 x + \cos \^2 x = 1$，用练习3.59定义的那些级数检验你定义出的过程。
+
+### 解答
+
+{% include_code 练习3.60 lang:scheme sicp/ex3-60.scm %}
+
+### 测试
+
+``` scheme
+(define result (add-streams (mul-series cosine-series
+                                        cosine-series)
+                            (mul-series sine-series
+                                        sine-series)))
+;Value: result
+                                        
+(stream-ref result 0)
+;Value: 1
+```
