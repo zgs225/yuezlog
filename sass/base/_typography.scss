@@ -1,8 +1,8 @@
 $blockquote: $type-border !default;
-$sans:  "Georgia", "Times New Roman", "Songti SC", "SimSun", serif !default;
-$serif: "Georgia", "Times New Roman", "Songti SC", "SimSun", serif !default;
+$serif: PingFang SC, -apple-system-, Wenquanyi Micro Hei, 文泉驿微米黑, Lantinghei SC, Microsoft YaHei, 微软雅黑, Songti SC, serif !default;
+$sans:  $serif;
 $mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
-$heading-font-family:  "Noto Sans CJK SC", "Heiti SC", "Microsoft YaHei", "WenQuanYi Microhei", sans-serif !default;
+$heading-font-family:  $serif;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $heading-font-family !default;
 
@@ -13,6 +13,10 @@ $header-subtitle-font-family: $heading-font-family !default;
 .sans { font-family: $sans; }
 .serif { font-family: $serif; }
 .mono { font-family: $mono; }
+
+h1, h2, h3, h4, h5 {
+    letter-spacing: 1px;
+}
 
 body > header h1 {
   font-size: 2.2em;
@@ -29,9 +33,23 @@ body > header h2 {
 body {
   line-height: 1.5em;
   color: $text-color;
+  text-rendering: optimizeLegibility;
   @extend .serif;
-  // font-weight: lighter;
+
+  .entry-content {
+      p, li {
+          letter-spacing: 1px;
+          color: #454545;
+          line-height: 25px;
+          font-weight: 300;
+      }
+
+      code {
+          letter-spacing: 0;
+      }
+  }
 }
+
 h1 {
   font-size: 2.2em;
   line-height: 1.2em;
