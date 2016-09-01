@@ -1,0 +1,20 @@
+---
+layout: mathjax
+title: "sicp-ex4-3"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-02 05:39:56 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+请重写`eval`使之能以一种数据导向的方式完成分派。请将这样做出的程序与练习2.73的数据导向程序做一个比较。（你可以用一个符合表达式的`car`来作为表达式的类型，采用像这一节中所实现的语法形式。）
+
+### 解答
+
+{% include_code 练习4.3 lang:scheme sicp/ex4-3.scm %}

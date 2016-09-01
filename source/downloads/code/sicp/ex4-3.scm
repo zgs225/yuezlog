@@ -1,0 +1,33 @@
+(define (eval exp env)
+  (let ((type (exp-type exp)))
+    (apply-generic type (exp-content exp) env)))
+
+(define (exp-type exp) (car exp))
+(define (exp-content) (cdr exp))
+
+(define operation-table (make-eq-hash-table))
+(define (put key datum) (hash-table/put! operation-table key datum))
+(define (get key) (hash-table/get operation-table key #f))
+
+(define (apply-generic op . args)
+  (let ((proc (get op)))
+    (if proc
+        (apply proc args)
+        (error "Unknown expression type -- EVAL" exp))))
+
+(put 'self-evaluating (lambda (exp env) (exp)))
+(put 'variable lookup-variable-value)
+(put 'quoted (lambda (exp env) (text-of-quotation exp)))
+(put 'assignment evel-assignment)
+(put 'definition eval-definition)
+(put 'if eval-if)
+(put 'lambda (lambda (exp env)
+                (make-procedure (lambda-parameters exp)
+                                (lambda-body exp)
+                                env)))
+(put 'begin (lambda (exp env)
+              (eval-sequence (begin-actions exp) env)))
+(put 'cond cond->if)
+(put 'application (lambda (exp env)
+                    (apply (eval (operator exp) env)
+                           (list-of-values (operands exp) env))))
