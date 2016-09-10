@@ -1,0 +1,32 @@
+---
+layout: mathjax
+title: "sicp-ex4-6"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-07 06:59:26 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+`let`表达式也是一种派生表达式，因为：
+
+``` scheme
+(let ((<val1> <exp1>) ... (<valn> <expn>))
+     body)
+```
+
+等价于
+
+``` scheme
+((lambda (<va1> ... <valn>)
+  <body>))
+```
+
+### 解答
+
+### 测试

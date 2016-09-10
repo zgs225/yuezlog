@@ -15,6 +15,22 @@
         (apply proc args)
         (error "Unknown expression type -- EVAL" exp))))
 
+(define (eval-and exp env)
+  (define (internal remains)
+    (cond ((null? remains) #t)
+          ((not (eval (car remains) env)) #f)
+          (else (internel (cdr remains)))))
+  (internal (cdr exp)))
+
+(define (eval-or exp env)
+  (define (internal remains)
+    (cond ((null? remains) #f)
+          ((eval (car remains) env) #t)
+          (else (internal (cdr remains)))))
+  (internal (cdr exp)))
+
+(put 'and eval-and)
+(put 'or eval-or)
 (put 'self-evaluating (lambda (exp env) (exp)))
 (put 'variable lookup-variable-value)
 (put 'quoted (lambda (exp env) (text-of-quotation exp)))

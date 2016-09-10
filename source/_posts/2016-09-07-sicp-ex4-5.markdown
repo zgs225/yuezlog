@@ -1,0 +1,27 @@
+---
+layout: mathjax
+title: "sicp-ex4-5"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-07 06:34:12 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Scheme还允许另一种形式的`cond`子句，`(<test> => <recipient)`。如果`test`求出的值是真，那么就对`recipient`求值。这样求出的值必需是一个单个参数的过程，将这一过程应用于`test`的值，并将其返回值作为这个cond表达式的值。例如：
+
+``` scheme
+(cond ((assoc 'b '((a 1) (b 2))) => cadr)
+      (else false))
+```
+
+返回值2。请修改对`cond`的处理，使之能支持这一语法扩充。
+
+### 解答
+
+{% include_code 练习4.5 lang:scheme sicp/ex4-5.scm %}

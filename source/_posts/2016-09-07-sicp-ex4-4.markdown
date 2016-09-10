@@ -1,0 +1,45 @@
+---
+layout: mathjax
+title: "sicp-ex4-4"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-07 06:14:08 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+回忆第1章解释的特殊形式`and`和`or`的定义：
+
++ `and`：其表达式从左到右求值。如果某个表达式求出的值是假，那么就返回假值，剩下的表达式也不再求值。如果所有的表达式求出的值都是真，那么就返回最后一个表达式的值，如果没有可求值的表达式就返回真。
+
++ `or`：其表达式从左到右求值。如果某个表达式求出的的值是真，那么就返回真值，剩下的表达式不在求值。如果所有的表达式求出的值都是假，或者根本就没有可求值的表达式，那么返回假值。
+
+请将`and`和`or`作为新的特殊形式安装到求值器里，定义适当的语法过程和求值过程`eval-and`和`eval-or`。换一种方式，请说明如何将`and`和`or`实现为派生表达式。
+
+### 解答
+
+``` scheme
+(define (eval-and exp env)
+  (define (internal remains)
+    (cond ((null? remains) #t)
+          ((not (eval (car remains) env)) #f)
+          (else (internel (cdr remains)))))
+  (internal (cdr exp)))
+
+(define (eval-or exp env)
+  (define (internal remains)
+    (cond ((null? remains) #f)
+          ((eval (car remains) env) #t)
+          (else (internal (cdr remains)))))
+  (internal (cdr exp)))
+
+(put 'and eval-and)
+(put 'or eval-or)
+```
+
+如果要将`and`和`or`实现为派生表达式，那么它们可以当做基于曾曾嵌套的`if`表达式定义出来。
