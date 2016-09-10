@@ -56,7 +56,7 @@ with EXPR as VAR:
 3. 调用上下文管理器的`__enter()__`方法。
 4. 如果`with`表达式包含`as VAR`，那么`EXPR`的返回值被赋值给`VAR`。
 5. 执行`BLOCK`中的表达式。
-6. 调用上下文管理器的`__exit()__`方法。如果`BLOCK`的执行过程中发生了一个异常导致程序退出，那么异常的`type`、`value`和`traceback`(即`sys.exc_info()的返回值`)将作为参数传递给`__exit()__`方法。否则，将传递三个`None`。
+6. 调用上下文管理器的`__exit()__`方法。如果`BLOCK`的执行过程中发生了一个异常导致程序退出，那么异常的`type`、`value`和`traceback`(即`sys.exc_info()`的返回值)将作为参数传递给`__exit()__`方法。否则，将传递三个`None`。
 
 将这个过程用代码表示，是这样的：
 
@@ -130,7 +130,7 @@ def transaction(db):
 第一眼上看去，这种实现方式更为简单，但是其机制更为复杂。看一下其执行过程吧：
 
 1. Python解释器识别到`yield`关键字后，`def`会创建一个生成器函数替代常规的函数（在类定义之外我喜欢用函数代替方法）。
-2. 装饰器`contextmanager`被调用并返回一个帮助方法，这个帮助函数在被调用后会生成一个`GeneratorContextManager`实例。最终`with`表达式中的`EXPR`调用的是由`contentmanager`装饰器返回的帮助函数。
+2. 装饰器`contextmanager`被调用并返回一个帮助函数，这个帮助函数在被调用后会生成一个`GeneratorContextManager`实例。最终`with`表达式中的`EXPR`调用的是由`contentmanager`装饰器返回的帮助函数。
 3. `with`表达式调用`transaction(db)`，实际上是调用帮助函数。帮助函数调用生成器函数，生成器函数创建一个生成器。
 4. 帮助函数将这个生成器传递给`GeneratorContextManager`，并创建一个`GeneratorContextManager`的实例对象作为上下文管理器。
 5. `with`表达式调用实例对象的上下文管理器的`__enter()__`方法。
@@ -178,7 +178,7 @@ class GeneratorContextManager(object):
 
 ## 总结
 
-Python的`with`表达式包含了很多Python特性。花点时间吃透`with`是一件非常值得的事情。
+Python的`with`表达式包含了很多Python特性，花点时间吃透`with`是一件非常值得的事情。
 
 ## 一些其他的例子
 
