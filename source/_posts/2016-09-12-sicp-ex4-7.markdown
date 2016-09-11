@@ -1,0 +1,39 @@
+---
+layout: mathjax
+title: "sicp-ex4-7"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-12 06:17:17 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+`let*`与`let`类似，但其中对`let`变量的约束是从左到右顺序进行的，每个约束都在同一个环境中完成，已经做了的约束都是可见的。例如：
+
+``` scheme
+(let* ((x 3)
+       (y (+ x 2))
+       (z (+ x y 5)))
+  (* x z))
+```
+
+返回39.请说明，为什么一个`let*`表达式可以重写为一些嵌套的`let`表达式，并请写出一个过程`let*->nested-lets`完成响应的变换。如果我们已经有了`let`的实现（练习4.6），并希望扩充求值器去处理`let*`，请给`eval`加入一个其中的动作如下的子句
+
+``` scheme
+(eval (let*->nested-lets exp) env)
+```
+
+就够了吗？或者说我们必须显示地以非派生方式来扩充对`let*`的处理？
+
+### 解答
+
+在一组嵌套的`let`表达式中，上级`let`声明的变量对于子级`let`表达式是可见的。所以可以将`let*`表达式重写为一些嵌套的`let`表达式。
+
+实现的`let*->nested-lets`如下：
+
+{% include_code 练习4.7 lang:scheme sicp/ex4-7.scm %}
