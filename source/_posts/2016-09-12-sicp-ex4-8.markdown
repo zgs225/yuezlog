@@ -1,0 +1,38 @@
+---
+layout: mathjax
+title: "sicp-ex4-8"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-12 06:40:41 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+“命名`let`”是`let`的一种变形，具有下面的形式：
+
+``` scheme
+(let <var> <bindings> <body>)
+```
+
+其中的`<bindings>`和`<body>`与常规的`let`完全一样，只是在`<body>`里的`<var>`应该约束到一个过程，该过程的体就是`<body>`，而其参数就是`<bindings>`里的变量。这样，我们就可以通过调用名字为`<var>`的过程的方式，反复执行这个`<body>`。举例说，迭代行的斐波那契过程（见1.2.2节）可以用命名`let`重写为：
+
+``` scheme
+(define (fib n)
+  (let fib-iter ((a 1)
+                 (b 0)
+                 (count n))
+    (if (= count 0)
+        b
+        (fib-iter (+ a b) a (- count 1)))))
+```
+
+请修改练习4.6中的`let->combination`，使之能够支持命名`let`。
+
+### 解答
+
+{% include_code 练习4.8 lang:scheme sicp/ex4-8.scm %}
