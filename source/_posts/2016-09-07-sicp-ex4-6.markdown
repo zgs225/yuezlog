@@ -24,9 +24,20 @@ categories: draft
 
 ``` scheme
 ((lambda (<va1> ... <valn>)
-  <body>))
+  <body>)
+  <exp1>
+  ...
+  <expn>)
 ```
+
+请实现语法变换过程`let->combination`，它能将对`let`表达式的求值归约到对于上面类型组合式的求值。请给`eval`增加合适的子句以处理`let`表达式。
 
 ### 解答
 
-### 测试
+在`eval`子句中一条分支判断：
+
+``` scheme
+((let? exp) (let->combination exp env))
+```
+
+{% include_code 练习4.6 lang:scheme sicp/ex4-6.scm %}
