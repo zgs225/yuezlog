@@ -1,0 +1,27 @@
+---
+layout: mathjax
+title: "sicp-ex4-10"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-13 06:48:17 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+通过数据抽象技术，我们就能够写出独立于被求值语言的特定语法形式的`eval`过程。为阐释这一点，请为Scheme设计和实现一种新的语法形式，请仅仅修改本节的有关过程，而不修改`eval`或者`apply`。
+
+### 解答
+
+可以将各个特定类型表达式的`eval`函数保存在表中，等待相关函数的调用。比如，将`eval-assignment`修改成：
+
+``` scheme
+(define (eval-assignment exp env)
+    ((get 'assignment) exp env))
+```
+
+类似的，`eval-if`、`eval-sequence`等都可以修改成这样的写法。
