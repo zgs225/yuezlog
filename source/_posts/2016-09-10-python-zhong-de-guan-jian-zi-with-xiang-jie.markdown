@@ -27,7 +27,7 @@ try:
 except:
     db.rollback()
     raise
-finally:
+else:
     db.commit()
 ```
 
