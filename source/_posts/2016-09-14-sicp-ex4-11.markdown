@@ -1,0 +1,36 @@
+---
+layout: mathjax
+title: "sicp-ex4-11"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-14 06:19:36 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+我们完全可以不把框架表示为表的序对，而是表示为约束的表，其中的每个约束是一个名字-值序对。请重写有关的环境过程，采用这种新的表示方式。
+
+### 解答
+
+{% include_code 练习4.11 lang:scheme sicp/ex4-11.scm %}
+
+### 测试
+
+``` scheme
+(define foo (make-frame (cons 'hello 3) (cons 'world 4)))
+;Value: foo
+
+foo
+;Value 40: ((hello . 3) (world . 4))
+
+(frame-variables foo)
+;Value 41: (hello world)
+
+(frame-values foo)
+;Value 42: (3 4)
+```
