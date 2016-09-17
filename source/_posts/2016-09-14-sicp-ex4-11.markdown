@@ -33,4 +33,10 @@ foo
 
 (frame-values foo)
 ;Value 42: (3 4)
+
+(define bar (extend-environment (list (cons 'nidaye 6)) foo))
+;Value: bar
+
+bar
+;Value 48: (((nidaye . 6)) (nihao . 5) (hello . 3) (world . 4))
 ```

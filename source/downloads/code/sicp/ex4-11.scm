@@ -23,7 +23,7 @@
   (cons (cons var val) frame))
 
 (define (extend-environment var-val-pairs base-env)
-  (cons (make-frame var-val-pairs) base-env))
+  (cons (apply make-frame var-val-pairs) base-env))
 
 (define (lookup-variable-value var env)
   (define (env-loop env)
