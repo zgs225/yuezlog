@@ -1,0 +1,20 @@
+---
+layout: mathjax
+title: "sicp-ex4-12"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-18 06:08:48 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+过程`set-variable-value!`、`define-variable!`和`lookup-variable-value`可以基于更抽象的遍历环境结构的过程描述。请定义有关的抽象，使之能抓住其中的公共模式，而后基于这些抽象重新定义上述三个过程。
+
+### 解答
+
+{% include_code 练习4.12 lang:scheme sicp/ex4-12.scm %}

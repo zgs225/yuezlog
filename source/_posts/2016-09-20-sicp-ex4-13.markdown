@@ -1,0 +1,24 @@
+---
+layout: mathjax
+title: "sicp-ex4-13"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-20 06:20:02 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Scheme 允许我们通过`define`为变量创建新的约束，但却没有提供消除约束的方式。请为求值器实现一个特殊形式`make-unbound!`，它能从`make-unbound!`表达式求值的哪个环境中删除给定的符号的约束。这一问题完全没有刻画清楚。例如，我们应该只删除环境中第一个框架里的约束吗？请完成有关的规范，并说明你所做选择的合理性。
+
+### 解答
+
+应该只删除第一个框架里的约束。因为其他框架可能是另一段程序上下文环境。如果第一个框架里面没有，从而去别的框架中寻找变量然后删除，那么会造成在退出当前环境时，别的程序执行会因为没有相关变量而出现错误。
+
+实现如下：
+
+{% include_code 练习4.13 lang:scheme sicp/ex4-13.scm %}
