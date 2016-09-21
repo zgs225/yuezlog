@@ -1,0 +1,35 @@
+---
+layout: mathjax
+title: "sicp-ex4-15"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-22 06:39:14 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+给定一个单参数的过程p和一个对象a，称p对a“终止”，如果对于表达式（pa）的求值能返回一个值（与得到一个错误信息而终止或者永远运行下去相对应）。请证明，我们不可能写出一个过程`halts?`,使它能正确地对任何过程p和对象a判定是否p对a终止。请采用下面的推理过程：如果你能有这样一个过程，你就可以实现下述程序：
+
+``` scheme
+(define (run-forever) (run-forever))
+
+(define (try p)
+  (if (halts? p p)
+    (run-forever)
+    'halted))
+```
+
+现在考虑求值表达式`(try try)`，并说明任何可能的结果（无论终止或者运行下去）都将违背所确定的`halts?`的行为。
+
+### 解答
+
+这里的`halts?`的返回值有两种情况：真或者假。
+
+假设其返回值为真，那么程序执行`(run-forever)`会永远执行下去，与`halts`得到的结果相悖。如果其返回值为假，则程序又返回了值`'halted`从而终止，也违背`halts?`的行为。
+
+所以，不会有这样的一个过程`halts?`。

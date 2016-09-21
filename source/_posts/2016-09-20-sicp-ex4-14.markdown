@@ -1,0 +1,19 @@
+---
+layout: mathjax
+title: "sicp-ex4-14"
+keywords:
+  - 计算机程序的构造和解释,
+  - 习题解答,
+  - Structure and Interpretation of Computer Programs,
+date: 2016-09-20 07:06:42 +0800
+comments: true
+hidden: true
+categories: draft
+---
+
+### 问题
+
+Eva Lu Ator 和 Louis Reasoner 各自实现了这里的元循环求值器。Eva 键入了`map`的定义，并运行了一些使用它的测试程序，它们都工作的很好。而 Louis 则是将系统的`map`版本作为基本过程安装到自己的元循环求值器中。当他去实验这个过程时，却出现了严重的错误。请解释，为什么 Eva 的`map`能够工作，而 Louis 的`map`却失败了。
+
+### 解答
+
