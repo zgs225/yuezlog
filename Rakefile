@@ -4,9 +4,9 @@ require "stringex"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
-ssh_user       = "yuez@yuez.me"
+ssh_user       = "yuez@47.95.146.126"
 ssh_port       = "22"
-document_root  = "~/www/yuez.me/"
+document_root  = "/wwwroot/yuez.me/"
 rsync_delete   = false
 rsync_args     = ""  # Any extra arguments to pass to rsync
 deploy_default = "rsync"
@@ -123,8 +123,8 @@ task :new_post, :title do |t, args|
 end
 
 # usage rake new_mathjax[my-new-post] or rake new_mathjax['my new post'] or rake new_mathjax (defaults to "new-post")
-desc "Begin a new post in #{source_dir}/#{posts_dir}"
-task :sicp, :title do |t, args|
+desc "Begin a new post in #{source_dir}/#{posts_dir} using mathjax layout"
+task :new_mathjax, :title do |t, args|
   if args.title
     title = args.title
   else
@@ -141,28 +141,13 @@ task :sicp, :title do |t, args|
     post.puts "---"
     post.puts "layout: mathjax"
     post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
-    post.puts "keywords:"
-    post.puts "  - 计算机程序的构造和解释,"
-    post.puts "  - 习题解答,"
-    post.puts "  - Structure and Interpretation of Computer Programs,"
     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
     post.puts "comments: true"
     post.puts "hidden: true"
     post.puts "categories: draft"
     post.puts "---"
-    post.puts ""
-    post.puts "### 问题"
-    post.puts ""
-    post.puts "### 解答"
-    post.puts ""
-    post.puts "### 测试"
   end
 end
-
-desc "Create new exercise post"
-task :new_sicp, :number do
-end
-
 
 # usage rake new_page[my-new-page] or rake new_page[my-new-page.html] or rake new_page (defaults to "new-page.markdown")
 desc "Create a new page in #{source_dir}/(filename)/index.#{new_page_ext}"
@@ -171,7 +156,7 @@ task :new_page, :filename do |t, args|
   args.with_defaults(:filename => 'new-page')
   page_dir = [source_dir]
   if args.filename.downcase =~ /(^.+\/)?(.+)/
-    filename, dot, extension = $2.rpartition('.').reject(&:empty?)         # Get filename and extension
+    filename, _, extension = $2.rpartition('.').reject(&:empty?)         # Get filename and extension
     title = filename
     page_dir.concat($1.downcase.sub(/^\//, '').split('/')) unless $1.nil?  # Add path to page_dir Array
     if extension.nil?

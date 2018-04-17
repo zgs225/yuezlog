@@ -1,0 +1,22 @@
+---
+layout: mathjax
+title: "eopl-ex2-1"
+date: 2018-04-17 07:34:33 +0800
+comments: true
+hidden: true
+categories: draft
+---
+### Exercise 2.1 [*]
+Implement the four required operations for bigits. Then use your implementation to calculate the factorial of 10. How does the execution time vary as this argument changes? How does the execution time vary as the base changes? Explain why.
+
+### Answer
+
+{% include_code 以10为底的 bigint lang:scheme eopl/ex2-1.scm %}
+
+### Example
+
+``` scheme
+(define foo '(0 1))
+(factorial foo)
+; => (0 0 8 8 2 6 3)
+```
